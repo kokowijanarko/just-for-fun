@@ -1,18 +1,12 @@
 /*
-SQLyog Ultimate v10.41 
-MySQL - 5.5.5-10.1.9-MariaDB : Database - bs_prot
+SQLyog - Free MySQL GUI v5.0
+Host - 5.6.12-log : Database - bs_prot
 *********************************************************************
-*/
+Server version : 5.6.12-log
+*/
 
-/*!40101 SET NAMES utf8 */;
 
-/*!40101 SET SQL_MODE=''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`bs_prot` /*!40100 DEFAULT CHARACTER SET latin1 */;
+create database if not exists `bs_prot`;
 
 USE `bs_prot`;
 
@@ -31,11 +25,12 @@ CREATE TABLE `dev_admin` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `level` (`level`),
   CONSTRAINT `dev_admin_ibfk_1` FOREIGN KEY (`level`) REFERENCES `dev_level` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `dev_admin` */
 
-insert  into `dev_admin`(`id`,`name`,`username`,`password`,`level`,`description`,`datetime_isert`) values (1,'admin','admin','21232f297a57a5a743894a0e4a801fc3',1,'root\r\n','2016-01-28 21:58:50');
+insert into `dev_admin` values 
+(1,'admin','admin','21232f297a57a5a743894a0e4a801fc3',1,'root\r\n','2016-01-28 21:58:50');
 
 /*Table structure for table `dev_file` */
 
@@ -65,6 +60,23 @@ CREATE TABLE `dev_image` (
 
 /*Data for the table `dev_image` */
 
+/*Table structure for table `dev_inventory` */
+
+DROP TABLE IF EXISTS `dev_inventory`;
+
+CREATE TABLE `dev_inventory` (
+  `kode_inventory` varchar(10) NOT NULL,
+  `nama_inventory` varchar(30) NOT NULL,
+  `kondisi` varchar(20) NOT NULL,
+  `tanggal_diterima` date NOT NULL,
+  PRIMARY KEY (`kode_inventory`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `dev_inventory` */
+
+insert into `dev_inventory` values 
+('213','Papan','Baik ','2012-01-01');
+
 /*Table structure for table `dev_level` */
 
 DROP TABLE IF EXISTS `dev_level`;
@@ -77,7 +89,9 @@ CREATE TABLE `dev_level` (
 
 /*Data for the table `dev_level` */
 
-insert  into `dev_level`(`id`,`name`) values (1,'admin'),(2,'root');
+insert into `dev_level` values 
+(1,'admin'),
+(2,'root');
 
 /*Table structure for table `dev_user` */
 
@@ -96,8 +110,3 @@ CREATE TABLE `dev_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 /*Data for the table `dev_user` */
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
