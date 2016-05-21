@@ -43,4 +43,8 @@ class Home extends CI_Controller {
         $data['view'] = 'pages/jgrid_pages';
         $this->load->view('index', $data);
 	}
+	public function formview(){		
+		$data['view'] = 'pages/form';
+		$this->load->view('index', $data);
+	}
 }
