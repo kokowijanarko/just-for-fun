@@ -1,0 +1,3 @@
+21-05-2016 by Koko
+
+ALTER TABLE `bs_prot`.`dev_inventory` ADD COLUMN `inv_tipe` INT(11) NOT NULL AFTER `tanggal_diterima`, ADD COLUMN `inv_parent_id` TINYINT(1) ZEROFILL NULL AFTER `inv_tipe`; 

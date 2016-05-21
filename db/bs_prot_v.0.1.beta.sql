@@ -10,6 +10,21 @@ create database if not exists `bs_prot`;
 
 USE `bs_prot`;
 
+DROP TABLE IF EXISTS `dev_level`;
+
+CREATE TABLE `dev_level` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of level',
+  `name` varchar(100) DEFAULT NULL COMMENT 'name level',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+/*Data for the table `dev_level` */
+
+insert into `dev_level` values 
+
+(1,'admin'),
+
+(2,'root');
 /*Table structure for table `dev_admin` */
 
 DROP TABLE IF EXISTS `dev_admin`;
@@ -79,19 +94,7 @@ insert into `dev_inventory` values
 
 /*Table structure for table `dev_level` */
 
-DROP TABLE IF EXISTS `dev_level`;
 
-CREATE TABLE `dev_level` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of level',
-  `name` varchar(100) DEFAULT NULL COMMENT 'name level',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
-
-/*Data for the table `dev_level` */
-
-insert into `dev_level` values 
-(1,'admin'),
-(2,'root');
 
 /*Table structure for table `dev_user` */
 
