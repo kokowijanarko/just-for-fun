@@ -15,28 +15,33 @@ class M_inventory extends CI_Model
 	public function tambah_inventory($data){	
 		$result = false;
 		if(!empty($data)){
-			$execute = $this->db->insert('dev_inventory', $data);	
+			$execute = $this->db->insert('inv_inventory', $data);	
 			$result = true;
 		}
 		return $result;
 	}
 	
 	function select_all(){
-		$query = $this->db->query("SELECT * FROM dev_inventory");
+		$query = $this->db->query("SELECT * FROM inv_inventory");
 		$result = $query->result();
 		return $result;
 	}
 	
+	function select_category(){
+		$query = $this->db->query("SELECT type_id, type_name FROM inv_ref_type");
+		$result = $query->result();
+		return $result;
+	}
 
-	function select_by_id($kode_inventory){
+	function select_by_id($inv_id){
 		$this->db->select('*');
-		$this->db->from('dev_inventory');
-		$this->db->where('kode_inventory', $kode_inventory);
+		$this->db->from('inv_inventory');
+		$this->db->where('inv_id', $inv_id);
 		return $this->db->get();
 	}
 
-	public function do_edit_inventory($kode_inventory,$data){
-		$this->db->update('dev_inventory', $data, array('kode_inventory' => $kode_inventory));
+	public function do_edit_inventory($inv_id,$data){
+		$this->db->update('inv_inventory', $data, array('inv_id' => $inv_id));
 			
 		
 	}
@@ -45,7 +50,7 @@ class M_inventory extends CI_Model
 	public function delete_inventory($id){
 		$result = false;
 		if(!empty($id)){
-			$execute = $this->db->delete('dev_inventory', array('kode_inventory' => $id));
+			$execute = $this->db->delete('inv_inventory', array('inv_id' => $id));
 			$result = true;
 		}		
 		return $result;		
