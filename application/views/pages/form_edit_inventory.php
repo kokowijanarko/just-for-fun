@@ -134,31 +134,47 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" action="<?php echo base_url('index.php/inventory/proses_edit_inventory');?>" role="form" method = "POST">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kode inventory </label>
+									<<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->kode_inventory;?>" name = "kode_inventory" id="form-field-1" placeholder="Kode inventory" class="col-xs-10 col-sm-5" readonly/>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventoris </label>
-										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->nama_inventory;?>" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+											<input type="text" value="<?php echo $inv_res->inv_id;?>" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kondisi </label>
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->kondisi;?>" name="kondisi" id="form-field-1" placeholder="Kondisi" class="col-xs-10 col-sm-5" />
+											<input type="text" value="<?php echo $inv_res->inv_name;?>" name="kondisi" id="form-field-1" placeholder="Kondisi" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Diterima </label>
 										<div class="col-sm-9">
-											<input type="date" value="<?php echo $inv_res->tanggal_diterima;?>" id="form-field-1" name="tanggal_diterima" class="col-xs-10 col-sm-5" />
+											<input type="date" value="<?php echo $inv_res->inv_date_procurement;?>" id="form-field-1" name="tanggal_diterima" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+										<div class="col-sm-9">
+											<select class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value=""></option>
+												<?php foreach ($opt as $options) { ?>
+													<option value="<?php echo $options->type_id; ?>"> <?php echo $options->type_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Parent </label>
+										<div class="col-sm-9">
+											<input type="text" value="<?php echo $inv_res->inv_parent;?>" id="form-field-1" name="parent" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
+										<div class="col-sm-9">
+											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"><?php echo $inv_res->inv_desc;?></textarea>
+										</div>
+									</div>
 									<div class="space-4"></div>
 
 									<div class="clearfix form-actions">

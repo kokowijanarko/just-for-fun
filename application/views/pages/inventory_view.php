@@ -31,7 +31,7 @@
 											</thead>
 
 											<tbody>
-											<?php foreach ($inven as $inv) { ?>
+											<?php foreach ($inven as $invens) { ?>
 												<tr>
 													<td class="center">
 														<label class="pos-rel">
@@ -40,22 +40,20 @@
 														</label>
 													</td>
 
-													<td>
-														<a href="#"> <?php echo $inv->kode_inventory; ?></a>
-													</td>
-													<td><?php echo $inv->nama_inventory; ?></td>
-													<td class="hidden-480"><?php echo $inv->kondisi; ?></td>
-													<td><?php echo $inv->tanggal_diterima; ?></td>
+													<td><?php echo $invens->inv_id; ?></td>
+													<td><?php echo $invens->inv_name; ?></td>
+													<td><?php echo $invens->inv_condition_id; ?></td>
+													<td><?php echo $invens->inv_date_procurement; ?></td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php echo site_url('inventory/edit_inventory/'.$inv->kode_inventory);?>">
+															<a href="<?php echo site_url('inventory/edit_inventory/'.$invens->inv_id);?>">
 																<button class="btn btn-xs btn-info">
 																	<i class="ace-icon fa fa-pencil bigger-120"></i>
 																</button>
 															</a>
 															
-															<a href="<?php echo site_url('inventory/delete_inventory/'.$inv->kode_inventory);?>">
+															<a href="<?php echo site_url('inventory/delete_inventory/'.$invens->inv_id);?>">
 																<button class="btn btn-xs btn-danger">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</button>
