@@ -25,38 +25,44 @@ class Inventory extends CI_Controller {
 	}
 
 	public function tambah_inventory(){
+		$data['opt'] = $this->M_inventory->select_category();
 		$data['view'] = 'pages/form_tambah_inventory';
 		$this->load->view('index', $data);
 	}
 
 	public function proses_tambah_inventory(){
-		$data['kode_inventory'] = $this->input->post('kode_inventory');
-		$data['nama_inventory'] = $this->input->post('nama_inventory');
-		$data['kondisi'] = $this->input->post('kondisi');
-		$data['tanggal_diterima'] = $this->input->post('tanggal_diterima');
+		$data['inv_name'] = $this->input->post('nama_inventory');
+		$data['inv_condition_id'] = $this->input->post('kondisi');
+		$data['inv_date_procurement'] = $this->input->post('tanggal_diterima');
+		$data['inv_type_id'] = $this->input->post('tipe');
+		$data['inv_parent'] = $this->input->post('parent');
+		$data['inv_desc'] = $this->input->post('deskripsi');
 		$this->M_inventory->tambah_inventory($data);
 		$this->view_inv();
 	}
 
-	public function delete_inventory($kode_inventory){
-		$this->M_inventory->delete_inventory($kode_inventory);
+	public function delete_inventory($inv_id){
+		$this->M_inventory->delete_inventory($inv_id);
 		$this->view_inv();
 	}
 
-	public function edit_inventory($kode_inventory){
-		$data['inv_res'] = $this->M_inventory->select_by_id($kode_inventory)->row();
+	public function edit_inventory($inv_id){
+		$data['inv_res'] = $this->M_inventory->select_by_id($inv_id)->row();
 		$data['view'] = 'pages/form_edit_inventory';
 		$this->load->view('index', $data);
 	}
 
 	public function proses_edit_inventory(){
 		//var_dump($_POST);die();
-		//$data['kode_inventory'] = $this->input->post('kode_inventory');
-		$data['nama_inventory'] = $this->input->post('nama_inventory');
-		$data['kondisi'] = $this->input->post('kondisi');
-		$data['tanggal_diterima'] = $this->input->post('tanggal_diterima');
-		$kode_inventory=$this->input->post('kode_inventory');
-		$this->M_inventory->do_edit_inventory($kode_inventory, $data);
+		//$data['inv_id'] = $this->input->post('inv_id');
+		$data['inv_name'] = $this->input->post('nama_inventory');
+		$data['inv_condition_id'] = $this->input->post('kondisi');
+		$data['inv_date_procurement'] = $this->input->post('tanggal_diterima');
+		$data['inv_type_id'] = $this->input->post('tipe');
+		//$data['inv_parent'] = $this->input->post('tipe');
+		$data['inv_desc'] = $this->input->post('deskripsi');
+		$inv_id=$this->input->post('inv_id');
+		$this->M_inventory->do_edit_inventory($inv_id, $data);
 		$this->view_inv();
 	}
    
