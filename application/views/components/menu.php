@@ -5,39 +5,9 @@
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
 				</script>
 
-				<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-					<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-						<button class="btn btn-success">
-							<i class="ace-icon fa fa-signal"></i>
-						</button>
-
-						<button class="btn btn-info">
-							<i class="ace-icon fa fa-pencil"></i>
-						</button>
-
-						<button class="btn btn-warning">
-							<i class="ace-icon fa fa-users"></i>
-						</button>
-
-						<button class="btn btn-danger">
-							<i class="ace-icon fa fa-cogs"></i>
-						</button>
-					</div>
-
-					<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-						<span class="btn btn-success"></span>
-
-						<span class="btn btn-info"></span>
-
-						<span class="btn btn-warning"></span>
-
-						<span class="btn btn-danger"></span>
-					</div>
-				</div><!-- /.sidebar-shortcuts -->
-
 				<ul class="nav nav-list">
 					<li class="active">
-                                            <a href="<?php echo base_url('index.php/home')?>">
+                        <a href="<?php echo base_url('index.php/home')?>">
 							<i class="menu-icon fa fa-tachometer"></i>
 							<span class="menu-text"> Dashboard </span>
 						</a>
@@ -75,7 +45,100 @@
 						</ul>
 						
 					</li>
-					
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Kondisi </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Condition/condition_read')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Lihat Kondisi
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Condition/condition_add')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Tambah Kondisi
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						
+					</li>
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Kategori </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Category/category_read')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Lihat Kategori
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Category/category_add')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Tambah Kategori
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						
+					</li>
+
+					<li class="">
+						<a href="#" class="dropdown-toggle">
+							<i class="menu-icon fa fa-list"></i>
+							<span class="menu-text"> Tipe </span>
+
+							<b class="arrow fa fa-angle-down"></b>
+						</a>
+
+						<b class="arrow"></b>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Type/type_read')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Lihat Tipe
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						<ul class="submenu">
+							<li class="">
+								<a href="<?php echo base_url('index.php/Type/type_add')?>">
+									<i class="menu-icon fa fa-caret-right"></i>
+									Tambah Tipe
+								</a>
+
+								<b class="arrow"></b>
+							</li>							
+						</ul>
+						
+					</li>
 				</ul><!-- /.nav-list -->
 
 				<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
