@@ -138,7 +138,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->inv_id; ?>" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+											<input type="text" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
