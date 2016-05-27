@@ -6,6 +6,7 @@ ALTER TABLE `bs_prot`.`inv_history` ADD FOREIGN KEY (`history_condition`) REFERE
 
 ALTER TABLE `bs_prot`.`inv_history` CHANGE `history_condition` `history_condition_id` INT(11) NULL, ADD COLUMN `history_desc` TEXT NULL AFTER `history_condition_id`; 
 
+ALTER TABLE `bs_prot`.`inv_inventory` DROP COLUMN `inv_condition_id`, CHANGE `inv_parent` `inv_category_id` INT NULL; 
 
 
 ---------------------------------------

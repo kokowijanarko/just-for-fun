@@ -12,13 +12,15 @@ class M_inventory extends CI_Model
         $this->load->library('session');
     }
 	
-	public function tambah_inventory($data){	
-		$result = false;
-		if(!empty($data)){
-			$execute = $this->db->insert('inv_inventory', $data);	
-			$result = true;
-		}
+	public function getInvCategory(){
+		$query = $this->db->query('select * from inv_ref_category');
+		$result = $query->result();
 		return $result;
+	}
+	
+	public function tambah_inventory($data){	
+		$execute = $this->db->insert('inv_inventory', $data);	
+		return $execute;
 	}
 	
 	function select_all(){
@@ -27,32 +29,29 @@ class M_inventory extends CI_Model
 		return $result;
 	}
 	
-	function select_category(){
+	function getInvType(){
 		$query = $this->db->query("SELECT type_id, type_name FROM inv_ref_type");
 		$result = $query->result();
 		return $result;
 	}
 
-	function select_by_id($inv_id){
-		$this->db->select('*');
-		$this->db->from('inv_inventory');
-		$this->db->where('inv_id', $inv_id);
-		return $this->db->get();
+	function getInvById($inv_id){
+		$result = $this->db->select('*');
+		$result =$this->db->from('inv_inventory');
+		$result =$this->db->where('inv_id', $inv_id);
+		$result =$this->db->get();
+		$result = $result->row();
+		return $result;
 	}
 
 	public function do_edit_inventory($inv_id,$data){
-		$this->db->update('inv_inventory', $data, array('inv_id' => $inv_id));
-			
-		
+		$result = $this->db->update('inv_inventory', $data, array('inv_id' => $inv_id));		
+		return $result;
 	}
 	
 	
 	public function delete_inventory($id){
-		$result = false;
-		if(!empty($id)){
-			$execute = $this->db->delete('inv_inventory', array('inv_id' => $id));
-			$result = true;
-		}		
+		$result = $this->db->delete('inv_inventory', array('inv_id' => $id));
 		return $result;		
 	}
 	

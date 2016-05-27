@@ -130,7 +130,8 @@
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.flot.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.flot.pie.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.flot.resize.min.js"></script>
-
+		
+		
 		<!-- ace scripts -->
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace.min.js"></script>
@@ -350,7 +351,9 @@
 						$(this).addClass('dropup');
 					else $(this).removeClass('dropup');
 				});
-			
+				
+				//data table
+						
 			})
 		</script>
 	</body>

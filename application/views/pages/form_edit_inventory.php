@@ -9,42 +9,42 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
 
 		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.2.0/css/font-awesome.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
-		<link rel="stylesheet" href="assets/css/jquery-ui.custom.min.css" />
-		<link rel="stylesheet" href="assets/css/chosen.min.css" />
-		<link rel="stylesheet" href="assets/css/datepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
-		<link rel="stylesheet" href="assets/css/colorpicker.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/jquery-ui.custom.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/chosen.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/datepicker.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap-timepicker.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/daterangepicker.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/colorpicker.min.css" />
 
 		<!-- text fonts -->
-		<link rel="stylesheet" href="assets/fonts/fonts.googleapis.com.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/fonts/fonts.googleapis.com.css" />
 
 		<!-- ace styles -->
-		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
 
 		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+			<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace-part2.min.css" class="ace-main-stylesheet" />
 		<![endif]-->
 
 		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
+		  <link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace-ie.min.css" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
-		<script src="assets/js/ace-extra.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-extra.min.js"></script>
 
 		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
 
 		<!--[if lte IE 8]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/html5shiv.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/respond.min.js"></script>
 		<![endif]-->
 	</head>
 
@@ -119,7 +119,7 @@
 								</div><!-- /.pull-left -->
 							</div><!-- /.ace-settings-box -->
 						</div><!-- /.ace-settings-container -->
-
+						
 						<div class="page-header">
 							<h1>
 								Form Elements
@@ -134,45 +134,65 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" action="<?php echo base_url('index.php/inventory/proses_edit_inventory');?>" role="form" method = "POST">
-									<<div class="form-group">
+									<input type="hidden" name="id_inventory" value="<?php echo $inv_res->inv_id?>">
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->inv_id;?>" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+											<input type="text" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" value="<?php echo $inv_res->inv_name?>" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kondisi </label>
-										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->inv_name;?>" name="kondisi" id="form-field-1" placeholder="Kondisi" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Diterima </label>
-										<div class="col-sm-9">
-											<input type="date" value="<?php echo $inv_res->inv_date_procurement;?>" id="form-field-1" name="tanggal_diterima" class="col-xs-10 col-sm-5" />
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Pengadaan </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="tanggal_diterima" id="id-date-picker-1" value="<?php echo date('d-m-Y', strtotime($inv_res->inv_date_procurement))?>" type="text" data-date-format="dd-mm-yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
-											<select class="col-xs-10 col-sm-5" id="form-field-select-1">
-												<option value=""></option>
-												<?php foreach ($opt as $options) { ?>
-													<option value="<?php echo $options->type_id; ?>"> <?php echo $options->type_name; ?> </option>
-												<?php } ?>
+											<select name="category" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php 
+													foreach ($category as $cat) { 									
+														if($cat->category_id == $inv_res->inv_category_id){
+															$selected = "selected";
+														}else{
+															$selected = "";
+														}
+														echo '<option value="'.$cat->category_id.'"'.$selected.'>'. $cat->category_name.'</option>';
+													} 
+												?>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Parent </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $inv_res->inv_parent;?>" id="form-field-1" name="parent" class="col-xs-10 col-sm-5" />
+											<select name="type" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php 
+													foreach ($type as $tp) { 									
+														if($tp->type_id == $inv_res->inv_type_id){
+															$selected = "selected";
+														}else{
+															$selected = "";
+														}
+														echo '<option value="'.$tp->type_id.'"'.$selected.'>'. $tp->type_name.'</option>';
+													} 
+												?>
+											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
 										<div class="col-sm-9">
-											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"><?php echo $inv_res->inv_desc;?></textarea>
+											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"><?php echo $inv_res->inv_desc?></textarea>
 										</div>
 									</div>
 									<div class="space-4"></div>
@@ -207,55 +227,55 @@
 		<!-- basic scripts -->
 
 		<!--[if !IE]> -->
-		<script src="assets/js/jquery.2.1.1.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.2.1.1.min.js"></script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
-<script src="assets/js/jquery.1.11.1.min.js"></script>
+<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.1.11.1.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery.min.js'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery.min.js'>"+"<"+"/script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery1x.min.js'>"+"<"+"/script>");
+ window.jQuery || document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery1x.min.js'>"+"<"+"/script>");
 </script>
 <![endif]-->
 		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="assets/js/excanvas.min.js"></script>
+		  <script src="<?php echo base_url()?>assets/theme/ac_master/js/excanvas.min.js"></script>
 		<![endif]-->
-		<script src="assets/js/jquery-ui.custom.min.js"></script>
-		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/fuelux.spinner.min.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<script src="assets/js/bootstrap-timepicker.min.js"></script>
-		<script src="assets/js/moment.min.js"></script>
-		<script src="assets/js/daterangepicker.min.js"></script>
-		<script src="assets/js/bootstrap-datetimepicker.min.js"></script>
-		<script src="assets/js/bootstrap-colorpicker.min.js"></script>
-		<script src="assets/js/jquery.knob.min.js"></script>
-		<script src="assets/js/jquery.autosize.min.js"></script>
-		<script src="assets/js/jquery.inputlimiter.1.3.1.min.js"></script>
-		<script src="assets/js/jquery.maskedinput.min.js"></script>
-		<script src="assets/js/bootstrap-tag.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery-ui.custom.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.ui.touch-punch.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/chosen.jquery.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/fuelux.spinner.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-datepicker.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-timepicker.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/moment.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/daterangepicker.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-datetimepicker.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-colorpicker.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.knob.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.autosize.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.inputlimiter.1.3.1.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.maskedinput.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-tag.min.js"></script>
 
 		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace.min.js"></script>
 
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
