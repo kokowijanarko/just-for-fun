@@ -1,0 +1,3 @@
+tambahin : 
+1. get session user
+2. javascript di page edit ga jalan
