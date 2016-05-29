@@ -14,6 +14,7 @@ class M_history extends CI_Model
 	
 	public function getInvHistory(){
 		$query = $this->db->query('select 
+	a.history_id as history_id,
 	a.history_insert_timestamp as history_date,
 	a.history_desc as history_desc,
 	b.user_name as history_user,
@@ -29,26 +30,32 @@ left join inv_inventory d on d.inv_id = a.history_inv_id');
 	
 	public function addHistory($data){	
 		$execute = $this->db->insert('inv_history', $data);	
+		//var_dump($this->db->last_query()); die();
 		return $execute;
-	}
-	
-	function selectAllHistory(){
-		$query = $this->db->query("SELECT * FROM inv_history");
-		$result = $query->result();
-		return $result;
 	}
 
 	function getHistoryById($history_id){
-		$result = $this->db->select('*');
-		$result =$this->db->from('inv_history');
-		$result =$this->db->where('history_id', $history_id);
-		$result =$this->db->get();
-		$result = $result->row();
+		$query = $this->db->query('select 
+	a.history_inv_id as history_inv_id,
+	a.history_condition_id as history_condition_id,
+	a.history_id as history_id,
+	a.history_insert_user_id as history_user_id,
+	a.history_insert_timestamp as history_date,
+	a.history_desc as history_desc,
+	b.user_name as history_user,
+	c.cond_name as history_cond,
+	d.inv_name as history_inv
+from inv_history a
+left join dev_user b ON b.user_id = a.history_insert_user_id
+left join inv_ref_condition c on c.cond_id = a.history_condition_id
+left join inv_inventory d on d.inv_id = a.history_inv_id
+where history_id ='.$history_id);
+		$result = $query->row();
 		return $result;
 	}
 
-	public function editHistory($history_id,$data){
-		$result = $this->db->update('inv_history', $data, array('history_id' => $inv_id));		
+	public function editHistory($history_id, $data){
+		$result = $this->db->update('inv_history', $data, array('history_id' => $history_id));		
 		return $result;
 	}
 	
@@ -58,7 +65,22 @@ left join inv_inventory d on d.inv_id = a.history_inv_id');
 		return $result;		
 	}
 	
+	function getInvInventory(){
+		$query = $this->db->query("SELECT inv_id, inv_name FROM inv_inventory");
+		$result = $query->result();
+		return $result;
+	}
 	
+	function getInvCondition(){
+		$query = $this->db->query("SELECT cond_id, cond_name FROM inv_ref_condition");
+		$result = $query->result();
+		return $result;
+	}
 	
+	function getDevUser(){
+		$query = $this->db->query("SELECT user_id, user_name FROM dev_user");
+		$result = $query->result();
+		return $result;
+	}
 	
 }

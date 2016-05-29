@@ -15,7 +15,7 @@ class History extends CI_Controller {
 		if(!isset($this->session->userdata['data'])){			
 			redirect(base_url('index.php/home/login'));
 		}else{			
-			redirect(base_url('index.php/history/view_inv'));
+			redirect(base_url('index.php/history/history_read'));
 		}
 	}
 
@@ -24,66 +24,72 @@ class History extends CI_Controller {
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
 		$data['hst'] = $this->M_history->getInvHistory();
+
 		//var_dump($data);die();
 		$data['view'] = 'pages/history_view';
 		$this->load->view('index', $data);
 	}
 
 	public function history_add(){
-		$data['opt'] = $this->M_history->getInvCategory();
-		$data['type'] = $this->M_history->getInvType();
-		$data['view'] = 'pages/form_tambah_history';
+		$data['inventories'] = $this->M_history->getInvInventory();
+		$data['conditions'] = $this->M_history->getInvCondition();
+		$data['users'] = $this->M_history->getDevUser();
+		$data['view'] = 'pages/history_insert';
 		$this->load->view('index', $data);
 	}
 
-	public function history_add_process(){		
-		$data['inv_name'] = $this->input->post('nama_history');
-		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
-		$data['inv_type_id'] = $this->input->post('type');
-		$data['inv_category_id'] = $this->input->post('category');
-		$data['inv_desc'] = $this->input->post('deskripsi');
-		$result = $this->M_history->tambah_history($data);
+	public function history_add_process(){	
+		$data['history_inv_id'] = $this->input->post('nama_inventaris');
+		$data['history_condition_id'] = $this->input->post('kondisi');
+		$data['history_desc'] = $this->input->post('keterangan');
+		$data['history_insert_user_id'] = $this->input->post('petugas');
+		$data['history_insert_timestamp'] = date('Y-m-d H:i:s');
+		$result = $this->M_history->addHistory($data);
 		
-		if($result == true){
-			redirect(site_url('history/view_inv?msg=Am1'));
+		if($result == true){	
+			redirect(site_url('history/history_read?msg=Am1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('history/view_inv?msg=Am0'));
+			redirect(site_url('history/history_read?msg=Am0'));
 		}
 	}
 
-	public function history_delete($inv_id){
-		$result = $this->M_history->delete_history($inv_id);
+	public function history_delete($history_id){
+		$result = $this->M_history->deleteHistory($history_id);
 		if($result == true){
-			redirect(site_url('history/view_inv?msg=Dm1'));
+			redirect(site_url('history/history_read?msg=Dm1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('history/view_inv?msg=Dm0'));
+			redirect(site_url('history/history_read?msg=Dm0'));
 		}
 	}
 
-	public function history_edit($inv_id){
-		$data['inv_res'] = $this->M_history->getInvById($inv_id);
-		$data['category'] = $this->M_history->getInvCategory();
-		$data['type'] = $this->M_history->getInvType();
-		$data['view'] = 'pages/form_edit_history';
+	public function history_edit($history_id){
+		//var_dump($history_id); die();
+		$data['inventories'] = $this->M_history->getInvInventory();
+		$data['conditions'] = $this->M_history->getInvCondition();
+		$data['users'] = $this->M_history->getDevUser();
+		$data['hists'] = $this->M_history->getHistoryById($history_id);
+		//var_dump($data['hists']); die();
+		$data['view'] = 'pages/history_edit';
 		$this->load->view('index', $data);
 	}
 
 	public function history_edit_process(){
-		$data['inv_name'] = $this->input->post('nama_history');
-		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
-		$data['inv_type_id'] = $this->input->post('type');
-		$data['inv_category_id'] = $this->input->post('category');
-		$data['inv_desc'] = $this->input->post('deskripsi');
-		$inv_id=$this->input->post('id_history');
-		$result = $this->M_history->do_edit_history($inv_id, $data);
+		$data['history_inv_id'] = $this->input->post('nama_inventaris');
+		$data['history_condition_id'] = $this->input->post('kondisi');
+		$data['history_desc'] = $this->input->post('keterangan');
+		$data['history_insert_user_id'] = $this->input->post('petugas');
+		$data['history_insert_timestamp'] = date('Y-m-d H:i:s');
+		$history_id=$this->input->post('id_history');
+		//var_dump($history_id); die();
+		$result = $this->M_history->editHistory($history_id, $data);
 		
 		if($result == true){
-			redirect(site_url('history/view_inv?msg=Em1'));
+			redirect(site_url('history/history_read?msg=Em1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('history/view_inv?msg=Em0'));
+			redirect(site_url('history/history_read?msg=Em0'));
 		}
 	}
    

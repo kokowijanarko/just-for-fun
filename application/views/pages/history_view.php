@@ -33,7 +33,6 @@
 											<tbody>
 											<?php $no=1; foreach ($hst as $historys) { ?>
 													<td><?php echo $no; ?></td>
-													
 													<td><?php echo $historys->history_inv; ?></td>
 													<td><?php echo $historys->history_cond; ?></td>
 													<td><?php echo $historys->history_desc; ?></td>
@@ -43,13 +42,13 @@
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php //echo site_url('historyentory/edit_historyentory/'.$history->history_id);?>">
+															<a href="<?php echo site_url('History/history_edit/'.$historys->history_id);?>">
 																<button class="btn btn-xs btn-info">
 																	<i class="ace-icon fa fa-pencil bigger-120"></i>
 																</button>
 															</a>
 															
-															<a href="<?php //echo site_url('historyentory/delete_historyentory/'.$history->history_id);?>">
+															<a href="<?php echo site_url('History/history_delete/'.$historys->history_id);?>">
 																<button class="btn btn-xs btn-danger">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</button>
