@@ -15,11 +15,11 @@ class Inventory extends CI_Controller {
 		if(!isset($this->session->userdata['data'])){			
 			redirect(base_url('index.php/home/login'));
 		}else{			
-			redirect(base_url('index.php/inventory/view_inv'));
+			redirect(base_url('index.php/inventory/inventory_read'));
 		}
 	}
 
-	public function view_inv(){
+	public function inventory_read(){
 		if(isset($_GET['msg'])){
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
@@ -28,36 +28,44 @@ class Inventory extends CI_Controller {
 		$this->load->view('index', $data);
 	}
 
-	public function tambah_inventory(){
+	public function inventory_add(){
 		$data['opt'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
-		$data['view'] = 'pages/form_tambah_inventory';
+		$data['view'] = 'pages/inventory_insert';
 		$this->load->view('index', $data);
 	}
 
-	public function proses_tambah_inventory(){		
-		$data['inv_name'] = $this->input->post('nama_inventory');
-		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
-		$data['inv_type_id'] = $this->input->post('type');
-		$data['inv_category_id'] = $this->input->post('category');
-		$data['inv_desc'] = $this->input->post('deskripsi');
-		$result = $this->M_inventory->tambah_inventory($data);
-		
+	public function inventory_add_process(){	
+		$count = $this->M_inventory->countRow();
+		//var_dump($count); die();
+		$counters = $count->counter;
+		//var_dump($counters); die();
+		$jumlah = $this->input->post('jumlah');
+		//var_dump($jumlah); die();
+		for ($i=1; $i <= $jumlah; $i++) { 	
+			$data['inv_name'] = $this->input->post('nama_inventaris');
+			$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
+			$data['inv_type_id'] = $this->input->post('tipe');
+			$data['inv_category_id'] = $this->input->post('kategori');
+			$data['inv_desc'] = $this->input->post('deskripsi');
+			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
+	 		$result = $this->M_inventory->addInventory($data);
+		}
 		if($result == true){
-			redirect(site_url('inventory/view_inv?msg=Am1'));
+			redirect(site_url('inventory/inventory_read?msg=Am1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('inventory/view_inv?msg=Am0'));
+			redirect(site_url('inventory/inventory_read?msg=Am0'));
 		}
 	}
 
 	public function delete_inventory($inv_id){
 		$result = $this->M_inventory->delete_inventory($inv_id);
 		if($result == true){
-			redirect(site_url('inventory/view_inv?msg=Dm1'));
+			redirect(site_url('inventory/inventory_read?msg=Dm1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('inventory/view_inv?msg=Dm0'));
+			redirect(site_url('inventory/inventory_read?msg=Dm0'));
 		}
 	}
 
@@ -79,10 +87,10 @@ class Inventory extends CI_Controller {
 		$result = $this->M_inventory->do_edit_inventory($inv_id, $data);
 		
 		if($result == true){
-			redirect(site_url('inventory/view_inv?msg=Em1'));
+			redirect(site_url('inventory/inventory_read?msg=Em1'));
 		}else{
 			unset($_POST);
-			redirect(site_url('inventory/view_inv?msg=Em0'));
+			redirect(site_url('inventory/inventory_read?msg=Em0'));
 		}
 	}
    

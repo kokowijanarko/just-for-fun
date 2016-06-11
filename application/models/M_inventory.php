@@ -18,7 +18,14 @@ class M_inventory extends CI_Model
 		return $result;
 	}
 	
-	public function tambah_inventory($data){	
+	public function countRow(){
+		$query = $this->db->query('SELECT DISTINCT COUNT(*) as counter FROM inv_inventory');
+		$result = $query->row();
+		//print_r($result);die;
+		return $result;
+	}
+
+	public function addInventory($data){	
 		$execute = $this->db->insert('inv_inventory', $data);	
 		return $execute;
 	}

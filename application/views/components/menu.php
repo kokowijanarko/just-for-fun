@@ -25,7 +25,7 @@
 						<b class="arrow"></b>
 						<ul class="submenu">
 							<li class="">
-								<a href="<?php echo base_url('index.php/inventory/view_inv')?>">
+								<a href="<?php echo base_url('index.php/inventory/inventory_read')?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Lihat Inventory
 								</a>
@@ -35,7 +35,7 @@
 						</ul>
 						<ul class="submenu">
 							<li class="">
-								<a href="<?php echo base_url('index.php/inventory/tambah_inventory')?>">
+								<a href="<?php echo base_url('index.php/inventory/inventory_add')?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Tambah Inventaris
 								</a>
