@@ -149,7 +149,7 @@
 
 						<div class="page-header">
 							<h1>
-								Poduct
+								Product
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
 									List

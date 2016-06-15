@@ -17,11 +17,11 @@ class M_history extends CI_Model
 	a.history_id as history_id,
 	a.history_insert_timestamp as history_date,
 	a.history_desc as history_desc,
-	b.user_name as history_user,
+	b.username as history_user,
 	c.cond_name as history_cond,
 	d.inv_name as history_inv
 from inv_history a
-left join dev_user b ON b.user_id = a.history_insert_user_id
+left join dev_user b ON b.id = a.history_insert_user_id
 left join inv_ref_condition c on c.cond_id = a.history_condition_id
 left join inv_inventory d on d.inv_id = a.history_inv_id');
 		$result = $query->result();
@@ -78,7 +78,7 @@ where history_id ='.$history_id);
 	}
 	
 	function getDevUser(){
-		$query = $this->db->query("SELECT user_id, user_name FROM dev_user");
+		$query = $this->db->query("SELECT id, username FROM dev_user");
 		$result = $query->result();
 		return $result;
 	}

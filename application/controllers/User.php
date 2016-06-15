@@ -24,13 +24,11 @@ class User extends CI_Controller {
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
 		$data['users'] = $this->M_user->selectAllUser();
-		$data['view'] = 'pages/user_view';
-		$this->load->view('index', $data);
+		$this->load->view('pages/user_view', $data);
 	}
 
 	public function user_add(){
-		$data['view'] = 'pages/user_insert';
-		$this->load->view('index', $data);
+		$this->load->view('pages/user_insert');
 	}
 
 	public function user_add_process(){	
@@ -62,9 +60,7 @@ class User extends CI_Controller {
 
 	public function edit_user($id){
 		$data['user_res'] = $this->M_user->selectUserById($id);
-		//var_dump($data['user_res']);die();
-		$data['view'] = 'pages/user_edit';
-		$this->load->view('index', $data);
+		$this->load->view('pages/user_edit', $data);
 	}
 
 	public function edit_user_process(){

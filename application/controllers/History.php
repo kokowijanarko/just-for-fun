@@ -24,10 +24,7 @@ class History extends CI_Controller {
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
 		$data['hst'] = $this->M_history->getInvHistory();
-
-		//var_dump($data);die();
-		$data['view'] = 'pages/history_view';
-		$this->load->view('index', $data);
+		$this->load->view('pages/history_view', $data);
 	}
 
 	public function history_add(){

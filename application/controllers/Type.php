@@ -19,14 +19,15 @@ class Type extends CI_Controller {
 	}
 
 	public function type_read(){
+		if(isset($_GET['msg'])){
+			$data['message'] = $this->message->getMessage($_GET['msg']);
+		}
 		$data['typ'] = $this->M_type->select_all();
-		$data['view'] = 'pages/type_view';
-		$this->load->view('index', $data);
+		$this->load->view('pages/type_view', $data);
 	}
 
 	public function type_add(){
-		$data['view'] = 'pages/type_insert';
-		$this->load->view('index', $data);
+		$this->load->view('pages/type_insert');
 	}
 
 	public function type_add_process(){
@@ -44,8 +45,7 @@ class Type extends CI_Controller {
 
 	public function type_edit($type_id){
 		$data['type_res'] = $this->M_type->select_by_id($type_id)->row();
-		$data['view'] = 'pages/type_edit';
-		$this->load->view('index', $data);
+		$this->load->view('pages/type_edit', $data);
 	}
 
 	public function type_edit_process(){
