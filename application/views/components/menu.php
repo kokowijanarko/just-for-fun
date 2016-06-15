@@ -1,5 +1,3 @@
-<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap.min.js"></script>
-
 <div id="sidebar" class="sidebar responsive">
 				<script type="text/javascript">
 					try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
