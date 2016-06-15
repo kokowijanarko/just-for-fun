@@ -273,55 +273,6 @@
 		<script type="text/javascript">
 			jQuery(function($) {
 				
-				//also add tooltips to table tools buttons
-				//addding tooltips directly to "A" buttons results in buttons disappearing (weired! don't know why!)
-				//so we add tooltips to the "DIV" child after it becomes inserted
-				//flash objects inside table tools buttons are inserted with some delay (100ms) (for some reason)
-				setTimeout(function() {
-					$(tableTools_obj.fnContainer()).find('a.DTTT_button').each(function() {
-						var div = $(this).find('> div');
-						if(div.length > 0) div.tooltip({container: 'body'});
-						else $(this).tooltip({container: 'body'});
-					});
-				}, 200);
-				
-				
-				
-				//ColVis extension
-				var colvis = new $.fn.dataTable.ColVis( oTable1, {
-					"buttonText": "<i class='fa fa-search'></i>",
-					"aiExclude": [0, 6],
-					"bShowAll": true,
-					//"bRestore": true,
-					"sAlign": "right",
-					"fnLabel": function(i, title, th) {
-						return $(th).text();//remove icons, etc
-					}
-					
-				}); 
-				
-				//style it
-				$(colvis.button()).addClass('btn-group').find('button').addClass('btn btn-white btn-info btn-bold')
-				
-				//and append it to our table tools btn-group, also add tooltip
-				$(colvis.button())
-				.prependTo('.tableTools-container .btn-group')
-				.attr('title', 'Show/hide columns').tooltip({container: 'body'});
-				
-				//and make the list, buttons and checkboxed Ace-like
-				$(colvis.dom.collection)
-				.addClass('dropdown-menu dropdown-light dropdown-caret dropdown-caret-right')
-				.find('li').wrapInner('<a href="javascript:void(0)" />') //'A' tag is required for better styling
-				.find('input[type=checkbox]').addClass('ace').next().addClass('lbl padding-8');
-					var th_checked = this.checked;//checkbox inside "TH" table header
-					
-					$(this).closest('table').find('tbody > tr').each(function(){
-						var row = this;
-						if(th_checked) tableTools_obj.fnSelect(row);
-						else tableTools_obj.fnDeselect(row);
-					});
-				});		
-				
 				//add tooltip for small view action buttons in dropdown menu
 				$('[data-rel="tooltip"]').tooltip({placement: tooltip_placement});
 				

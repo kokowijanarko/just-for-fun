@@ -198,7 +198,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Jumlah </label>
 										<div class="col-sm-9">
-											<input type="number" name= "jumlah" id="form-field-1" placeholder="Jumlah" class="col-xs-10 col-sm-5" />
+											<input type="number" name= "jumlah" id="form-field-1" placeholder="Jumlah" min="1" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
