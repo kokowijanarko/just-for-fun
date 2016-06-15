@@ -20,13 +20,13 @@ class Category extends CI_Controller {
 
 	public function category_read(){
 		$data['cat'] = $this->M_category->select_all();
-		$data['view'] = 'pages/category_view';
-		$this->load->view('index', $data);
+		// $data['view'] = 'pages/category_view';
+		$this->load->view('pages/category_view', $data);
 	}
 
 	public function category_add(){
-		$data['view'] = 'pages/category_insert';
-		$this->load->view('index', $data);
+		//$data['view'] = 'pages/category_insert';
+		$this->load->view('pages/category_insert');
 	}
 
 	public function category_add_process(){
@@ -44,8 +44,8 @@ class Category extends CI_Controller {
 
 	public function category_edit($category_id){
 		$data['category_res'] = $this->M_category->select_by_id($category_id)->row();
-		$data['view'] = 'pages/category_edit';
-		$this->load->view('index', $data);
+		//$data['view'] = 'pages/category_edit';
+		$this->load->view('pages/category_edit', $data);
 	}
 
 	public function category_edit_process(){

@@ -20,13 +20,13 @@ class Condition extends CI_Controller {
 
 	public function condition_read(){
 		$data['cond'] = $this->M_condition->select_all();
-		$data['view'] = 'pages/condition_view';
-		$this->load->view('index', $data);
+		//$data['view'] = 'pages/condition_view';
+		$this->load->view('pages/condition_view', $data);
 	}
 
 	public function condition_add(){
-		$data['view'] = 'pages/condition_insert';
-		$this->load->view('index', $data);
+		//$data['view'] = 'pages/condition_insert';
+		$this->load->view('pages/condition_insert');
 	}
 
 	public function condition_add_process(){
@@ -44,8 +44,8 @@ class Condition extends CI_Controller {
 
 	public function condition_edit($cond_id){
 		$data['cond_res'] = $this->M_condition->select_by_id($cond_id)->row();
-		$data['view'] = 'pages/condition_edit';
-		$this->load->view('index', $data);
+		//$data['view'] = 'pages/condition_edit';
+		$this->load->view('pages/condition_edit', $data);
 	}
 
 	public function condition_edit_process(){
