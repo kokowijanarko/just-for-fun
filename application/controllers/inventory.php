@@ -30,7 +30,7 @@ class Inventory extends CI_Controller {
 	public function inventory_add(){
 		$data['opt'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
-		$this->load->view('pages/list_product', $data);
+		$this->load->view('pages/inventory_insert', $data);
 	}
 
 	public function inventory_add_process(){	

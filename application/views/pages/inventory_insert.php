@@ -13,7 +13,8 @@
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
-
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/datepicker.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+		
 		<!-- text fonts -->
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/fonts/fonts.googleapis.com.css" />
 
@@ -203,7 +204,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
 										<div class="col-sm-9">
-											<input type="text" name= "nama_inventaris" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+											<input type="text" name= "nama_inventaris" id="nama_inventaris" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
@@ -267,6 +268,8 @@
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap.min.js"></script>
 
 		<!-- page specific plugin scripts -->
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-datepicker.min.js"></script>
+		
 		
 		<!-- ace scripts -->
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
@@ -275,7 +278,20 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-				
+				//datepicker plugin
+				//link
+				$('.date-picker').datepicker({
+					autoclose: true,
+					todayHighlight: true
+				})
+				//show datepicker when clicking on the icon
+				.next().on(ace.click_event, function(){
+					$(this).prev().focus();
+				});
+				$('select[name="tipe"]').change(function(){
+					var name = $('select[name="tipe"] option:selected').text();
+					$('input[name="nama_inventaris"]').val(name);
+				});
 			})
 		</script>
 	</body>
