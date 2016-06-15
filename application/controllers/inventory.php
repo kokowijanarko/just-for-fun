@@ -24,8 +24,7 @@ class Inventory extends CI_Controller {
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
 		$data['inven'] = $this->M_inventory->select_all();
-		$data['view'] = 'pages/inventory_view';
-		$this->load->view('index', $data);
+		$this->load->view('pages/inventory_view', $data);
 	}
 
 	public function inventory_add(){
