@@ -186,9 +186,9 @@
 													<td><?php echo $no; ?></td>
 													<td><?php echo $invens->inv_number; ?></td>
 													<td><?php echo $invens->inv_name; ?></td>
-													<td><?php echo $invens->inv_category_id; ?></td>
-													<td><?php echo $invens->inv_type_id; ?></td>
-													<td><?php echo $invens->inv_date_procurement; ?></td>
+													<td><?php echo $invens->category; ?></td>
+													<td><?php echo $invens->type; ?></td>
+													<td><?php echo $invens->inv_date; ?></td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">

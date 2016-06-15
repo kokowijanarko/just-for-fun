@@ -31,7 +31,16 @@ class M_inventory extends CI_Model
 	}
 	
 	function select_all(){
-		$query = $this->db->query("SELECT * FROM inv_inventory");
+		$query = $this->db->query(
+		"SELECT a.inv_name as inv_name, 
+		a.inv_id as inv_id,
+		a.inv_number as inv_number, 
+		a.inv_date_procurement as inv_date, 
+		b.category_name as category, 
+		c.type_name as type 
+		FROM inv_inventory a 
+		JOIN inv_ref_category b ON b.category_id = a.inv_category_id
+		JOIN inv_ref_type c ON c.type_id = a.inv_type_id");
 		$result = $query->result();
 		return $result;
 	}
