@@ -9,6 +9,7 @@ B. tampilan inventaris:
 
 C. RIWAYAT:
 	1. option nama riwayat cantumkan kode inventaris
+	2. riwayat harusnya tidak dihapus, tetapi diubah status menjadi tidak aktif
  
 D. KEKURANGAN:
 	1. laporan, meliputi:
