@@ -1,3 +1,6 @@
+15-06-2016 by koko
+ALTER TABLE `bs_prot`.`inv_inventory` ADD COLUMN `inv_number` VARCHAR(20) NULL AFTER `inv_id`; 
+
 28-05-2016 by otong
 
 ALTER TABLE `inv_history` ADD `history_inv_id` INT( 11 ) NOT NULL AFTER `history_id` ;
