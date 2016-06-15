@@ -160,61 +160,78 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<div class="row">
-									<div class="col-xs-12">
-										<?php 
-											isset($message)? print_r($message):null;											
-										?>				
-										<div class="clearfix">
-											<div class="pull-right tableTools-container"></div>
+								<form class="form-horizontal" action="<?php echo base_url('index.php/inventory/inventory_add_process');?>" role="form" method = "POST">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+										<div class="col-sm-9">
+											<select name="kategori" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php foreach ($opt as $options) { ?>
+													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
+												<?php } ?>
+											</select>
 										</div>
-										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
-											<thead>
-												<tr>													
-													<th width="25px"> No</th>
-													<th> Kode Inventaris </th>
-													<th> Nama Inventaris </th>
-													<th> Kategori</th>
-													<th> Tipe</th>
-													<th> Tanggal Diterima </th>
-													<th> Aksi </th>
-												</tr>
-											</thead>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
+										<div class="col-sm-9">
+											<select name="tipe" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php foreach ($type as $tp) { ?>
+													<option value="<?php echo $tp->type_id; ?>"> <?php echo $tp->type_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Pengadaan </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="tanggal_diterima" id="id-date-picker-1"  type="text" data-date-format="dd-mm-yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Jumlah </label>
+										<div class="col-sm-9">
+											<input type="number" name= "jumlah" id="form-field-1" placeholder="Jumlah" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
+										<div class="col-sm-9">
+											<input type="text" name= "nama_inventaris" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
+										<div class="col-sm-9">
+											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"></textarea>
+										</div>
+									</div>
+									<div class="space-4"></div>
 
-											<tbody>
-											<?php $no=1; foreach ($inven as $invens) { ?>
-													<td><?php echo $no; ?></td>
-													<td><?php echo $invens->inv_number; ?></td>
-													<td><?php echo $invens->inv_name; ?></td>
-													<td><?php echo $invens->inv_category_id; ?></td>
-													<td><?php echo $invens->inv_type_id; ?></td>
-													<td><?php echo $invens->inv_date_procurement; ?></td>
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Submit
+											</button>
 
-													<td>
-														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php echo site_url('inventory/edit_inventory/'.$invens->inv_id);?>">
-																<button class="btn btn-xs btn-info">
-																	<i class="ace-icon fa fa-pencil bigger-120"></i>
-																</button>
-															</a>
-															
-															<a href="<?php echo site_url('inventory/delete_inventory/'.$invens->inv_id);?>">
-																<button class="btn btn-xs btn-danger">
-																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
-																</button>
-															</a>	
-														</div>
-													</td>
-												</tr>
-												
-												<?php $no++;} ?>
-											</tbody>
-										</table>
-									</div><!-- /.span -->
-								</div><!-- /.row -->								
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+								</form>
 							</div><!-- /.col -->
-						</div><!-- /.row -->
-
+						</div><!-- /.row --> 
+					
 			<?php $this->load->view('components/footer')?>
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
 				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
