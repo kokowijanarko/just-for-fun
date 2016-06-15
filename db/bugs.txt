@@ -1,6 +1,6 @@
 bug on sin inventaris:
 A. INPUT INVENTARIS:
-	1. tanggal tidak keluar otomatis
+	1. tanggal tidak keluar otomatis 
 	2. nama inventaris masih belum otomatis terisi
 	3. nama inv. masih sama juka input multipel
 B. tampilan inventaris:
