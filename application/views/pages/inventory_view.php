@@ -32,7 +32,7 @@
 											<tbody>
 											<?php $no=1; foreach ($inven as $invens) { ?>
 													<td><?php echo $no; ?></td>
-													<td><?php echo $invens->inv_id; ?></td>
+													<td><?php echo $invens->inv_number; ?></td>
 													<td><?php echo $invens->inv_name; ?></td>
 													<td><?php echo $invens->inv_category_id; ?></td>
 													<td><?php echo $invens->inv_type_id; ?></td>

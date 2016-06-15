@@ -66,7 +66,7 @@ where history_id ='.$history_id);
 	}
 	
 	function getInvInventory(){
-		$query = $this->db->query("SELECT inv_id, inv_name FROM inv_inventory");
+		$query = $this->db->query("SELECT inv_id, inv_name, inv_number FROM inv_inventory");
 		$result = $query->result();
 		return $result;
 	}

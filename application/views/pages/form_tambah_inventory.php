@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>Form Elements - Ace Admin</title>
-
-		<meta name="description" content="Common form elements and layouts" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-
-		<!-- bootstrap & fontawesome -->
-		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/font-awesome/4.2.0/css/font-awesome.min.css" />
-
-		<!-- page specific plugin styles -->
+<!-- page specific plugin styles -->
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/jquery-ui.custom.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/chosen.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/datepicker.min.css" />
@@ -21,228 +7,6 @@
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap-datetimepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/colorpicker.min.css" />
 
-		<!-- text fonts -->
-		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/fonts/fonts.googleapis.com.css" />
-
-		<!-- ace styles -->
-		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-
-		<!--[if lte IE 9]>
-			<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace-part2.min.css" class="ace-main-stylesheet" />
-		<![endif]-->
-
-		<!--[if lte IE 9]>
-		  <link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/ace-ie.min.css" />
-		<![endif]-->
-
-		<!-- inline styles related to this page -->
-
-		<!-- ace settings handler -->
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-extra.min.js"></script>
-
-		<!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
-
-		<!--[if lte IE 8]>
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/html5shiv.min.js"></script>
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/respond.min.js"></script>
-		<![endif]-->
-	</head>
-
-	<body class="no-skin">
-		<div class="main-container" id="main-container">
-			<script type="text/javascript">
-				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
-			</script>
-
-			<div class="main-content">
-				<div class="main-content-inner">
-					<div class="page-content">
-						<div class="ace-settings-container" id="ace-settings-container">
-							<div class="ace-settings-box clearfix" id="ace-settings-box">
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<div class="pull-left">
-											<select id="skin-colorpicker" class="hide">
-												<option data-skin="no-skin" value="#438EB9">#438EB9</option>
-												<option data-skin="skin-1" value="#222A2D">#222A2D</option>
-												<option data-skin="skin-2" value="#C6487E">#C6487E</option>
-												<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
-											</select>
-										</div>
-										<span>&nbsp; Choose Skin</span>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
-										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
-										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
-										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
-										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
-										<label class="lbl" for="ace-settings-add-container">
-											Inside
-											<b>.container</b>
-										</label>
-									</div>
-								</div><!-- /.pull-left -->
-
-								<div class="pull-left width-50">
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" />
-										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" />
-										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
-									</div>
-
-									<div class="ace-settings-item">
-										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" />
-										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
-									</div>
-								</div><!-- /.pull-left -->
-							</div><!-- /.ace-settings-box -->
-						</div><!-- /.ace-settings-container -->
-						
-						<div class="page-header">
-							<h1>
-								Form Elements
-								<small>
-									<i class="ace-icon fa fa-angle-double-right"></i>
-									Common form elements and layouts
-								</small>
-							</h1>
-						</div><!-- /.page-header -->
-
-						<div class="row">
-							<div class="col-xs-12">
-								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" action="<?php echo base_url('index.php/inventory/proses_tambah_inventory');?>" role="form" method = "POST">
-									
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
-										<div class="col-sm-9">
-											<input type="text" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Pengadaan </label>
-										<div class="col-xs-10 col-sm-4">
-											<div class="input-group">
-												<input class="form-control date-picker" name="tanggal_diterima" id="id-date-picker-1"  type="text" data-date-format="dd-mm-yyyy" />
-												<span class="input-group-addon">
-													<i class="fa fa-calendar bigger-110"></i>
-												</span>
-											</div>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
-										<div class="col-sm-9">
-											<select name="category" class="col-xs-10 col-sm-5" id="form-field-select-1">
-												<option value="">--Pilih--</option>
-												<?php foreach ($opt as $options) { ?>
-													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
-												<?php } ?>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
-										<div class="col-sm-9">
-											<select name="type" class="col-xs-10 col-sm-5" id="form-field-select-1">
-												<option value="">--Pilih--</option>
-												<?php foreach ($type as $tp) { ?>
-													<option value="<?php echo $tp->type_id; ?>"> <?php echo $tp->type_name; ?> </option>
-												<?php } ?>
-											</select>
-										</div>
-									</div>
-									
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
-										<div class="col-sm-9">
-											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"></textarea>
-										</div>
-									</div>
-									<div class="space-4"></div>
-
-									<div class="clearfix form-actions">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit">
-												<i class="ace-icon fa fa-check bigger-110"></i>
-												Submit
-											</button>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="ace-icon fa fa-undo bigger-110"></i>
-												Reset
-											</button>
-										</div>
-									</div>
-								</form>
-							</div><!-- /.col -->
-						</div><!-- /.row -->
-					</div><!-- /.page-content -->
-				</div>
-			</div><!-- /.main-content -->
-
-
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		</div><!-- /.main-container -->
-
-		<!-- basic scripts -->
-
-		<!--[if !IE]> -->
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.2.1.1.min.js"></script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.1.11.1.min.js"></script>
-<![endif]-->
-
-		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery.min.js'>"+"<"+"/script>");
-		</script>
-
-		<!-- <![endif]-->
-
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery1x.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='<?php echo base_url()?>assets/theme/ac_master/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap.min.js"></script>
-
-		<!-- page specific plugin scripts -->
-
-		<!--[if lte IE 8]>
-		  <script src="<?php echo base_url()?>assets/theme/ac_master/js/excanvas.min.js"></script>
-		<![endif]-->
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery-ui.custom.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.ui.touch-punch.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/chosen.jquery.min.js"></script>
@@ -259,12 +23,7 @@
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.maskedinput.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-tag.min.js"></script>
 
-		<!-- ace scripts -->
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
-		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace.min.js"></script>
-
-		<!-- inline scripts related to this page -->
-		<script type="text/javascript">
+<script type="text/javascript">
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
@@ -537,7 +296,7 @@
 			
 				//datepicker plugin
 				//link
-				$('#date-picker').datepicker({
+				$('date-picker').datepicker({
 					autoclose: true,
 					todayHighlight: true
 				})
@@ -659,5 +418,87 @@
 			
 			});
 		</script>
-	</body>
-</html>
+
+
+
+<div class="page-header">
+							<h1>
+								Form Elements
+								<small>
+									<i class="ace-icon fa fa-angle-double-right"></i>
+									Common form elements and layouts
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+								<form class="form-horizontal" action="<?php echo base_url('index.php/inventory/proses_tambah_inventory');?>" role="form" method = "POST">
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Inventaris </label>
+										<div class="col-sm-9">
+											<input type="text" name= "nama_inventory" id="form-field-1" placeholder="Nama inventory" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Pengadaan </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="tanggal_diterima" id="id-date-picker-1"  type="text" data-date-format="dd-mm-yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+										<div class="col-sm-9">
+											<select name="category" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php foreach ($opt as $options) { ?>
+													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
+										<div class="col-sm-9">
+											<select name="type" class="col-xs-10 col-sm-5" id="form-field-select-1">
+												<option value="">--Pilih--</option>
+												<?php foreach ($type as $tp) { ?>
+													<option value="<?php echo $tp->type_id; ?>"> <?php echo $tp->type_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
+										<div class="col-sm-9">
+											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"></textarea>
+										</div>
+									</div>
+									<div class="space-4"></div>
+
+									<div class="clearfix form-actions">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit">
+												<i class="ace-icon fa fa-check bigger-110"></i>
+												Submit
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="ace-icon fa fa-undo bigger-110"></i>
+												Reset
+											</button>
+										</div>
+									</div>
+								</form>
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					

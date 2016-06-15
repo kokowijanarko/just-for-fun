@@ -51,6 +51,7 @@ class Inventory extends CI_Controller {
 			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
 	 		$result = $this->M_inventory->addInventory($data);
 		}
+		//var_dump($this->db->last_query());
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Am1'));
 		}else{

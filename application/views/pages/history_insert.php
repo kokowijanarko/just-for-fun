@@ -141,7 +141,7 @@
 											<select name="nama_inventaris" class="col-xs-10 col-sm-5" id="form-field-select-1">
 												<option value="">--Pilih--</option>
 												<?php foreach ($inventories as $invs) { ?>
-													<option value="<?php echo $invs->inv_id; ?>"> <?php echo $invs->inv_name; ?> </option>
+													<option value="<?php echo $invs->inv_id; ?>"> <?php echo $invs->inv_name.' - '.$invs->inv_number; ?> </option>
 												<?php } ?>
 											</select>
 										</div>
