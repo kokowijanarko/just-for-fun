@@ -191,19 +191,19 @@
 														</label>
 													</td>
 
-													<td><?php echo $userss->name; ?></td>
-													<td><?php echo $userss->username; ?></td>
-													<td><?php echo $userss->description; ?></td>
+													<td><?php echo $userss->user_name; ?></td>
+													<td><?php echo $userss->user_username; ?></td>
+													<td><?php echo $userss->user_description; ?></td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php echo site_url('User/edit_user/'.$userss->id);?>">
+															<a href="<?php echo site_url('User/edit_user/'.$userss->user_id);?>">
 																<button class="btn btn-xs btn-info">
 																	<i class="ace-icon fa fa-pencil bigger-120"></i>
 																</button>
 															</a>
 															
-															<a href="<?php echo site_url('User/delete_user/'.$userss->id);?>">
+															<a href="<?php echo site_url('User/delete_user/'.$userss->user_id);?>">
 																<button class="btn btn-xs btn-danger">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</button>
