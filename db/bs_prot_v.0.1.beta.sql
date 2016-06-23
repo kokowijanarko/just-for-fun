@@ -1,6 +1,6 @@
 /*
 SQLyog Ultimate v10.41 
-MySQL - 5.5.5-10.1.9-MariaDB : Database - bs_prot
+MySQL - 5.5.5-10.1.9-MariaDB : Database - bs_prot_v1
 *********************************************************************
 */
 
@@ -12,9 +12,9 @@ MySQL - 5.5.5-10.1.9-MariaDB : Database - bs_prot
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`bs_prot` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`bs_prot_v1` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `bs_prot`;
+USE `bs_prot_v1_v1`;
 
 /*Table structure for table `dev_admin` */
 

@@ -169,7 +169,7 @@
 											<select name="petugas" class="col-xs-10 col-sm-5" id="form-field-select-1">
 												<option value="">--Pilih--</option>
 												<?php foreach ($users as $ussr) { ?>
-													<option value="<?php echo $ussr->user_id; ?>"> <?php echo $ussr->user_name; ?> </option>
+													<option value="<?php echo $ussr->user_id; ?>"> <?php echo $ussr->user_username; ?> </option>
 												<?php } ?>
 											</select>
 										</div>

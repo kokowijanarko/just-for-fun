@@ -40,7 +40,8 @@ class M_inventory extends CI_Model
 		c.type_name as type 
 		FROM inv_inventory a 
 		JOIN inv_ref_category b ON b.category_id = a.inv_category_id
-		JOIN inv_ref_type c ON c.type_id = a.inv_type_id");
+		JOIN inv_ref_type c ON c.type_id = a.inv_type_id");	
+		//var_dump($this->db->last_query(), $query);die;
 		$result = $query->result();
 		return $result;
 	}
