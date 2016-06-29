@@ -49,11 +49,12 @@
 	</head>
 
 	<body class="no-skin">
+		<?php $this->load->view('components/header')?>
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
 				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
 			</script>
-
+			<?php $this->load->view('components/menu')?>
 			<div class="main-content">
 				<div class="main-content-inner">
 					<div class="page-content">
