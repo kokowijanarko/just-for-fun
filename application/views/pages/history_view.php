@@ -172,7 +172,7 @@
 											<thead>
 												<tr>													
 													<th width="25px"> No</th>
-													
+													<th> Kode Inventaris </th>
 													<th> Nama Inventaris </th>
 													<th> Kondisi </th>
 													<th> Keterangan </th>
@@ -185,6 +185,7 @@
 											<tbody>
 											<?php $no=1; foreach ($hst as $historys) { ?>
 													<td><?php echo $no; ?></td>
+													<td><?php echo $historys->history_inv_number; ?></td>
 													<td><?php echo $historys->history_inv; ?></td>
 													<td><?php echo $historys->history_cond; ?></td>
 													<td><?php echo $historys->history_desc; ?></td>
@@ -208,7 +209,7 @@
 														</div>
 													</td>
 												</tr>
-												<?php } ?>
+												<?php $no++;} ?>
 											</tbody>
 										</table>
 									</div><!-- /.span -->
