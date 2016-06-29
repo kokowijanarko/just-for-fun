@@ -123,10 +123,10 @@
 						
 						<div class="page-header">
 							<h1>
-								Form Elements
+								Tambah
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Common form elements and layouts
+									Inventory
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -146,7 +146,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Pengadaan </label>
 										<div class="col-xs-10 col-sm-4">
 											<div class="input-group">
-												<input class="form-control date-picker" name="tanggal_diterima" id="id-date-picker-1"  type="text" data-date-format="dd-mm-yyyy" />
+												<input class="form-control date-picker" name="tanggal_diterima" id="date-picker"  type="text" data-date-format="dd-mm-yyyy" />
 												<span class="input-group-addon">
 													<i class="fa fa-calendar bigger-110"></i>
 												</span>
@@ -357,48 +357,6 @@
 			
 			
 				
-				//"jQuery UI Slider"
-				//range slider tooltip example
-				$( "#slider-range" ).css('height','200px').slider({
-					orientation: "vertical",
-					range: true,
-					min: 0,
-					max: 100,
-					values: [ 17, 67 ],
-					slide: function( event, ui ) {
-						var val = ui.values[$(ui.handle).index()-1] + "";
-			
-						if( !ui.handle.firstChild ) {
-							$("<div class='tooltip right in' style='display:none;left:16px;top:-6px;'><div class='tooltip-arrow'></div><div class='tooltip-inner'></div></div>")
-							.prependTo(ui.handle);
-						}
-						$(ui.handle.firstChild).show().children().eq(1).text(val);
-					}
-				}).find('span.ui-slider-handle').on('blur', function(){
-					$(this.firstChild).hide();
-				});
-				
-				
-				$( "#slider-range-max" ).slider({
-					range: "max",
-					min: 1,
-					max: 10,
-					value: 2
-				});
-				
-				$( "#slider-eq > span" ).css({width:'90%', 'float':'left', margin:'15px'}).each(function() {
-					// read initial values from markup and remove that
-					var value = parseInt( $( this ).text(), 10 );
-					$( this ).empty().slider({
-						value: value,
-						range: "min",
-						animate: true
-						
-					});
-				});
-				
-				$("#slider-eq > span.ui-slider-purple").slider('disable');//disable third item
-			
 				
 				$('#id-input-file-1 , #id-input-file-2').ace_file_input({
 					no_file:'No File ...',
@@ -416,126 +374,6 @@
 				//$('#id-input-file-1').ace_file_input('show_file_list', ['myfile.txt'])
 			
 			
-				$('#id-input-file-3').ace_file_input({
-					style:'well',
-					btn_choose:'Drop files here or click to choose',
-					btn_change:null,
-					no_icon:'ace-icon fa fa-cloud-upload',
-					droppable:true,
-					thumbnail:'small'//large | fit
-					//,icon_remove:null//set null, to hide remove/reset button
-					/**,before_change:function(files, dropped) {
-						//Check an example below
-						//or examples/file-upload.html
-						return true;
-					}*/
-					/**,before_remove : function() {
-						return true;
-					}*/
-					,
-					preview_error : function(filename, error_code) {
-						//name of the file that failed
-						//error_code values
-						//1 = 'FILE_LOAD_FAILED',
-						//2 = 'IMAGE_LOAD_FAILED',
-						//3 = 'THUMBNAIL_FAILED'
-						//alert(error_code);
-					}
-			
-				}).on('change', function(){
-					//console.log($(this).data('ace_input_files'));
-					//console.log($(this).data('ace_input_method'));
-				});
-				
-				
-				//$('#id-input-file-3')
-				//.ace_file_input('show_file_list', [
-					//{type: 'image', name: 'name of image', path: 'http://path/to/image/for/preview'},
-					//{type: 'file', name: 'hello.txt'}
-				//]);
-			
-				
-				
-			
-				//dynamically change allowed formats by changing allowExt && allowMime function
-				$('#id-file-format').removeAttr('checked').on('change', function() {
-					var whitelist_ext, whitelist_mime;
-					var btn_choose
-					var no_icon
-					if(this.checked) {
-						btn_choose = "Drop images here or click to choose";
-						no_icon = "ace-icon fa fa-picture-o";
-			
-						whitelist_ext = ["jpeg", "jpg", "png", "gif" , "bmp"];
-						whitelist_mime = ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"];
-					}
-					else {
-						btn_choose = "Drop files here or click to choose";
-						no_icon = "ace-icon fa fa-cloud-upload";
-						
-						whitelist_ext = null;//all extensions are acceptable
-						whitelist_mime = null;//all mimes are acceptable
-					}
-					var file_input = $('#id-input-file-3');
-					file_input
-					.ace_file_input('update_settings',
-					{
-						'btn_choose': btn_choose,
-						'no_icon': no_icon,
-						'allowExt': whitelist_ext,
-						'allowMime': whitelist_mime
-					})
-					file_input.ace_file_input('reset_input');
-					
-					file_input
-					.off('file.error.ace')
-					.on('file.error.ace', function(e, info) {
-						//console.log(info.file_count);//number of selected files
-						//console.log(info.invalid_count);//number of invalid files
-						//console.log(info.error_list);//a list of errors in the following format
-						
-						//info.error_count['ext']
-						//info.error_count['mime']
-						//info.error_count['size']
-						
-						//info.error_list['ext']  = [list of file names with invalid extension]
-						//info.error_list['mime'] = [list of file names with invalid mimetype]
-						//info.error_list['size'] = [list of file names with invalid size]
-						
-						
-						/**
-						if( !info.dropped ) {
-							//perhapse reset file field if files have been selected, and there are invalid files among them
-							//when files are dropped, only valid files will be added to our file array
-							e.preventDefault();//it will rest input
-						}
-						*/
-						
-						
-						//if files have been selected (not dropped), you can choose to reset input
-						//because browser keeps all selected files anyway and this cannot be changed
-						//we can only reset file field to become empty again
-						//on any case you still should check files with your server side script
-						//because any arbitrary file can be uploaded by user and it's not safe to rely on browser-side measures
-					});
-				
-				});
-			
-				$('#spinner1').ace_spinner({value:0,min:0,max:200,step:10, btn_up_class:'btn-info' , btn_down_class:'btn-info'})
-				.closest('.ace-spinner')
-				.on('changed.fu.spinbox', function(){
-					//alert($('#spinner1').val())
-				}); 
-				$('#spinner2').ace_spinner({value:0,min:0,max:10000,step:100, touch_spinner: true, icon_up:'ace-icon fa fa-caret-up bigger-110', icon_down:'ace-icon fa fa-caret-down bigger-110'});
-				$('#spinner3').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus bigger-110', icon_down:'ace-icon fa fa-minus bigger-110', btn_up_class:'btn-success' , btn_down_class:'btn-danger'});
-				$('#spinner4').ace_spinner({value:0,min:-100,max:100,step:10, on_sides: true, icon_up:'ace-icon fa fa-plus', icon_down:'ace-icon fa fa-minus', btn_up_class:'btn-purple' , btn_down_class:'btn-purple'});
-			
-				//$('#spinner1').ace_spinner('disable').ace_spinner('value', 11);
-				//or
-				//$('#spinner1').closest('.ace-spinner').spinner('disable').spinner('enable').spinner('value', 11);//disable, enable or change value
-				//$('#spinner1').closest('.ace-spinner').spinner('value', 0);//reset to 0
-			
-			
 				//datepicker plugin
 				//link
 				$('#date-picker').datepicker({
@@ -547,49 +385,6 @@
 					$(this).prev().focus();
 				});
 			
-				//or change it into a date range picker
-				$('.input-daterange').datepicker({autoclose:true});
-			
-			
-				//to translate the daterange picker, please copy the "examples/daterange-fr.js" contents here before initialization
-				$('input[name=date-range-picker]').daterangepicker({
-					'applyClass' : 'btn-sm btn-success',
-					'cancelClass' : 'btn-sm btn-default',
-					locale: {
-						applyLabel: 'Apply',
-						cancelLabel: 'Cancel',
-					}
-				})
-				.prev().on(ace.click_event, function(){
-					$(this).next().focus();
-				});
-			
-			
-				$('#timepicker1').timepicker({
-					minuteStep: 1,
-					showSeconds: true,
-					showMeridian: false
-				}).next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
-				
-				$('#date-timepicker1').datetimepicker().next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
-				
-			
-				$('#colorpicker1').colorpicker();
-			
-				$('#simple-colorpicker-1').ace_colorpicker();
-				//$('#simple-colorpicker-1').ace_colorpicker('pick', 2);//select 2nd color
-				//$('#simple-colorpicker-1').ace_colorpicker('pick', '#fbe983');//select #fbe983 color
-				//var picker = $('#simple-colorpicker-1').data('ace_colorpicker')
-				//picker.pick('red', true);//insert the color if it doesn't exist
-			
-			
-				$(".knob").knob();
-				
-				
 				var tag_input = $('#form-field-tags');
 				try{
 					tag_input.tag(

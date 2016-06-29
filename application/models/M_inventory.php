@@ -72,7 +72,9 @@ class M_inventory extends CI_Model
 		return $result;		
 	}
 	
-	
+	public function getInventory($filter){
+		
+	}
 	
 	
 }
