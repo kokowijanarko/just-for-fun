@@ -73,8 +73,14 @@ class M_inventory extends CI_Model
 	}
 	
 	public function getInventory($filter){
-		
+		$sql = $this->db->query("
+			
+		");
 	}
 	
 	
+	public function getLastNamePrefix($name){
+		$sql = $this->db->query("SELECT MAX(inv_name) AS last_prefix FROM inv_inventory WHERE inv_name LIKE '".$name."%'");
+		return $sql->row();
+	}
 }

@@ -40,16 +40,27 @@ class Inventory extends CI_Controller {
 		//var_dump($counters); die();
 		$jumlah = $this->input->post('jumlah');
 		//var_dump($jumlah); die();
-		for ($i=1; $i <= $jumlah; $i++) { 	
-			$data['inv_name'] = $this->input->post('nama_inventaris');
+		$prefix = 1;
+		
+		$this->db->trans_start();
+		$result = $this->M_inventory->getLastNamePrefix($this->input->post('nama_inventaris'));			
+		if(!empty($result->last_prefix) || !is_null($result->last_prefix)){
+			$prefix = $result->last_prefix;
+		}
+		//var_dump($result, $prefix);die;
+		
+		
+		for ($i=1; $i <= $jumlah; $i++) {
+			$nama = $this->input->post('nama_inventaris');
+			$data['inv_name'] = $nama.' '.($prefix++);
 			$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
 			$data['inv_type_id'] = $this->input->post('tipe');
 			$data['inv_category_id'] = $this->input->post('kategori');
 			$data['inv_desc'] = $this->input->post('deskripsi');
 			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
-	 		$result = $this->M_inventory->addInventory($data);
+	 		$result = $result && $this->M_inventory->addInventory($data);
 		}
-		//var_dump($this->db->last_query());
+		$this->db->trans_complete($result);
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Am1'));
 		}else{

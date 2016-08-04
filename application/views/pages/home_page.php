@@ -22,8 +22,7 @@
 									<strong class="green">
 										Ace
 										<small>(v1.3.3)</small>
-									</strong>,
-	легкий, много-функциональный и простой в использовании шаблон для админки на bootstrap 3.3. Загрузить исходники с <a href="https://github.com/bopoda/ace">github</a> (with minified ace js files).
+									</strong>
 								</div>
 
 								<div class="row">

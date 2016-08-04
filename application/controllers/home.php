@@ -12,8 +12,7 @@ class Home extends CI_Controller {
 		
     }
 	
-	public function index(){
-		
+	public function index(){		
 		if(!isset($this->session->userdata['data'])){			
 			redirect(base_url('index.php/home/login'));
 		}else{			
