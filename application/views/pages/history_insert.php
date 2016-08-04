@@ -122,10 +122,10 @@
 						
 						<div class="page-header">
 							<h1>
-								Form Elements
+								Catat
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Common form elements and layouts
+									Riwayat
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -163,17 +163,8 @@
 											<textarea name = "keterangan" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"></textarea>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Petugas </label>
-										<div class="col-sm-9">
-											<select name="petugas" class="col-xs-10 col-sm-5" id="form-field-select-1">
-												<option value="">--Pilih--</option>
-												<?php foreach ($users as $ussr) { ?>
-													<option value="<?php echo $ussr->user_id; ?>"> <?php echo $ussr->user_username; ?> </option>
-												<?php } ?>
-											</select>
-										</div>
-									</div>
+									<input type="hidden" name="petugas" value="<?php echo $this->session->userdata('user_id')?>">
+									
 									<div class="space-4"></div>
 
 									<div class="clearfix form-actions">

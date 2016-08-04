@@ -16,13 +16,13 @@ class M_history extends CI_Model
 		$query = $this->db->query('SELECT
 	a.history_id AS history_id,
 	a.history_insert_timestamp AS history_date,
+	d.inv_number AS history_inv_number,
 	a.history_desc AS history_desc,
 	b.user_username AS history_user,
 	c.cond_name AS history_cond,
 	d.inv_name AS history_inv
 	
 FROM inv_history a
-
 LEFT JOIN dev_user b ON b.user_id = a.history_insert_user_id
 LEFT JOIN inv_ref_condition c ON c.cond_id = a.history_condition_id
 LEFT JOIN inv_inventory d ON d.inv_id = a.history_inv_id');
