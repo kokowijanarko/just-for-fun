@@ -46,4 +46,9 @@ class Home extends CI_Controller {
 		$data['view'] = 'pages/form';
 		$this->load->view('index', $data);
 	}
+	
+	public function logout(){
+		unset($this->session->userdata());
+		redirect(site_url('home/login'));
+	}
 }
