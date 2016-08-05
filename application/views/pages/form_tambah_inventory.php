@@ -423,10 +423,10 @@
 
 <div class="page-header">
 							<h1>
-								Form Elements
+								Tambah Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Common form elements and layouts
+									Inventaris
 								</small>
 							</h1>
 						</div><!-- /.page-header -->

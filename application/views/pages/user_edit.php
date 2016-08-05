@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Inventaris Barang</title>
+		<title> Edit Data Pengguna </title>
 
 		<meta name="description" content="Inventaris &amp; Barang" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -126,10 +126,10 @@
 
 						<div class="page-header">
 							<h1>
-								Product
+								Edit Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									List
+									Pengguna
 								</small>
 							</h1>
 						</div><!-- /.page-header -->

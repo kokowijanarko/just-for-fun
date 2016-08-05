@@ -18,9 +18,9 @@
 
 									<i class="ace-icon fa fa-check green"></i>
 
-									Welcome to
+									Selamat Datang di
 									<strong class="green">
-										Ace
+										Sistem Pengelolaan Inventaris
 										<small>(v1.3.3)</small>
 									</strong>
 								</div>

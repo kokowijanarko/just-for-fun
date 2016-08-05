@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Tables - Ace Admin</title>
+		<title>Tambah Data Kategori</title>
 
 		<meta name="description" content="Static &amp; Dynamic Tables" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -126,7 +126,7 @@
 
 						<div class="page-header">
 							<h1>
-								Tambah
+								Tambah Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
 									Kategori

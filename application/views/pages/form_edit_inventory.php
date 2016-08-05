@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Form Elements - Ace Admin</title>
+		<title>Edit Data Inventaris</title>
 
 		<meta name="description" content="Common form elements and layouts" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -122,10 +122,10 @@
 						
 						<div class="page-header">
 							<h1>
-								Form Elements
+								Edit Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Common form elements and layouts
+									Inventaris
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
