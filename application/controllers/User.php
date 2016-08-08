@@ -32,11 +32,12 @@ class User extends CI_Controller {
 	}
 
 	public function user_add_process(){	
-		$data['name'] = $this->input->post('user_name');
-		$data['username'] = $this->input->post('username');
-		$data['password'] = md5($this->input->post('username'));
-		$data['datetime_insert'] = date("Y-m-d h:i:s");
-		$data['description'] = $this->input->post('keterangan');
+		$data['user_name'] = $this->input->post('user_name');
+		$data['user_username'] = $this->input->post('username');
+		$data['user_password'] = md5($this->input->post('username'));
+		$data['user_insert_timestamp'] = date("Y-m-d h:i:s");
+		$data['user_insert_user_id'] = $this->session->userdata['data']->user_id;
+		$data['user_desc'] = $this->input->post('keterangan');
 	 	$result = $this->M_user->addUser($data);
 	
 		
@@ -64,11 +65,11 @@ class User extends CI_Controller {
 	}
 
 	public function edit_user_process(){
-		$data['name'] = $this->input->post('user_name');
-		$data['username'] = $this->input->post('username');
-		$data['password'] = md5($this->input->post('username'));
-		$data['description'] = $this->input->post('keterangan');
-		$id=$this->input->post('id_user');
+		//var_dump($_POST);die;
+		$data['user_name'] = $this->input->post('user_name');
+		$data['user_username'] = $this->input->post('user_username');
+		$data['user_desc'] = $this->input->post('user_desc');
+		$id=$this->input->post('user_id');
 		$result = $this->M_user->editUser($id, $data);
 		
 		if($result == true){

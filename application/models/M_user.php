@@ -15,7 +15,8 @@ class M_user extends CI_Model
 	public function addUser($data){	
 		$result = false;
 		if(!empty($data)){
-			$execute = $this->db->insert('dev_user', $data);	
+			$execute = $this->db->insert('dev_user', $data);
+			//var_dump($this->db->last_query());die;
 			$result = true;
 		}
 		return $result;
@@ -29,7 +30,7 @@ class M_user extends CI_Model
 	
 
 	function selectUserById($id){
-		$query = $this->db->query("SELECT * FROM dev_user WHERE id = $id");
+		$query = $this->db->query("SELECT * FROM dev_user WHERE user_id = $id");
 		$result = $query->row();
 		return $result;
 	}
@@ -37,7 +38,7 @@ class M_user extends CI_Model
 	public function editUser($id, $data){
 		//var_dump($id);die();
 		//var_dump($data);die();
-		$this->db->where('id', $id);
+		$this->db->where('user_id', $id);
 		$this->db->update('dev_user', $data);
 	}
 	
@@ -45,7 +46,8 @@ class M_user extends CI_Model
 	public function deleteUser($id){
 		$result = false;
 		if(!empty($id)){
-			$execute = $this->db->delete('dev_user', array('id' => $id));
+			$execute = $this->db->delete('dev_user', array('user_id' => $id));
+			//var_dump($this->db->last_query());die;
 			$result = true;
 		}		
 		return $result;		

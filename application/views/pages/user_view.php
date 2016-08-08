@@ -159,7 +159,7 @@
 													
 													<td><?php echo $userss->user_name; ?></td>
 													<td><?php echo $userss->user_username; ?></td>
-													<td><?php echo $userss->user_description; ?></td>
+													<td><?php echo $userss->user_desc; ?></td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">

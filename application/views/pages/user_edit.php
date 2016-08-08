@@ -141,12 +141,12 @@
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" role="form" action="<?php echo base_url('index.php/User/edit_user_process')?>" method="POST">
-									<input type="hidden" value="<?php echo $user_res->id; ?>" id="form-field-1-1" name="id_user" class="col-xs-10 col-sm-5" />
+									<input type="hidden" value="<?php echo $user_res->user_id; ?>" id="form-field-1-1" name="user_id" class="col-xs-10 col-sm-5" />
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Nama Pengguna </label>
 
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $user_res->name; ?>" id="form-field-1-1" name="user_name" placeholder="Nama Asli Pengguna" class="col-xs-10 col-sm-5" />
+											<input type="text" value="<?php echo $user_res->user_name; ?>" id="form-field-1-1" name="user_name" placeholder="Nama Asli Pengguna" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -156,29 +156,19 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Username </label>
 
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $user_res->username; ?>" id="form-field-2" name="username" placeholder="Nama Pengguna Untuk Login" class="col-xs-10 col-sm-5" />
+											<input type="text" value="<?php echo $user_res->user_username; ?>" id="form-field-2" name="user_username" placeholder="Nama Pengguna Untuk Login" class="col-xs-10 col-sm-5" />
 											
 										</div>
 									</div>
 									
 									<div class="space-4"></div>
 									
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Password </label>
-
-										<div class="col-sm-9">
-											<input type="password"  id="form-field-2" name="password" placeholder="Password" class="col-xs-10 col-sm-5" />
-											
-										</div>
-									</div>
-									
-									<div class="space-4"></div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Keterangan </label>
 										
 										<div class="col-sm-9">
-											<textarea class="fcol-xs-10 col-sm-5" id="form-field-8" placeholder="Keterangan" name="keterangan"> <?php echo $user_res->description; ?></textarea>
+											<textarea class="fcol-xs-10 col-sm-5" id="form-field-8" placeholder="Keterangan" name="user_desc"> <?php echo $user_res->user_desc; ?></textarea>
 										</div>
 									</div>
 
