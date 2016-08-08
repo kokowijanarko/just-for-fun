@@ -34,7 +34,7 @@ class User extends CI_Controller {
 	public function user_add_process(){	
 		$data['user_name'] = $this->input->post('user_name');
 		$data['user_username'] = $this->input->post('username');
-		$data['user_password'] = md5($this->input->post('username'));
+		$data['user_password'] = md5($this->input->post('password'));
 		$data['user_insert_timestamp'] = date("Y-m-d h:i:s");
 		$data['user_insert_user_id'] = $this->session->userdata['data']->user_id;
 		$data['user_desc'] = $this->input->post('keterangan');
