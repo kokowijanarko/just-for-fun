@@ -17,6 +17,7 @@ class M_home extends CI_Model
 		$password = md5($data['password']);
 		
         $query = $this->db->query("select * from dev_user where user_username='".$username."' AND user_pass='".$password."'");
+		//var_dump($query);
 		$result = $query->row();
     //var_dump($this->db->last_query());
     //var_dump($result);die;
