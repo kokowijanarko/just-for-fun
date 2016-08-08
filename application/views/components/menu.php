@@ -7,7 +7,7 @@
 					<li class="active">
                         <a href="<?php echo base_url('index.php/home')?>">
 							<i class="menu-icon fa fa-tachometer"></i>
-							<span class="menu-text"> Dashboard </span>
+							<span class="menu-text"> Home </span>
 						</a>
 
 						<b class="arrow"></b>
