@@ -15,7 +15,7 @@ class M_access extends CI_Model
 		$password = md5($data['password']);
 		
         $query = $this->db->query("select * from dev_admin where username='".$username."' AND password='".$password."'");
-		$result = $query->result();
+		$result = $query->row();
 		
 		if(!empty($result)){
 			$this->session->set_userdata = $result;

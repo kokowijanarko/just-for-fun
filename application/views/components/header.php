@@ -30,7 +30,7 @@
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
 								<span class="user-info">
 									<small>Welcome,</small>
-									<?php echo $this->session->userdata('username')?>
+									<?php echo $this->session->userdata('data')->user_name?>
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
@@ -38,7 +38,7 @@
 
 							<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 								<li>
-									<a href="#">
+									<a href="<?php echo site_url('home/logout')?>">
 										<i class="ace-icon fa fa-power-off"></i>
 										Logout
 									</a>
