@@ -62,6 +62,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
+						
 						<ul class="submenu">
 							<li class="">
 								<a href="<?php echo base_url('index.php/Condition/condition_add')?>">
@@ -72,6 +73,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
+						
 						
 					</li>
 					<li class="">
@@ -157,6 +159,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
+						<?php if($this->session->userdata('data')->user_level == '1'){?>
 						<ul class="submenu">
 							<li class="">
 								<a href="<?php echo base_url('index.php/History/history_add')?>">
@@ -167,7 +170,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
-						
+						<?php }?>
 					</li>
 					<li class="">
 						<a href="#" class="dropdown-toggle">
@@ -188,6 +191,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
+						<?php if($this->session->userdata('data')->user_level == '1'){?>
 						<ul class="submenu">
 							<li class="">
 								<a href="<?php echo base_url('index.php/User/user_add')?>">
@@ -198,7 +202,7 @@
 								<b class="arrow"></b>
 							</li>							
 						</ul>
-						
+						<?php }?>
 					</li>
 					
 					<li class="">

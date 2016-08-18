@@ -34,10 +34,10 @@ class User extends CI_Controller {
 	public function user_add_process(){	
 		$data['user_name'] = $this->input->post('user_name');
 		$data['user_username'] = $this->input->post('username');
-		$data['user_password'] = md5($this->input->post('password'));
-		$data['user_insert_timestamp'] = date("Y-m-d h:i:s");
-		$data['user_insert_user_id'] = $this->session->userdata['data']->user_id;
+		$data['user_pass'] = md5($this->input->post('password'));
 		$data['user_desc'] = $this->input->post('keterangan');
+		$data['user_level'] = $this->input->post('level');
+		
 	 	$result = $this->M_user->addUser($data);
 	
 		
@@ -69,6 +69,7 @@ class User extends CI_Controller {
 		$data['user_name'] = $this->input->post('user_name');
 		$data['user_username'] = $this->input->post('user_username');
 		$data['user_desc'] = $this->input->post('user_desc');
+		$data['user_level'] = $this->input->post('level');
 		$id=$this->input->post('user_id');
 		$result = $this->M_user->editUser($id, $data);
 		

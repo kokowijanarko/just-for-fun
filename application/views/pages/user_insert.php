@@ -157,6 +157,34 @@
 										</div>
 									</div>
 									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Level </label>
+										<div class="col-sm-9">
+											<select name="level" class="col-xs-10 col-sm-5">
+												<option value="">---Pilih---</option>
+												<?php 
+													$level = array(
+														array(
+															'id' => '0',
+															'name' => 'USER'
+														),
+														array(
+															'id' => '1',
+															'name' => 'ADMIN'
+														)
+													);
+													
+													foreach($level as $val){
+														echo '<option value="'. $val['id'] .'">'. $val['name'] .'</option>';
+													}
+												?>
+											</select>
+										</div>
+									</div>
+									
+									
+									
+									
 									<div class="space-4"></div>
 									
 									<div class="form-group">
