@@ -52,6 +52,7 @@ class Report_inventory extends CI_Controller {
 				$no = 1;
 				
 			foreach($inventory as $val){
+				$cond = '';
 				foreach($ref_condition as $condition){
 					$cond_name = strtolower($condition->cond_name);
 					$cond_name = str_replace(' ', '_', $cond_name);					
@@ -64,7 +65,7 @@ class Report_inventory extends CI_Controller {
 					';
 					//var_dump($cond_name);
 				}
-				$row = '
+				$row .= '
 					<tr>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $no .'</span></td>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->type .'</span></td>
@@ -73,6 +74,7 @@ class Report_inventory extends CI_Controller {
 						'. $cond .'
 					</tr>				
 				';
+				$no++;
 			}
 		}else{
 			foreach($inventory as $val){
