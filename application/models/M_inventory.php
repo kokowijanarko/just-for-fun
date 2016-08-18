@@ -72,10 +72,69 @@ class M_inventory extends CI_Model
 		return $result;		
 	}
 	
-	public function getInventory($filter){
-		$sql = $this->db->query("
-			
-		");
+	public function getInventoryByCat($filter){
+		$this->load->model('m_condition');
+		
+		if(is_array($filter)){
+			extract($filter);
+		}
+		$query = "
+			SELECT 
+				b.`inv_id` AS `id`,
+				b.`inv_name` AS `name`,
+				b.`inv_number` AS `number`,
+				b.`inv_date_procurement` AS `date_procurment`,
+				e.`category_name` AS `category`,
+				c.`type_name` AS `type`,
+				--cond--
+				(COUNT(b.`inv_id`)) AS count_total
+				
+			FROM inv_history a
+			JOIN inv_inventory b ON b.`inv_id` = a.`history_inv_id`
+			JOIN inv_ref_category e ON e.`category_id` = b.`inv_category_id`
+			JOIN inv_ref_type c ON c.`type_id` = b.`inv_type_id`
+			JOIN inv_ref_condition d ON d.`cond_id` = a.`history_condition_id`
+			WHERE 
+				1 = 1
+				--key--
+			GROUP BY c.`type_id`
+		";
+		
+		$key = '';
+		
+		if(!empty($periode)){
+			$key .= " AND b.`inv_date_procurement` LIKE '$periode%'";
+		}
+		if(!empty($kategori) && $kategori !== 'all'){
+			$key .= " AND b.`inv_category_id` = $kategori";
+		}
+		if(!empty($tipe) && $tipe !== 'all'){
+			$key .= " AND b.`inv_type_id` = $tipe";
+		}
+		
+		$ref_condition = $this->m_condition->select_all();
+		
+		
+		$cond = '';
+		foreach($ref_condition as $val){
+			$cond_name = strtolower($val->cond_name);
+			$cond_name = str_replace(' ', '_', $cond_name);
+			$cond .= "
+				(SELECT COUNT(aa.`history_id`) 
+				FROM inv_history aa
+				JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
+				WHERE  history_condition_id='". $val->cond_id ."'
+					AND bb.`inv_type_id` = c.`type_id`) AS `". $cond_name ."`, 			
+			";
+		}
+		//var_dump($cond);
+		
+		$query = str_replace('--key--', $key, $query);
+		$query = str_replace('--cond--', $cond, $query);
+		//var_dump($query);die;
+		$sql = $this->db->query($query);
+		$result = $sql->result();
+		return $result;
 	}
 	
 	

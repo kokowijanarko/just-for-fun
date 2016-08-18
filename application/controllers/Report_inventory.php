@@ -7,8 +7,9 @@ class Report_inventory extends CI_Controller {
         $this->load->database();
         $this->load->helper('url');
         $this->load->library('message');
-        $this->load->library('Excel');
+        $this->load->model('m_condition');
 		$this->load->model('M_inventory');
+		$this->load->library('rep_pdf');
 		
     }
 	
@@ -20,12 +21,111 @@ class Report_inventory extends CI_Controller {
 	}
 	
 	public function print_report(){
-		var_dump($_POST);
-		$filter = $_POST;
-		
+		$filter = $_POST;		
 		$filter['periode'] = date('Y-m', strtotime($filter['tanggal_diterima']));
-		var_dump($filter);die;
-		$inventory = $this->M_inventory->getInventory($filter);
+		$inventory = $this->M_inventory->getInventoryByCat($filter);
+		//var_dump($inventory);
+		
+		$mPDF = $this->rep_pdf;
+		
+		$mPDF = new $mPDF('', 'A4');
+		//var_dump($mPDF);
+		
+		// $mPDF->SetHTMLFooter('
+		// <table width="100%" style="vertical-align: bottom; font-family: serif; font-size: 8pt; color: #000000; font-weight: bold; font-style: italic;">
+		  // <tr>
+			// <td width="33%">
+			// </span></td>
+			// <td width="33%" align="center" style="font-weight: bold; font-style: italic;">
+			  
+			// </span></td>
+			// <td width="33%" style="text-align: right; ">Laporan Inventaris - '. $filter['periode'] .' {PAGENO}
+			// </span></td>
+		  // </tr>
+		// </table>
+		// ');
+		
+		if(!empty($inventory)){
+			$ref_condition = $this->m_condition->select_all();
+		
+				$row = '';
+				$no = 1;
+				
+			foreach($inventory as $val){
+				foreach($ref_condition as $condition){
+					$cond_name = strtolower($condition->cond_name);
+					$cond_name = str_replace(' ', '_', $cond_name);					
+					$cond .= '						
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; ">
+							<span style="font-size:10pt;">
+								'. $val->$cond_name.'
+							</span>
+						</td>
+					';
+					//var_dump($cond_name);
+				}
+				$row = '
+					<tr>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $no .'</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->type .'</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->category .'</span></td>
+						'. $cond .'
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->count_total .'</span></td>
+					</tr>				
+				';
+			}
+		}else{
+			foreach($inventory as $val){
+				foreach($ref_condition as $condition){				
+					$cond .= '						
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; ">
+							<span style="font-size:10pt;">
+								-
+							</span>
+						</td>
+					';
+					//var_dump($cond_name);
+				}
+				$row = '
+					<tr>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">1</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
+						'. $cond .'
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
+					</tr>				
+				';
+			}
+		}
+		
+		
+		foreach($ref_condition as $condition){		
+			$kondisi .= '<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">'. $condition->cond_name .'</span></td>
+			';
+			
+		}
+		$html_body = '
+			<b><span style=" font-size:10pt;">Daftar Inventaris</span></b>
+			<br /><br />
+			<table width="100%" width="100%" cellpadding="0" cellPadding="0" border="1" style="font-family:Times New Roman; border-collapse:collapse;">
+				
+				<tr>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">NO</span></td>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Tipe</span></td>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Kategori</span></td>
+					'. $kondisi .'
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Jumlah</span></td>
+					
+				</tr>
+				'. $row .'
+			</table>
+		
+		';
+		
+		// var_dump($html_body);
+		$mPDF->WriteHTML($html_body);
+        $mPDF->Output('Laporan Inventaris Periode '. date('Y-M', strtotime($filter['tanggal_diterima'])) .'.pdf', 'D');
+        exit;
 	}
 
 
