@@ -142,15 +142,9 @@
 										<table id="simple-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</th>
-													<th> ID Tipe </th>
 													<th> Kode Tipe </th>
 													<th> Nama Tipe </th>
+													<th> Kategory </th>
 													<th> Keterangan </th>
 													<th> Aksi </th>
 												</tr>
@@ -159,16 +153,9 @@
 											<tbody>
 											<?php foreach ($typ as $types) { ?>
 												<tr>
-													<td class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</td>
-
-													<td><?php echo $types->type_id; ?></td>
 													<td><?php echo $types->type_code; ?></td>
 													<td><?php echo $types->type_name; ?></td>
+													<td><?php echo $types->category_code .' - '. $types->category_name; ?></td>
 													<td><?php echo $types->type_desc; ?></td>
 
 													<td>

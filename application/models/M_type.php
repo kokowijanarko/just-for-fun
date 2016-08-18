@@ -22,7 +22,17 @@ class M_type extends CI_Model
 	}
 	
 	function select_all(){
-		$query = $this->db->query("SELECT * FROM inv_ref_type");
+		$query = $this->db->query("		
+		SELECT
+			a.`type_category_id`,
+			a.`type_code`,
+			a.`type_desc`,
+			a.`type_id`,
+			a.`type_name`,
+			b.`category_name`,
+			b.`category_code`
+		FROM inv_ref_type a
+		JOIN inv_ref_category b ON b.`category_id` = a.`type_category_id`");
 		$result = $query->result();
 		return $result;
 	}
@@ -57,6 +67,11 @@ class M_type extends CI_Model
 		return $result;
 	}
 	
+	public function getCat(){
+		$qry = $this->db->query('SELECT * FROM inv_ref_category');
+		$result = $qry->result();
+		return $result;
+	}
 	
 	
 	

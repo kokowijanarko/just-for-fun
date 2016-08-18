@@ -27,12 +27,14 @@ class Type extends CI_Controller {
 	}
 
 	public function type_add(){
-		$this->load->view('pages/type_insert');
+		$data['category'] = $this->M_type->getCat();
+		$this->load->view('pages/type_insert', $data);
 	}
 
 	public function type_add_process(){
 		$data['type_code'] = $this->input->post('kode_tipe');
 		$data['type_name'] = $this->input->post('nama_tipe');
+		$data['type_category_id'] = $this->input->post('category');
 		$data['type_desc'] = $this->input->post('keterangan');
 		$this->M_type->addType($data);
 		$this->type_read();
@@ -45,6 +47,7 @@ class Type extends CI_Controller {
 
 	public function type_edit($type_id){
 		$data['type_res'] = $this->M_type->select_by_id($type_id)->row();
+		$data['category'] = $this->M_type->getCat();
 		$this->load->view('pages/type_edit', $data);
 	}
 
@@ -52,6 +55,7 @@ class Type extends CI_Controller {
 		//var_dump($_POST);die();
 		$data['type_code'] = $this->input->post('kode_tipe');
 		$data['type_name'] = $this->input->post('nama_tipe');
+		$data['type_category_id'] = $this->input->post('category');
 		$data['type_desc'] = $this->input->post('keterangan');
 		$type_id=$this->input->post('id_tipe');
 		//var_dump($type_id);die();

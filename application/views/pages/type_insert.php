@@ -153,7 +153,19 @@
 											<input type="text" id="form-field-1-1" name="kode_tipe" placeholder="Isi 3 Karakter" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+										<div class="col-sm-9">
+											<select name="category" class="col-xs-10 col-sm-5" id="category">
+												<option value="">--Pilih--</option>
+												<?php foreach ($category as $cat) { ?>
+													<option value="<?php echo $cat->category_id; ?>"> <?php echo $cat->category_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									
 									<div class="space-4"></div>
 									
 									<div class="form-group">
