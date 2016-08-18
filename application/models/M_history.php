@@ -38,20 +38,20 @@ LEFT JOIN inv_inventory d ON d.inv_id = a.history_inv_id');
 
 	function getHistoryById($history_id){
 		$query = $this->db->query('select 
-	a.history_inv_id as history_inv_id,
-	a.history_condition_id as history_condition_id,
-	a.history_id as history_id,
-	a.history_insert_user_id as history_user_id,
-	a.history_insert_timestamp as history_date,
-	a.history_desc as history_desc,
-	b.user_name as history_user,
-	c.cond_name as history_cond,
-	d.inv_name as history_inv
-from inv_history a
-left join dev_user b ON b.user_id = a.history_insert_user_id
-left join inv_ref_condition c on c.cond_id = a.history_condition_id
-left join inv_inventory d on d.inv_id = a.history_inv_id
-where history_id ='.$history_id);
+		a.history_inv_id as history_inv_id,
+		a.history_condition_id as history_condition_id,
+		a.history_id as history_id,
+		a.history_insert_user_id as history_user_id,
+		a.history_insert_timestamp as history_date,
+		a.history_desc as history_desc,
+		b.user_name as history_user,
+		c.cond_name as history_cond,
+		d.inv_name as history_inv
+	from inv_history a
+	left join dev_user b ON b.user_id = a.history_insert_user_id
+	left join inv_ref_condition c on c.cond_id = a.history_condition_id
+	left join inv_inventory d on d.inv_id = a.history_inv_id
+	where history_id ='.$history_id);
 		$result = $query->row();
 		return $result;
 	}

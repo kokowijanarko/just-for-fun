@@ -178,7 +178,7 @@
 											<textarea name = "keterangan" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"><?php echo $hists->history_desc; ?></textarea>
 										</div>
 									</div>
-									<input type="hidden" name="petugas" value="<?php echo $this->session->userdata('user_id')?>">
+									<input type="hidden" name="petugas" value="<?php echo $this->session->userdata('data')->user_id;?>">
 									
 									
 									<div class="space-4"></div>

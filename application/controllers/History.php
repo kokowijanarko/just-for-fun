@@ -79,9 +79,7 @@ class History extends CI_Controller {
 		$data['history_insert_user_id'] = $this->input->post('petugas');
 		$data['history_insert_timestamp'] = date('Y-m-d H:i:s');
 		$history_id=$this->input->post('id_history');
-		//var_dump($history_id); die();
 		$result = $this->M_history->editHistory($history_id, $data);
-		
 		if($result == true){
 			redirect(site_url('history/history_read?msg=Em1'));
 		}else{
