@@ -63,7 +63,7 @@ class Type extends CI_Controller {
 		$this->type_read();
 	}
 	
-	public function get_type_by_cat(){
+	public function get_type_by_cat(){		
 		$data_type = $this->M_type->getTypeByCat($_POST['category_id']);
 		echo json_encode($data_type);
 		exit;

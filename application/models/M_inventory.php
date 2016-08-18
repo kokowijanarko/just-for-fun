@@ -78,6 +78,7 @@ class M_inventory extends CI_Model
 		if(is_array($filter)){
 			extract($filter);
 		}
+		// var_dump($filter);
 		$query = "
 			SELECT 
 				b.`inv_id` AS `id`,
@@ -87,7 +88,7 @@ class M_inventory extends CI_Model
 				e.`category_name` AS `category`,
 				c.`type_name` AS `type`,
 				--cond--
-				(COUNT(b.`inv_id`)) AS count_total
+				(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = b.`inv_type_id`) AS count_total
 				
 			FROM inv_history a
 			JOIN inv_inventory b ON b.`inv_id` = a.`history_inv_id`
@@ -120,11 +121,17 @@ class M_inventory extends CI_Model
 			$cond_name = strtolower($val->cond_name);
 			$cond_name = str_replace(' ', '_', $cond_name);
 			$cond .= "
-				(SELECT COUNT(aa.`history_id`) 
-				FROM inv_history aa
-				JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
-				WHERE  history_condition_id='". $val->cond_id ."'
-					AND bb.`inv_type_id` = c.`type_id`) AS `". $cond_name ."`, 			
+				IF(
+					(SELECT COUNT(aa.`history_id`) 
+					FROM inv_history aa
+					JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
+					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id`) = 0,
+					'-',
+					(SELECT COUNT(aa.`history_id`) 
+					FROM inv_history aa
+					JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
+					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id`)						
+				) AS `". $cond_name ."`, 			
 			";
 		}
 		//var_dump($cond);

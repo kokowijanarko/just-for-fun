@@ -8,7 +8,7 @@ B. tampilan inventaris:
 
 
 C. RIWAYAT:
-	1. option nama riwayat cantumkan kode inventaris (done)
+	1. option nama riwayat cantumkan kode inventaris 
 	2. riwayat harusnya tidak dihapus, tetapi diubah status menjadi tidak aktif
  
 D. KEKURANGAN:
@@ -16,3 +16,10 @@ D. KEKURANGAN:
 		a. laporan inventaris, perperiode.
 		b. manajemen user. (done)
 		c. cetak kode inventaris.
+
+
+fixed task : 
+1. hapus script jquery tabel yang tdk terpakai
+2. menyeragamkan input type="hidden" buat "id" di semua halaman edit
+3. manajemen user
+4. merujuk kategori dan tipe di inventory_view

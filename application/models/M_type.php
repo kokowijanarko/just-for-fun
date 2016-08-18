@@ -61,8 +61,19 @@ class M_type extends CI_Model
 		return $result;		
 	}
 	
-	public function getTypeBYCat($id){
-		$qry = $this->db->query('SELECT * FROM inv_ref_type WHERE type_category_id='. $id);
+	public function getTypeBYCat($id_cat){
+		$id = '';
+		if(is_array($id_cat)){
+			
+			foreach($id_cat as $cat_id){
+				$id .= " $cat_id";				
+			}
+			$id = trim($id);
+			$id = str_replace(' ', ',', $id);
+		}else{
+			$id = $id_cat;
+		}
+		$qry = $this->db->query('SELECT * FROM inv_ref_type WHERE type_category_id IN ('. $id .')');
 		$result = $qry->result();
 		return $result;
 	}

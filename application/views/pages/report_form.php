@@ -148,9 +148,9 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
-										<div class="col-sm-4">
-											<select name="kategori" multiple="" class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Pilih kategori . . ." required>
-												<option value="all">SEMUA</option>
+										<div class="col-sm-9">
+											<select name="kategori" class="col-xs-10 col-sm-5" id="kategori">
+												<option value="all">--Semua--</option>
 												<?php foreach ($opt as $options) { ?>
 													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
 												<?php } ?>
@@ -159,12 +159,10 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
-										<div class="col-sm-4">
-											<select  name="tipe" multiple="" class="col-xs-10 col-sm-5 chosen-select" data-placeholder="Pilih tipe . . ." required>
-												<option value="all">SEMUA</option>
-												<?php foreach ($type as $tp) { ?>
-													<option value="<?php echo $tp->type_id; ?>"> <?php echo $tp->type_name; ?> </option>
-												<?php } ?>
+										<div class="col-sm-9">
+											<select name="tipe" class="col-xs-10 col-sm-5" id="tipe">
+												<option value="all">--Semua--</option>
+												
 											</select>
 										</div>
 									</div>
@@ -254,6 +252,31 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
+				$('#kategori').change(function(){
+					var cat_id = $('#kategori').val();
+					var par = {
+						'category_id':cat_id
+					}
+					
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('type/get_type_by_cat')?>',
+						data:par
+					}).success(function(result){
+						$('#tipe').empty();
+						$('#tipe').append('<option value="all">--Semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);
+		
+							for(idx=0; idx<result.length; idx++){
+								$('#tipe').append('<option value="'+result[idx]['type_id']+'">'+result[idx]['type_name']+'</option>');
+							}							
+						}
+						
+					});
+				})			
+				
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
 					if(inp.hasAttribute('disabled')) {
