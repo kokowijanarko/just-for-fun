@@ -32,6 +32,7 @@ class Category extends CI_Controller {
 	public function category_add_process(){
 		$data['category_code'] = $this->input->post('kode_kategori');
 		$data['category_name'] = $this->input->post('nama_kategori');
+		$data['is_building'] = $this->input->post('is_building');
 		$data['category_desc'] = $this->input->post('keterangan');
 		$this->M_category->addCategory($data);
 		$this->category_read();
@@ -52,6 +53,7 @@ class Category extends CI_Controller {
 		//var_dump($_POST);die();
 		$data['category_code'] = $this->input->post('kode_kategori');
 		$data['category_name'] = $this->input->post('nama_kategori');
+		$data['is_building'] = $this->input->post('is_building');
 		$data['category_desc'] = $this->input->post('keterangan');
 		$category_id=$this->input->post('id_kategori');
 		//var_dump($category_id);die();

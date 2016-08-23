@@ -157,6 +157,32 @@
 									<div class="space-4"></div>
 									
 									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Bangunan ? </label>
+										<div class="col-sm-9">
+											<?php
+											$is_building = array(
+												array(
+													'id'=>0,
+													'cek'=>'checked',
+													'name'=>'TIDAK'
+												),
+												array(
+													'id'=>1,													
+													'cek'=>'',
+													'name'=>'YA'
+												)
+											);
+											
+											foreach($is_building as $val){
+												echo '<div class="col-sm-1"><label><input type="radio" name="is_building" value="'. $val['id'] .'" '. $val['cek'] .'> '. $val['name'] .'</label></div>';
+											}
+										?>
+											
+											
+										</div>
+									</div>
+									
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Keterangan </label>
 										
 										<div class="col-sm-9">

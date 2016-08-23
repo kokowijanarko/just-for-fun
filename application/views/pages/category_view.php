@@ -148,16 +148,10 @@
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</th>
-													<th> ID Kategori </th>
 													<th> Kode Kategori </th>
 													<th> Nama Kategori </th>
 													<th> Keterangan </th>
+													<th> Bangunan </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
@@ -165,17 +159,15 @@
 											<tbody>
 											<?php foreach ($cat as $cats) { ?>
 												<tr>
-													<td class="center">
-														<label class="pos-rel">
-															<input type="checkbox" class="ace" />
-															<span class="lbl"></span>
-														</label>
-													</td>
-
-													<td><?php echo $cats->category_id; ?></td>
 													<td><?php echo $cats->category_code; ?></td>
 													<td><?php echo $cats->category_name; ?></td>
 													<td><?php echo $cats->category_desc; ?></td>
+													<td>
+														<?php 
+															$is_building = ($cats->is_building == 1)?'YA':'TIDAK';
+															echo $is_building; 
+														?>
+													</td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
