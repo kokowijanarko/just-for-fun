@@ -156,10 +156,10 @@
 									</div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Bangunan ? </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Container ? </label>
 										<div class="col-sm-9">
 											<?php
-											$is_building = array(
+											$is_container = array(
 												array(
 													'id'=>0,
 													'name'=>'TIDAK'
@@ -170,12 +170,12 @@
 												)
 											);
 											
-											foreach($is_building as $val){
+											foreach($is_container as $val){
 												$cek = '';
-												if($val['id'] == $category_res->is_building){
+												if($val['id'] == $category_res->is_container){
 													$cek='checked';
 												}
-												echo '<div class="col-sm-1"><label><input type="radio" name="is_building" value="'. $val['id'] .'" '. $cek .'> '. $val['name'] .'</label></div>';
+												echo '<div class="col-sm-1"><label><input type="radio" name="is_container" value="'. $val['id'] .'" '. $cek .'> '. $val['name'] .'</label></div>';
 											}
 										?>
 											

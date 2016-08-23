@@ -151,7 +151,7 @@
 													<th> Kode Kategori </th>
 													<th> Nama Kategori </th>
 													<th> Keterangan </th>
-													<th> Bangunan </th>
+													<th> Container </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
@@ -164,8 +164,8 @@
 													<td><?php echo $cats->category_desc; ?></td>
 													<td>
 														<?php 
-															$is_building = ($cats->is_building == 1)?'YA':'TIDAK';
-															echo $is_building; 
+															$is_container = ($cats->is_container == 1)?'YA':'TIDAK';
+															echo $is_container; 
 														?>
 													</td>
 

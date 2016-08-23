@@ -53,11 +53,25 @@ class M_inventory extends CI_Model
 	}
 
 	function getInvById($inv_id){
-		$result = $this->db->select('*');
-		$result =$this->db->from('inv_inventory');
-		$result =$this->db->where('inv_id', $inv_id);
-		$result =$this->db->get();
-		$result = $result->row();
+		$query = $this->db->query('
+			SELECT
+				a.`inv_id`,
+				a.`inv_name`,
+				a.`inv_number`,
+				a.`inv_date_procurement`,
+				a.`inv_date_expired`,
+				a.`inv_category_id`,
+				a.`inv_type_id`,
+				a.`inv_store_place_in_use`,
+				a.`inv_store_place_after_use`,
+				a.`inv_desc`,
+				b.`category_name`,
+				b.`is_container`
+			FROM inv_inventory a 
+			JOIN inv_ref_category b ON b.`category_id` = a.`inv_category_id`
+			WHERE a.`inv_id` = '. $inv_id);
+		
+		$result = $query->row();
 		return $result;
 	}
 
