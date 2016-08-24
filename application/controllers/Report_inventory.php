@@ -126,7 +126,7 @@ class Report_inventory extends CI_Controller {
 		
 		//var_dump($html_body);die;
 		$mPDF->WriteHTML($html_body);
-        $mPDF->Output('Laporan Inventaris Periode '. date('Y-M', strtotime($filter['tanggal_diterima'])) .'.pdf', 'D');
+        $mPDF->Output('Laporan Inventaris Periode '. date('Y-M', strtotime($filter['tanggal_diterima'])) .' '. date('His dmY') .'.pdf', 'D');
         exit;
 	}
 
