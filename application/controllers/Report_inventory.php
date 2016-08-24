@@ -24,7 +24,7 @@ class Report_inventory extends CI_Controller {
 		$filter = $_POST;		
 		$filter['periode'] = date('Y-m', strtotime($filter['tanggal_diterima']));
 		$inventory = $this->m_inventory->getInventoryByCat($filter);
-		// var_dump($inventory, $this->db->last_query());die;
+		//var_dump($inventory, $this->db->last_query());die;
 		
 		$mPDF = $this->rep_pdf;
 		
@@ -55,7 +55,7 @@ class Report_inventory extends CI_Controller {
 				$cond = '';
 				foreach($ref_condition as $condition){
 					$cond_name = strtolower($condition->cond_name);
-					$cond_name = str_replace(' ', '_', $cond_name);					
+					$cond_name = str_replace(' ', '_', $cond_name);
 					$cond .= '						
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; ">
 							<span style="font-size:10pt;">
@@ -124,7 +124,7 @@ class Report_inventory extends CI_Controller {
 		
 		';
 		
-		// var_dump($html_body);
+		//var_dump($html_body);die;
 		$mPDF->WriteHTML($html_body);
         $mPDF->Output('Laporan Inventaris Periode '. date('Y-M', strtotime($filter['tanggal_diterima'])) .'.pdf', 'D');
         exit;

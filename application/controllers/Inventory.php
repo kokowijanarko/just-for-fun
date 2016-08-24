@@ -8,6 +8,7 @@ class Inventory extends CI_Controller {
         $this->load->helper('url');
         $this->load->library('message');
 		$this->load->model('M_inventory');
+		$this->load->model('m_history');
 		
     }
 	
@@ -61,9 +62,25 @@ class Inventory extends CI_Controller {
 			$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
 			$data['inv_desc'] = $this->input->post('deskripsi');
 			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
-	 		$result = $result && $this->M_inventory->addInventory($data);
+	 		$result = $result && $this->M_inventory->addInventory($data);			
+			
+			if($result){
+				$id = $this->db->insert_id();
+				$data_history['history_inv_id'] = $id;
+				$data_history['history_condition_id'] = 1;
+				$data_history['history_desc'] = '';
+				$data_history['history_insert_user_id'] = $this->session->userdata('data')->user_id;
+				$data_history['history_insert_timestamp'] = date('Y-m-d H:i:s');
+				
+				$result = $result && $this->m_history->addHistory($data_history);
+				
+			}
+			//var_dump($this->db->last_query());
 		}
-		var_dump($this->db->last_query());die;
+		
+		//die;		
+		
+		
 		$this->db->trans_complete($result);
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Am1'));

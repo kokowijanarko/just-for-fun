@@ -8,13 +8,12 @@ SELECT
 	b.`category_name` AS `category`,
 	a.`inv_date_procurement` AS `date_procurement`,
 	(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = a.`inv_type_id`) AS count_total
-	(SELECT inv)
-				
+	(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = a.`inv_type_id`) AS count_total			
 FROM inv_inventory a
 JOIN inv_ref_category b ON b.`category_id` = a.`inv_category_id`
 JOIN inv_ref_type c ON c.`type_id` = a.`inv_type_id`
 
-WHERE 
+WHERE
 	1 = 1
 
 GROUP BY a.`inv_type_id`
