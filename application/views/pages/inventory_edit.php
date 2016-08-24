@@ -330,7 +330,7 @@
 				
 				
 				//datepicker plugin
-				$('#date-picker').datepicker({
+				$('.date-picker').datepicker({
 					autoclose: true,
 					todayHighlight: true
 				})
