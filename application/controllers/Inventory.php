@@ -54,12 +54,16 @@ class Inventory extends CI_Controller {
 			$nama = $this->input->post('nama_inventaris');
 			$data['inv_name'] = $nama.' '.($prefix++);
 			$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
+			$data['inv_date_expired'] = date('Y-m-d', strtotime($this->input->post('tanggal_expired')));
 			$data['inv_type_id'] = $this->input->post('tipe');
 			$data['inv_category_id'] = $this->input->post('kategori');
+			$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
+			$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
 			$data['inv_desc'] = $this->input->post('deskripsi');
 			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
 	 		$result = $result && $this->M_inventory->addInventory($data);
 		}
+		var_dump($this->db->last_query());die;
 		$this->db->trans_complete($result);
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Am1'));

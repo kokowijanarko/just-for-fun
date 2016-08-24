@@ -84,6 +84,21 @@ class M_type extends CI_Model
 		return $result;
 	}
 	
+	public function getTypeIsContainer(){
+		$qry = $this->db->query('
+			SELECT
+				a.`type_id`,
+				a.`type_name`,
+				a.`type_code`,
+				a.`type_category_id`				
+			FROM `inv_ref_type` a
+			JOIN `inv_ref_category` b ON b.`category_id` = a.`type_category_id`
+			WHERE b.`is_container`=1
+		');
+		$result = $qry->result();
+		return $result;
+	}
+	
 	
 	
 }

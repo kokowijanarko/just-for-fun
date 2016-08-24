@@ -157,6 +157,17 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Kedaluarsa </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="tanggal_expired" id="date-picker-exp"  type="text" data-date-format="dd-mm-yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
 											<select name="kategori" class="col-xs-10 col-sm-5" id="category">
@@ -171,9 +182,25 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
 											<select name="tipe" class="col-xs-10 col-sm-5" id="tipe">
-												<option value="">--Pilih--</option>
-												
+												<option value="">--Pilih--</option>												
 											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Peggunaan </label>
+										<div class="col-sm-9">
+											<select name="store_place_in_use" class="col-xs-10 col-sm-5" id="store_place_in_use">
+												<option value="">--Pilih--</option>												
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Penyimpanan</label>
+										<div class="col-sm-9">
+											<select name="store_place_after_use" class="col-xs-10 col-sm-5" id="store_place_after_use">
+												<option value="">--Pilih--</option>												
+											</select>
+											<label><i>*Jika sudah tidak digunakan</i></label>
 										</div>
 									</div>
 									<div class="form-group">
@@ -263,6 +290,8 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
+				getStoreInUse();
+				getStoreAfterUse();
 				//dinamic input type reference to category
 				$('#category').change(function(){
 					var cat_id = $('#category').val();
@@ -290,7 +319,7 @@
 				
 				
 				//datepicker plugin
-				$('#date-picker').datepicker({
+				$('.date-picker').datepicker({
 					autoclose: true,
 					todayHighlight: true
 				})
@@ -317,7 +346,43 @@
 					return 'left';
 				}
 			
-			})
+			});
+			
+			function getStoreAfterUse(){
+				$.ajax({
+					url:'<?php echo site_url('type/get_storage_place')?>'
+				}).success(function(result){
+					$('#store_place_after_use').empty();
+					$('#store_place_after_use').append('<option value="">---Pilih--</option>');
+					if(result){
+						result = JSON.parse(result);
+						console.log(result);
+		        
+						for(idx=0; idx<result.length; idx++){
+							$('#store_place_after_use').append('<option value="'+result[idx]['type_id']+'">'+result[idx]['type_name']+'</option>');
+						}							
+					}
+					
+				});
+			}
+			
+			function getStoreInUse(){
+				$.ajax({
+					url:'<?php echo site_url('type/get_storage_place')?>'
+				}).success(function(result){
+					$('#store_place_in_use').empty();
+					$('#store_place_in_use').append('<option value="">---Pilih--</option>');
+					if(result){
+						result = JSON.parse(result);
+						console.log(result);
+		        
+						for(idx=0; idx<result.length; idx++){
+							$('#store_place_in_use').append('<option value="'+result[idx]['type_id']+'">'+result[idx]['type_name']+'</option>');
+						}							
+					}
+					
+				});
+			}
 		</script>
 	</body>
 </html>

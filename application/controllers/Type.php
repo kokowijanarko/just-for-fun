@@ -68,5 +68,10 @@ class Type extends CI_Controller {
 		echo json_encode($data_type);
 		exit;
 	}
+	public function get_storage_place(){		
+		$data_type = $this->M_type->getTypeIsContainer();
+		echo json_encode($data_type);
+		exit;
+	}
    
 }
