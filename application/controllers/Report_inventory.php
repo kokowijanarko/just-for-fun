@@ -20,6 +20,12 @@ class Report_inventory extends CI_Controller {
 		$this->load->view('pages/report_form', $data);
 	}
 	
+	public function print_form(){
+		$data['opt'] = $this->m_inventory->getInvCategory();
+		$data['type'] = $this->m_inventory->getInvType();
+		$this->load->view('pages/print_inv_label', $data);
+	}
+	
 	public function print_report(){
 		$filter = $_POST;		
 		$filter['periode'] = date('Y-m', strtotime($filter['tanggal_diterima']));
@@ -107,7 +113,7 @@ class Report_inventory extends CI_Controller {
 			
 		}
 		$html_body = '
-			<b><span style=" font-size:10pt;">Daftar Inventaris</span></b>
+			<b><span style=" font-size:10pt;">Daftar Inventaris Periode '. date('M Y', strtotime($filter['tanggal_diterima'])).'</span></b>
 			<br /><br />
 			<table width="100%" width="100%" cellpadding="0" cellPadding="0" border="1" style="font-family:Times New Roman; border-collapse:collapse;">
 				
@@ -127,6 +133,64 @@ class Report_inventory extends CI_Controller {
 		//var_dump($html_body);die;
 		$mPDF->WriteHTML($html_body);
         $mPDF->Output('Laporan Inventaris Periode '. date('Y-M', strtotime($filter['tanggal_diterima'])) .' '. date('His dmY') .'.pdf', 'D');
+        exit;
+	}
+	
+	public function print_inv_label(){
+		$filter = $_POST;	
+		//var_dump($filter);	die;	
+		$inventory = $this->m_inventory->getInv($filter);
+		//var_dump($inventory, $this->db->last_query());die;
+		
+		$mPDF = $this->rep_pdf;
+		
+		$mPDF = new $mPDF('', 'A4');
+		
+		if(!empty($inventory)){
+			$row = '';
+			$no = 1;
+				
+			foreach($inventory as $val){
+				$row .= '
+					
+					<div style="position: relative; width: 250px; height: 100px; border: 2px solid;">
+						<table>
+							<tr>
+								<th colspan="3"><span style="font-size:150%">'. $val->inv_name .' <br> '. $val->inv_number .'</span></th>								
+							</tr>
+							<tr>
+								<td><span style="font-size:150%">Tanggal Pengadaan</span></td>
+								<td><span style="font-size:150%">:</span></td>
+								<td><span style="font-size:150%">'. $val->inv_date_procurement .'</span></td>
+							</tr>
+							<tr>
+								<td><span style="font-size:150%">Kategori</span></td>
+								<td><span style="font-size:150%">:</span></td>
+								<td><span style="font-size:150%">'. $val->category_name .'</span></td>
+							</tr>
+							<tr>
+								<td><span style="font-size:150%">Tipe</span></td>
+								<td><span style="font-size:150%">:</span></td>
+								<td><span style="font-size:150%">'. $val->type_name .'</span></td>
+							</tr>						
+						</table>
+					</div>
+					<br />
+					<br />
+					<br />
+					<br />					
+				';
+			}
+		}		
+		$html_body = '
+		<div>
+		'. $row .'
+		</div>
+		';
+		
+		//var_dump($html_body);die;
+		$mPDF->WriteHTML($html_body);
+        $mPDF->Output('Label Inventaris.pdf', 'D');
         exit;
 	}
 

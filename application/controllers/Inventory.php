@@ -77,9 +77,10 @@ class Inventory extends CI_Controller {
 			}
 			//var_dump($this->db->last_query());
 		}
+		//var_dump($this->db->last_query());die;
+
 		
 		//die;		
-		
 		
 		$this->db->trans_complete($result);
 		if($result == true){
