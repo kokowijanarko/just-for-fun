@@ -94,8 +94,11 @@ class Inventory extends CI_Controller {
 	public function proses_edit_inventory(){
 		$data['inv_name'] = $this->input->post('nama_inventory');
 		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
+		$data['inv_date_expired'] = date('Y-m-d', strtotime($this->input->post('tanggal_expired')));
 		$data['inv_type_id'] = $this->input->post('type');
 		$data['inv_category_id'] = $this->input->post('category');
+		$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
+		$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
 		$data['inv_desc'] = $this->input->post('deskripsi');
 		$inv_id=$this->input->post('id_inventory');
 		$result = $this->M_inventory->do_edit_inventory($inv_id, $data);
