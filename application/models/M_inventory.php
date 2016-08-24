@@ -170,4 +170,39 @@ class M_inventory extends CI_Model
 		$sql = $this->db->query("SELECT MAX(inv_name) AS last_prefix FROM inv_inventory WHERE inv_name LIKE '".$name."%'");
 		return $sql->row();
 	}
+	
+	public function getInv($filter){
+		if(is_array($filter)){
+			extract($filter);
+		}
+		
+		$query="
+			SELECT
+				a.`inv_name`,
+				a.`inv_number`,
+				a.`inv_date_procurement`,
+				b.`category_name`,
+				c.`type_name`,	
+				IFNULL((SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_after_use`), '-') AS `store_place_after_use`,
+				IFNULL((SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_in_use`), '-') AS `store_place_in_use`
+			FROM `inv_inventory` a
+			JOIN `inv_ref_category` b ON b.`category_id`=a.`inv_category_id`
+			JOIN `inv_ref_type` c ON c.`type_id` = a.`inv_type_id`
+			WHERE 1 = 1
+				--key--
+			GROUP BY c.`type_id`
+		";
+		$key = '';
+		if(!empty($kategori) && $kategori !== 'all'){
+			$key .= " AND a.`inv_category_id` = $kategori";
+		}
+		if(!empty($tipe) && $tipe !== 'all'){
+			$key .= " AND a.`inv_type_id` = $tipe";
+		}
+		$query = str_replace('--key--', $key, $query);
+		$sql = $this->db->query($query);
+		$result = $sql->result();
+		return $result;
+	}
+	
 }

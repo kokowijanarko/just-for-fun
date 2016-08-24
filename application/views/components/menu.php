@@ -224,7 +224,7 @@
 						</ul>
 						<ul class="submenu">
 							<li class="">
-								<a href="<?php echo base_url('index.php/report/print_inventory_code')?>">
+								<a href="<?php echo base_url('index.php/Report_inventory/print_form')?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Cetak Kode Inventaris
 								</a>
