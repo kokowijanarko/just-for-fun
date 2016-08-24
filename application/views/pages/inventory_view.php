@@ -133,7 +133,7 @@
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-
+	
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -151,7 +151,11 @@
 													<th> Nama Inventaris </th>
 													<th> Kategori</th>
 													<th> Tipe</th>
-													<th> Tanggal Diterima </th>
+													<th> Tanggal Pengadaan </th>
+													<th> Tanggal Kedaluarsa </th>
+													<th> Lokasi Penggunaan </th>
+													<th> Lokasi Penyimpanan </th>
+													<th> Keterangan </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
@@ -164,6 +168,10 @@
 													<td><?php echo $invens->category; ?></td>
 													<td><?php echo $invens->type; ?></td>
 													<td><?php echo $invens->inv_date; ?></td>
+													<td><?php echo $invens->date_expired; ?></td>
+													<td><?php echo $invens->store_place_in_use; ?></td>
+													<td><?php echo $invens->store_place_after_use; ?></td>
+													<td><?php echo $invens->desc; ?></td>
 
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">

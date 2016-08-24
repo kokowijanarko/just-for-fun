@@ -32,15 +32,22 @@ class M_inventory extends CI_Model
 	
 	function select_all(){
 		$query = $this->db->query(
-		"SELECT a.inv_name as inv_name, 
-		a.inv_id as inv_id,
-		a.inv_number as inv_number, 
-		a.inv_date_procurement as inv_date, 
-		b.category_name as category, 
-		c.type_name as type 
+		"SELECT a.inv_name AS inv_name, 
+			a.inv_id AS inv_id,
+			a.inv_number AS inv_number, 
+			a.`inv_date_expired` AS date_expired,
+			a.inv_date_procurement AS inv_date, 
+			b.category_name AS category, 
+			c.type_name AS `type`,
+			a.`inv_store_place_after_use`,
+			a.`inv_store_place_in_use`,
+			a.inv_desc AS `desc`,
+			(SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
+			(SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
 		FROM inv_inventory a 
 		JOIN inv_ref_category b ON b.category_id = a.inv_category_id
-		JOIN inv_ref_type c ON c.type_id = a.inv_type_id");	
+		JOIN inv_ref_type c ON c.type_id = a.inv_type_id
+		");	
 		//var_dump($this->db->last_query(), $query);die;
 		$result = $query->result();
 		return $result;
