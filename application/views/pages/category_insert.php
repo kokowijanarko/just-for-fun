@@ -153,34 +153,23 @@
 											<input type="text" id="form-field-1-1" name="kode_kategori" placeholder="Isi 3 Karakter" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-
-									<div class="space-4"></div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Container ? </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Golongan </label>
+
 										<div class="col-sm-9">
-											<?php
-											$is_container = array(
-												array(
-													'id'=>0,
-													'cek'=>'checked',
-													'name'=>'TIDAK'
-												),
-												array(
-													'id'=>1,													
-													'cek'=>'',
-													'name'=>'YA'
-												)
-											);
-											
-											foreach($is_container as $val){
-												echo '<div class="col-sm-1"><label><input type="radio" name="is_container" value="'. $val['id'] .'" '. $val['cek'] .'> '. $val['name'] .'</label></div>';
-											}
-										?>
-											
-											
+											<select id="class" name="class" class="col-xs-10 col-sm-5">
+												<option value="">---Pilih---</option>
+												<?php
+													foreach($class as $val){
+														echo '<option value="'. $val->class_id .'">'. $val->class_name .'</option>';
+													}
+												?>											
+											</select>
 										</div>
 									</div>
+
+									<div class="space-4"></div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Keterangan </label>

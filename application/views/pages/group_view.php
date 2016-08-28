@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title> Data Tipe Inventaris </title>
+		<title>Data Group Inventaris</title>
 
 		<meta name="description" content="Inventaris &amp; Barang" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -129,7 +129,7 @@
 								Tampil Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Tipe Inventaris
+									Group Inventaris
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -141,37 +141,38 @@
 									<div class="col-xs-12">
 										<?php 
 											isset($message)? print_r($message):null;											
-										?>
-										<table id="simple-table" class="table table-striped table-bordered table-hover">
+										?>				
+										<div class="clearfix">
+											<div class="pull-right tableTools-container"></div>
+										</div>
+										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th> NO </th>
-													<th> Kode Tipe </th>
-													<th> Nama Tipe </th>
-													<th> Group </th>
+													<th> No </th>
+													<th> Nama Group </th>
+													<th> Container </th>
 													<th> Keterangan </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
 
 											<tbody>
-											<?php $no=1;foreach ($typ as $types) { ?>
+											
+											<?php $no=1; foreach ($group as $val){ $is_cont = ($val->is_container == 1)?'YA':'TIDAK'; ?>
 												<tr>
 													<td><?php echo $no; ?></td>
-													<td><?php echo $types->type_code; ?></td>
-													<td><?php echo $types->type_name; ?></td>
-													<td><?php echo $types->group_name; ?></td>
-													<td><?php echo $types->type_desc; ?></td>
-
+													<td><?php echo $val->group_name; ?></td>
+													<td><?php echo $is_cont; ?></td>
+													<td><?php echo $val->group_desc; ?></td>
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php echo site_url('Type/type_edit/'.$types->type_id);?>">
+															<a href="<?php echo site_url('group/input/'.$val->group_id);?>">
 																<button class="btn btn-xs btn-info">
 																	<i class="ace-icon fa fa-pencil bigger-120"></i>
 																</button>
 															</a>
 															
-															<a href="<?php echo site_url('Type/type_delete/'.$types->type_id);?>">
+															<a href="<?php echo site_url('group/do_delete/'.$val->group_id);?>">
 																<button class="btn btn-xs btn-danger">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</button>
@@ -183,12 +184,8 @@
 											</tbody>
 										</table>
 									</div><!-- /.span -->
-								</div><!-- /.row -->
-
-								<div class="hr hr-18 dotted hr-double"></div>
-
+								</div><!-- /.row -->								
 							</div><!-- /.col -->
-						</div><!-- /.row -->
 						</div><!-- /.row -->
 
 			<?php $this->load->view('components/footer')?>
@@ -240,7 +237,7 @@
 			jQuery(function($) {
 				//initiate dataTables plugin
 				var oTable1 = 
-				$('#simple-table')
+				$('#dynamic-table')
 				.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
 				.dataTable( {
 					bAutoWidth: false,

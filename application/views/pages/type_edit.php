@@ -156,17 +156,17 @@
 									</div>
 									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Group </label>
 										<div class="col-sm-9">
-											<select name="category" class="col-xs-10 col-sm-5" id="category">
+											<select name="group" class="col-xs-10 col-sm-5" id="group">
 												<option value="">--Pilih--</option>
-												<?php foreach ($category as $cat) { 
+												<?php foreach ($group as $cat) { 
 													$cek='';
-													if($cat->category_id == $type_res->type_category_id){
+													if($cat->group_id == $type_res->type_group_id){
 														$cek="selected";
 													}
 												?>
-													<option value="<?php echo $cat->category_id; ?>" <?php echo $cek?>> <?php echo $cat->category_name; ?> </option>
+													<option value="<?php echo $cat->group_id; ?>" <?php echo $cek?>> <?php echo $cat->group_name; ?> </option>
 												<?php } ?>
 											</select>
 										</div>

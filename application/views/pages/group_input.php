@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title> Edit Data Kategori </title>
+		<title>Input Group</title>
 
 		<meta name="description" content="Static &amp; Dynamic Tables" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -126,10 +126,10 @@
 
 						<div class="page-header">
 							<h1>
-								Edit Data
+								Input
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Kategori
+									Group
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
@@ -137,48 +137,85 @@
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
-								<form class="form-horizontal" role="form" action="<?php echo base_url('index.php/Category/category_edit_process')?>" method="POST">
-									<input type="hidden" id="form-field-1" value="<?php echo $category_res->category_id;?>" name="id_kategori" placeholder="" class="col-xs-10 col-sm-5"/>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Kategori </label>
+								<form class="form-horizontal" role="form" action="<?php echo base_url('index.php/group/process')?>" method="POST">
+									<div class="form-group hide">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> ID Group </label>
 
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $category_res->category_name;?>" id="form-field-1" name="nama_kategori" placeholder="" class="col-xs-10 col-sm-5" />
+											<input type="text" id="form-field-1" name="group_id" value="<?php $group_id = !empty($group->group_id)?$group->group_id:null; echo $group_id;?>" placeholder="" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
-
+									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Kode Kategori </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Nama Group </label>
 
 										<div class="col-sm-9">
-											<input type="text" value="<?php echo $category_res->category_code;?>" id="form-field-1-1" name="kode_kategori" placeholder="Isi 3 Karakter" class="col-xs-10 col-sm-5" />
+											<input type="text" id="group_name" name="group_name" value="<?php $group_id = !empty($group->group_name)?$group->group_name:null; echo $group_id;?>" placeholder="" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
+
+										<div class="col-sm-9">
+											<select name="group_category" class="col-xs-10 col-sm-5">
+												<option value="">---Pilih---</option>
+												<?php
+													foreach($category as $val){
+														$cek = '';
+														if(!empty($group->group_category_id)){
+															if($group->group_category_id == $val->category_id){
+																$cek='selected';
+															}
+														}
+														echo '<option value="'. $val->category_id .'" '. $cek .' >'. $val->category_name .'</option>';
+													}
+												?>
+											</select>
 										</div>
 									</div>
 									
 									<div class="space-4"></div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Golongan </label>
-
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1-1"> Container ? </label>
 										<div class="col-sm-9">
-											<select id="class" name="class" class="col-xs-10 col-sm-5">
-												<option value="">---Pilih---</option>
-												<?php
-													foreach($class as $val){
-														$cek='';
-														if($val->class_id == $category_res->category_class_id){
-															$cek='selected';
-														}
-														echo '<option value="'. $val->class_id .'" '. $cek .'>'. $val->class_name .'</option>';
+											<?php
+											$is_container = array(
+												array(
+													'id'=>0,
+													'cek'=>'checked',
+													'name'=>'TIDAK'
+												),
+												array(
+													'id'=>1,		
+													'cek'=>'',
+													'name'=>'YA'
+												)
+											);
+											
+											foreach($is_container as $val){
+												$cek = '';
+												if(!empty($group->is_container)){
+													if($group->is_container == $val['id']){
+														$cek='checked';
 													}
-												?>											
-											</select>
+													
+												}elseif($val['id'] == 0){
+													$cek='checked';
+												}
+												echo '<div class="col-sm-2"><label><input type="radio" name="is_container" value="'. $val['id'] .'" '. $cek .'> '. $val['name'] .'</label></div>';
+											}
+										?>
+											
+											
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> Keterangan </label>
 										
 										<div class="col-sm-9">
-											<textarea class="fcol-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text" name="keterangan"><?php echo $category_res->category_desc;?></textarea>
+											<textarea class="fcol-xs-10 col-sm-5" id="group_desc"  placeholder="Default Text" name="group_desc"><?php $group_desc = !empty($group->group_desc)?$group->group_desc:null; echo $group_desc;?></textarea>
 										</div>
 									</div>
 
@@ -198,7 +235,8 @@
 											</button>
 										</div>
 									</div>
-								</form></div><!-- /.col -->
+								</form>
+							</div><!-- /.col -->
 						</div><!-- /.row --> 
 					
 			<?php $this->load->view('components/footer')?>

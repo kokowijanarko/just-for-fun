@@ -249,7 +249,7 @@
 								<b class="arrow"></b>
 								<ul class="submenu">
 									<li class="">
-										<a href="<?php echo base_url('index.php/Category/category_read')?>">
+										<a href="<?php echo base_url('index.php/group/view')?>">
 											<i class="menu-icon fa fa-caret-right"></i>
 											Lihat Group
 										</a>
@@ -257,7 +257,7 @@
 										<b class="arrow"></b>
 									</li>	
 									<li class="">
-										<a href="<?php echo base_url('index.php/Category/category_add')?>">
+										<a href="<?php echo base_url('index.php/group/input')?>">
 											<i class="menu-icon fa fa-caret-right"></i>
 											Tambah Group
 										</a>

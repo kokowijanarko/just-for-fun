@@ -24,15 +24,14 @@ class M_type extends CI_Model
 	function select_all(){
 		$query = $this->db->query("		
 		SELECT
-			a.`type_category_id`,
+			a.`type_group_id`,
 			a.`type_code`,
 			a.`type_desc`,
 			a.`type_id`,
 			a.`type_name`,
-			b.`category_name`,
-			b.`category_code`
+			b.`group_name`
 		FROM inv_ref_type a
-		JOIN inv_ref_category b ON b.`category_id` = a.`type_category_id`");
+		JOIN inv_ref_group b ON b.`group_id` = a.`type_group_id`");
 		$result = $query->result();
 		return $result;
 	}
@@ -47,8 +46,9 @@ class M_type extends CI_Model
 	public function editType($type_id, $data){
 		//var_dump($type_id);die();
 		//var_dump($data);die();
-		$this->db->where('type_id', $type_id);
-		$this->db->update('inv_ref_type', $data);
+		$result = $this->db->where('type_id', $type_id);
+		$result = $this->db->update('inv_ref_type', $data);
+		return $result;
 	}
 	
 	

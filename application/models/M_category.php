@@ -22,24 +22,43 @@ class M_category extends CI_Model
 	}
 	
 	function select_all(){
-		$query = $this->db->query("SELECT * FROM inv_ref_category");
+		$query = $this->db->query("
+			SELECT
+				a.`category_id`,
+				a.`category_name`,
+				a.`category_code`,
+				a.`is_container`,
+				a.`category_class_id`,
+				a.`category_desc`,
+				b.`class_name`
+			FROM inv_ref_category a
+			JOIN inv_ref_class b ON b.`class_id` = a.`category_class_id`");
 		$result = $query->result();
 		return $result;
 	}
 	
 
 	function select_by_id($id){
-		$this->db->select('*');
-		$this->db->from('inv_ref_category');
-		$this->db->where('category_id', $id);
-		return $this->db->get();
+		$query = $this->db->query("
+			SELECT
+				a.`category_id`,
+				a.`category_name`,
+				a.`category_code`,
+				a.`is_container`,
+				a.`category_class_id`,
+				a.`category_desc`,
+				b.`class_name`
+			FROM inv_ref_category a
+			JOIN inv_ref_class b ON b.`class_id` = a.`category_class_id`
+			WHERE a.`category_id`=". $id);
+		$result = $query->row();
+		return $result;
 	}
 
 	public function editCategory($category_id, $data){
-		//var_dump($category_id);die();
-		//var_dump($data);die();
-		$this->db->where('category_id', $category_id);
-		$this->db->update('inv_ref_category', $data);
+		$result = $this->db->where('category_id', $category_id);
+		$result = $this->db->update('inv_ref_category', $data);
+		return $result;
 	}
 	
 	

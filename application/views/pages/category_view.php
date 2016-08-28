@@ -148,27 +148,23 @@
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
+													<th> No </th>
 													<th> Kode Kategori </th>
 													<th> Nama Kategori </th>
+													<th> Golongan </th>
 													<th> Keterangan </th>
-													<th> Container </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
 
 											<tbody>
-											<?php foreach ($cat as $cats) { ?>
+											<?php $no=1; foreach ($cat as $cats) { ?>
 												<tr>
+													<td><?php echo $no; ?></td>
 													<td><?php echo $cats->category_code; ?></td>
 													<td><?php echo $cats->category_name; ?></td>
+													<td><?php echo $cats->class_name; ?></td>
 													<td><?php echo $cats->category_desc; ?></td>
-													<td>
-														<?php 
-															$is_container = ($cats->is_container == 1)?'YA':'TIDAK';
-															echo $is_container; 
-														?>
-													</td>
-
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
 															<a href="<?php echo site_url('category/category_edit/'.$cats->category_id);?>">
@@ -185,7 +181,7 @@
 														</div>
 													</td>
 												</tr>
-												<?php } ?>
+												<?php $no++;} ?>
 											</tbody>
 										</table>
 									</div><!-- /.span -->
