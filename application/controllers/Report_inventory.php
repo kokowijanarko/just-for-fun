@@ -153,7 +153,7 @@ class Report_inventory extends CI_Controller {
 			foreach($inventory as $val){
 				$row .= '
 					
-					<div style="position: relative; width: 250px; height: 100px; border: 2px solid;">
+					<div style="position: relative; width: 250px; height: 100px; border: 2px solid; float=right;">
 						<table>
 							<tr>
 								<th colspan="3"><span style="font-size:150%">'. $val->inv_name .' <br> '. $val->inv_number .'</span></th>								

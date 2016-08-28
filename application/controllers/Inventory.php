@@ -31,39 +31,48 @@ class Inventory extends CI_Controller {
 	public function inventory_add(){
 		$data['opt'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
+		$data['class'] = $this->M_inventory->getInvClass();
+		$data['group'] = $this->M_inventory->getInvGroup();
+		$data['storage'] = $this->M_inventory->select_all(1, null);
+		//var_dump($this->db->last_query());die;
 		$this->load->view('pages/inventory_insert', $data);
 	}
 
 	public function inventory_add_process(){	
 		$count = $this->M_inventory->countRow();
-		//var_dump($count); die();
 		$counters = $count->counter;
-		//var_dump($counters); die();
-		$jumlah = $this->input->post('jumlah');
-		//var_dump($jumlah); die();
-		$prefix = 1;
+		$jumlah =intval($this->input->post('jumlah'));
+		$prefix = 0;
 		
 		$this->db->trans_start();
 		$result = $this->M_inventory->getLastNamePrefix($this->input->post('nama_inventaris'));			
-		if(!empty($result->last_prefix) || !is_null($result->last_prefix)){
-			$prefix = $result->last_prefix;
-		}
-		//var_dump($result, $prefix);die;
 		
+		$name = $this->M_inventory->getTypeName($this->input->post('tipe'));
+		$name = $name->type_name;
 		
+		$inv_by_type = $this->M_inventory->select_all(null, $this->input->post('tipe'));
+		//var_dump($this->db->last_query(), $inv_by_type);die;
+		
+		$count_inv = count($inv_by_type) == 0 ? 1 : count($inv_by_type);
+		//var_dump($jumlah, $count_inv);
+		//$x=0;
 		for ($i=1; $i <= $jumlah; $i++) {
-			$nama = $this->input->post('nama_inventaris');
-			$data['inv_name'] = $nama.' '.($prefix++);
+			//$nama = $this->input->post('nama_inventaris');
+			$prefik = $count_inv++;
+			$data['inv_name'] = $name;
 			$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
 			$data['inv_date_expired'] = date('Y-m-d', strtotime($this->input->post('tanggal_expired')));
+			$data['inv_class_id'] = $this->input->post('class');
+			$data['inv_category_id'] = $this->input->post('category');
+			$data['inv_group_id'] = $this->input->post('group');
 			$data['inv_type_id'] = $this->input->post('tipe');
-			$data['inv_category_id'] = $this->input->post('kategori');
 			$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
 			$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
 			$data['inv_desc'] = $this->input->post('deskripsi');
-			$data['inv_number'] = $counters+$i.'/'.date('Y/m/d', strtotime($this->input->post('tanggal_diterima')));
-	 		$result = $result && $this->M_inventory->addInventory($data);			
-			
+			$data['inv_number'] = date('y.m', strtotime($this->input->post('tanggal_diterima'))).'.'.$data['inv_class_id'].'.'.$data['inv_category_id'].'.'.$data['inv_group_id'].'.'.$data['inv_type_id'].'.'. $prefik;
+	 		
+			$result = $result && $this->M_inventory->addInventory($data);			
+			//var_dump($result, $this->db->last_query(), $prefik, $data);
 			if($result){
 				$id = $this->db->insert_id();
 				$data_history['history_inv_id'] = $id;
@@ -77,10 +86,10 @@ class Inventory extends CI_Controller {
 			}
 			//var_dump($this->db->last_query());
 		}
-		//var_dump($this->db->last_query());die;
+		//var_dump($data);die;
 
 		
-		//die;		
+		// die;		
 		
 		$this->db->trans_complete($result);
 		if($result == true){
@@ -127,6 +136,26 @@ class Inventory extends CI_Controller {
 			unset($_POST);
 			redirect(site_url('inventory/inventory_read?msg=Em0'));
 		}
+	}
+	
+	public function get_cat_by_class(){		
+		//var_dump($_POST['class_id']);die;
+		$category = $this->M_inventory->getCatByClass($_POST['class_id']);
+		//var_dump($this->db->last_query());die;
+		echo json_encode($category);
+		exit;
+	}
+	
+	public function get_group_by_cat(){		
+		$group = $this->M_inventory->getGroupByCat($_POST['cat_id']);
+		echo json_encode($group);
+		exit;
+	}
+	
+	public function get_type_by_group(){		
+		$type = $this->M_inventory->getTypeByGroup($_POST['group_id']);
+		echo json_encode($type);
+		exit;
 	}
    
 }

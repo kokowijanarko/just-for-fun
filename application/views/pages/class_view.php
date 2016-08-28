@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title> Data Inventaris </title>
+		<title>Data Golongan Inventaris</title>
 
 		<meta name="description" content="Inventaris &amp; Barang" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -129,11 +129,11 @@
 								Tampil Data
 								<small>
 									<i class="ace-icon fa fa-angle-double-right"></i>
-									Inventaris
+									Golongan Inventaris
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-	
+
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -142,48 +142,34 @@
 										<?php 
 											isset($message)? print_r($message):null;											
 										?>				
-										
+										<div class="clearfix">
+											<div class="pull-right tableTools-container"></div>
+										</div>
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
-												<tr>													
-													<th width="25px"> No</th>
-													<th> Inventaris </th>
-													<th> Golongan </th>
-													<th> Kategori</th>
-													<th> Group</th>
-													<th> Tipe</th>
-													<th> Lokasi</th>
-													<th> Lokasi Penyimpanan</th>
-													<th> Tanggal Pengadaan </th>
-													<th> Tanggal Kedaluarsa </th>
+												<tr>
+													<th> Kode Golongan </th>
+													<th> Nama Golongan </th>
 													<th> Keterangan </th>
 													<th> Aksi </th>
 												</tr>
 											</thead>
 
 											<tbody>
-											<?php $no=1; foreach ($inven as $invens) { ?>
-													<td><?php echo $no; ?></td>
-													<td><?php echo $invens->inv_name .' | '. $invens->inv_number; ?></td>
-													<td><?php echo $invens->class; ?></td>
-													<td><?php echo $invens->category; ?></td>
-													<td><?php echo $invens->group; ?></td>
-													<td><?php echo $invens->type; ?></td>
-													<td><?php echo $invens->store_place_in_use; ?></td>
-													<td><?php echo $invens->store_place_after_use; ?></td>
-													<td><?php echo $invens->inv_date; ?></td>
-													<td><?php echo $invens->date_expired; ?></td>
-													<td><?php echo $invens->desc; ?></td>
-
+											<?php foreach ($class as $val) { ?>
+												<tr>
+													<td><?php echo $val->class_id; ?></td>
+													<td><?php echo $val->class_name; ?></td>
+													<td><?php echo $val->class_desc; ?></td>
 													<td>
 														<div class="hidden-sm hidden-xs btn-group">
-															<a href="<?php echo site_url('inventory/edit_inventory/'.$invens->inv_id);?>">
+															<a href="<?php echo site_url('class_con/input/'.$val->class_id);?>">
 																<button class="btn btn-xs btn-info">
 																	<i class="ace-icon fa fa-pencil bigger-120"></i>
 																</button>
 															</a>
 															
-															<a href="<?php echo site_url('inventory/delete_inventory/'.$invens->inv_id);?>">
+															<a href="<?php echo site_url('class_con/do_delete/'.$val->class_id);?>">
 																<button class="btn btn-xs btn-danger">
 																	<i class="ace-icon fa fa-trash-o bigger-120"></i>
 																</button>
@@ -191,8 +177,7 @@
 														</div>
 													</td>
 												</tr>
-												
-												<?php $no++;} ?>
+												<?php } ?>
 											</tbody>
 										</table>
 									</div><!-- /.span -->
@@ -386,27 +371,27 @@
 			
 			
 				
-				///////////////////////////////
-				// table checkboxes
-				// $('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
+				/////////////////////////////////
+				//table checkboxes
+				$('th input[type=checkbox], td input[type=checkbox]').prop('checked', false);
 				
-				// select/deselect all rows according to table header checkbox
-				// $('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					// var th_checked = this.checked;//checkbox inside "TH" table header
+				//select/deselect all rows according to table header checkbox
+				$('#dynamic-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+					var th_checked = this.checked;//checkbox inside "TH" table header
 					
-					// $(this).closest('table').find('tbody > tr').each(function(){
-						// var row = this;
-						// if(th_checked) tableTools_obj.fnSelect(row);
-						// else tableTools_obj.fnDeselect(row);
-					// });
-				// });
+					$(this).closest('table').find('tbody > tr').each(function(){
+						var row = this;
+						if(th_checked) tableTools_obj.fnSelect(row);
+						else tableTools_obj.fnDeselect(row);
+					});
+				});
 				
-				// select/deselect a row when the checkbox is checked/unchecked
-				// $('#dynamic-table').on('click', 'td input[type=checkbox]' , function(){
-					// var row = $(this).closest('tr').get(0);
-					// if(!this.checked) tableTools_obj.fnSelect(row);
-					// else tableTools_obj.fnDeselect($(this).closest('tr').get(0));
-				// });
+				//select/deselect a row when the checkbox is checked/unchecked
+				$('#dynamic-table').on('click', 'td input[type=checkbox]' , function(){
+					var row = $(this).closest('tr').get(0);
+					if(!this.checked) tableTools_obj.fnSelect(row);
+					else tableTools_obj.fnDeselect($(this).closest('tr').get(0));
+				});
 				
 			
 				
@@ -420,23 +405,23 @@
 				
 				//And for the first simple table, which doesn't have TableTools or dataTables
 				//select/deselect all rows according to table header checkbox
-				// var active_class = 'active';
-				// $('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
-					// var th_checked = this.checked;//checkbox inside "TH" table header
+				var active_class = 'active';
+				$('#simple-table > thead > tr > th input[type=checkbox]').eq(0).on('click', function(){
+					var th_checked = this.checked;//checkbox inside "TH" table header
 					
-					// $(this).closest('table').find('tbody > tr').each(function(){
-						// var row = this;
-						// if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
-						// else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
-					// });
-				// });
+					$(this).closest('table').find('tbody > tr').each(function(){
+						var row = this;
+						if(th_checked) $(row).addClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', true);
+						else $(row).removeClass(active_class).find('input[type=checkbox]').eq(0).prop('checked', false);
+					});
+				});
 				
 				//select/deselect a row when the checkbox is checked/unchecked
-				// $('#simple-table').on('click', 'td input[type=checkbox]' , function(){
-					// var $row = $(this).closest('tr');
-					// if(this.checked) $row.addClass(active_class);
-					// else $row.removeClass(active_class);
-				// });
+				$('#simple-table').on('click', 'td input[type=checkbox]' , function(){
+					var $row = $(this).closest('tr');
+					if(this.checked) $row.addClass(active_class);
+					else $row.removeClass(active_class);
+				});
 			
 				
 			

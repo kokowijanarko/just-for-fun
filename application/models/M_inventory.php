@@ -26,12 +26,12 @@ class M_inventory extends CI_Model
 	}
 
 	public function addInventory($data){	
-		$execute = $this->db->insert('inv_inventory', $data);	
+		$execute = $this->db->insert('inv_inventory', $data);
 		return $execute;
 	}
 	
-	function select_all(){
-		$query = $this->db->query(
+	function select_all($is_container=null, $type_id=null){
+		$sql = 
 		"SELECT a.inv_name AS inv_name, 
 			a.inv_id AS inv_id,
 			a.inv_number AS inv_number, 
@@ -42,19 +42,68 @@ class M_inventory extends CI_Model
 			a.`inv_store_place_after_use`,
 			a.`inv_store_place_in_use`,
 			a.inv_desc AS `desc`,
-			(SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
-			(SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
+			d.`group_name` AS `group`,
+			e.`class_name` AS `class`,
+			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
+			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
 		FROM inv_inventory a 
 		JOIN inv_ref_category b ON b.category_id = a.inv_category_id
 		JOIN inv_ref_type c ON c.type_id = a.inv_type_id
-		");	
-		//var_dump($this->db->last_query(), $query);die;
+		JOIN `inv_ref_group` d ON d.`group_id` = a.`inv_group_id`
+		JOIN `inv_ref_class` e ON e.`class_id` = a.`inv_class_id`
+		WHERE 
+			1=1
+			---whr---
+		";	
+		
+		$str = '';
+		if(!is_null($is_container)){
+			$str = ' AND d.`is_container` = 1'; 
+		}
+		
+		if(!is_null($type_id)){
+			$str = ' AND c.`type_id` ='. $type_id;
+		}
+		
+		$sql = str_replace('---whr---', $str, $sql);
+		$query = $this->db->query($sql);
+		
+		//var_dump($this->db->last_query(), $query, $is_container);die;
 		$result = $query->result();
 		return $result;
 	}
 	
 	function getInvType(){
 		$query = $this->db->query("SELECT type_id, type_name FROM inv_ref_type");
+		$result = $query->result();
+		return $result;
+	}
+	
+	function getInvClass(){
+		$query = $this->db->query("SELECT * FROM inv_ref_class");
+		$result = $query->result();
+		return $result;
+	}
+	function getInvGroup(){
+		$query = $this->db->query("SELECT * FROM inv_ref_group");
+		$result = $query->result();
+		return $result;
+	}
+	
+	function getCatByClass($id){
+		$query = $this->db->query("SELECT * FROM inv_ref_category WHERE category_class_id=".$id);
+		$result = $query->result();
+		return $result;
+	}
+	
+	function getGroupByCat($id){
+		$query = $this->db->query("SELECT * FROM inv_ref_group WHERE group_category_id=".$id);
+		$result = $query->result();
+		return $result;
+	}
+	
+	function getTypeByGroup($id){
+		$query = $this->db->query("SELECT * FROM inv_ref_type WHERE type_group_id=".$id);
 		$result = $query->result();
 		return $result;
 	}
@@ -205,4 +254,12 @@ class M_inventory extends CI_Model
 		return $result;
 	}
 	
+	public function getTypeName($id){
+		$query = $this->db->query('SELECT type_name FROM inv_ref_type WHERE type_id='.$id);
+		$result = $query->row();
+		return $result;
+	}
+	
+	
+		
 }
