@@ -114,6 +114,8 @@ class Inventory extends CI_Controller {
 		$data['inv_res'] = $this->M_inventory->getInvById($inv_id);
 		$data['category'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
+		$data['class'] = $this->M_inventory->getInvClass();
+		$data['group'] = $this->M_inventory->getInvGroup();
 		$data['storage'] = $this->M_inventory->select_all(1, null);
 		$this->load->view('pages/inventory_edit', $data);
 	}
@@ -122,14 +124,16 @@ class Inventory extends CI_Controller {
 		$data['inv_name'] = $this->input->post('nama_inventory');
 		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
 		$data['inv_date_expired'] = date('Y-m-d', strtotime($this->input->post('tanggal_expired')));
-		$data['inv_type_id'] = $this->input->post('type');
-		$data['inv_category_id'] = $this->input->post('category');
+		$data['inv_class_id'] = $this->input->post('class');
+			$data['inv_category_id'] = $this->input->post('category');
+			$data['inv_group_id'] = $this->input->post('group');
+			$data['inv_type_id'] = $this->input->post('tipe');
 		$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
 		$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
 		$data['inv_desc'] = $this->input->post('deskripsi');
 		$inv_id=$this->input->post('id_inventory');
 		$result = $this->M_inventory->do_edit_inventory($inv_id, $data);
-		
+		var_dump($result, $this->db->last_query());
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Em1'));
 		}else{

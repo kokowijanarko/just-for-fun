@@ -110,21 +110,29 @@ class M_inventory extends CI_Model
 
 	function getInvById($inv_id){
 		$query = $this->db->query('
-			SELECT
-				a.`inv_id`,
-				a.`inv_name`,
-				a.`inv_number`,
-				a.`inv_date_procurement`,
-				a.`inv_date_expired`,
-				a.`inv_category_id`,
-				a.`inv_type_id`,
-				a.`inv_store_place_in_use`,
-				a.`inv_store_place_after_use`,
-				a.`inv_desc`,
-				b.`category_name`,
-				b.`is_container`
-			FROM inv_inventory a 
-			JOIN inv_ref_category b ON b.`category_id` = a.`inv_category_id`
+			SELECT a.inv_name AS inv_name, 
+			a.inv_id AS inv_id,
+			a.inv_number AS inv_number, 
+			a.`inv_date_expired`,
+			a.inv_date_procurement, 
+			b.category_name AS category, 
+			c.type_name AS `type`,
+			a.`inv_store_place_after_use`,
+			a.`inv_store_place_in_use`,
+			a.inv_desc,
+			a.inv_class_id,
+			a.inv_group_id,
+			a.inv_category_id,
+			a.inv_type_id,
+			d.`group_name` AS `group`,
+			e.`class_name` AS `class`,
+			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
+			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
+		FROM inv_inventory a 
+		JOIN inv_ref_category b ON b.category_id = a.inv_category_id
+		JOIN inv_ref_type c ON c.type_id = a.inv_type_id
+		JOIN `inv_ref_group` d ON d.`group_id` = a.`inv_group_id`
+		JOIN `inv_ref_class` e ON e.`class_id` = a.`inv_class_id`
 			WHERE a.`inv_id` = '. $inv_id);
 		
 		$result = $query->row();

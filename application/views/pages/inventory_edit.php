@@ -167,42 +167,68 @@
 											</div>
 										</div>
 									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Golongan </label>
+										<div class="col-sm-9">
+											<select name="class" class="col-xs-10 col-sm-5" id="class">
+												<option value="">--Pilih--</option>
+												<?php foreach ($class as $val) {
+													$cek='';
+													if($val->class_id == $inv_res->inv_class_id){
+														$cek='selected';
+													}
+													echo '<option value="'. $val->class_id .'" '. $cek .'>'. $val->class_name .'</option>';
+												 } ?>
+											</select>
+										</div>
+									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
-											<select name="category" id="category" class="col-xs-10 col-sm-5" >
+											<select name="category" class="col-xs-10 col-sm-5" id="category">
 												<option value="">--Pilih--</option>
-												<?php 
-													foreach ($category as $cat) { 									
-														if($cat->category_id == $inv_res->inv_category_id){
-															$selected = "selected";
-														}else{
-															$selected = "";
-														}
-														echo '<option value="'.$cat->category_id.'"'.$selected.'>'. $cat->category_name.'</option>';
-													} 
-												?>
+												<?php foreach ($category as $val) {
+													$cek='';
+													if($val->category_id == $inv_res->inv_category_id){
+														$cek='selected';
+													}
+													echo '<option value="'. $val->category_id .'" '. $cek .'>'. $val->category_name .'</option>';
+												 } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Group </label>
+										<div class="col-sm-9">
+											<select name="group" class="col-xs-10 col-sm-5" id="group">
+												<option value="">--Pilih--</option>		
+												<?php foreach ($group as $val) {
+													$cek='';
+													if($val->group_id == $inv_res->inv_group_id){
+														$cek='selected';
+													}
+													echo '<option value="'. $val->group_id .'" '. $cek .'>'. $val->group_name .'</option>';
+												 } ?>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
-											<select name="type" class="col-xs-10 col-sm-5" id="tipe">
-												<option value="">--Pilih--</option>
-												<?php 
-													foreach ($type as $tp) { 									
-														if($tp->type_id == $inv_res->inv_type_id){
-															$selected = "selected";
-														}else{
-															$selected = "";
-														}
-														echo '<option value="'.$tp->type_id.'"'.$selected.'>'. $tp->type_name.'</option>';
-													} 
-												?>
+											<select name="tipe" class="col-xs-10 col-sm-5" id="tipe">
+												<option value="">--Pilih--</option>	
+												<?php foreach ($type as $val) {
+													$cek='';
+													if($val->type_id == $inv_res->inv_type_id){
+														$cek='selected';
+													}
+													echo '<option value="'. $val->type_id .'" '. $cek .'>'. $val->type_name .'</option>';
+												 } ?>
 											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Peggunaan </label>
 										<div class="col-sm-9">
@@ -319,17 +345,64 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-				getStoreInUse();
-				getStoreAfterUse();
+				//getStoreInUse();
+				//getStoreAfterUse();
 				//dinamic input type reference to category
-				$('#category').change(function(){
-					var cat_id = $('#category').val();
+				$('#class').change(function(){
+					var class_id = $('#class').val();
 					var par = {
-						'category_id':cat_id	
+						'class_id':class_id	
 					}
 					$.ajax({
 						type:'post',
-						url:'<?php echo site_url('type/get_type_by_cat')?>',
+						url:'<?php echo site_url('inventory/get_cat_by_class')?>',
+						data:par
+					}).success(function(result){
+						console.log(result);
+						$('#category').empty();
+						$('#category').append('<option value="">---Pilih--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#category').append('<option value="'+result[idx]['category_id']+'">'+result[idx]['category_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				
+				$('#category').change(function(){
+					var cat_id = $('#category').val();
+					var par = {
+						'cat_id':cat_id	
+					}
+					//console.log(par);
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_group_by_cat')?>',
+						data:par
+					}).success(function(result){
+						$('#group').empty();
+						$('#group').append('<option value="">---Pilih--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#group').append('<option value="'+result[idx]['group_id']+'">'+result[idx]['group_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				$('#group').change(function(){
+					var group_id = $('#group').val();
+					var par = {
+						'group_id':group_id	
+					}
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_type_by_group')?>',
 						data:par
 					}).success(function(result){
 						$('#tipe').empty();

@@ -167,6 +167,7 @@
 											</div>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Golongan </label>
 										<div class="col-sm-9">
@@ -202,6 +203,7 @@
 											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Peggunaan </label>
 										<div class="col-sm-9">
@@ -359,8 +361,7 @@
 						$('#group').append('<option value="">---Pilih--</option>');
 						if(result){
 							result = JSON.parse(result);
-							console.log(result);
-		
+							console.log(result);		
 							for(idx=0; idx<result.length; idx++){
 								$('#group').append('<option value="'+result[idx]['group_id']+'">'+result[idx]['group_name']+'</option>');
 							}							
