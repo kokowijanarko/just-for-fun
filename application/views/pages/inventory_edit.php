@@ -207,7 +207,16 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Peggunaan </label>
 										<div class="col-sm-9">
 											<select name="store_place_in_use" class="col-xs-10 col-sm-5" id="store_place_in_use">
-												<option value="">--Pilih--</option>												
+												<option value="">--Pilih--</option>	
+												<?php
+													foreach($storage as $val){
+														$cek='';
+														if($val->inv_id == $inv_res->inv_store_place_in_use){
+															$cek='selected';
+														}
+														echo '<option value="'. $val->inv_id .'" '. $cek .'>'. $val->inv_name .'|'. $val->inv_number .'</option>';
+													}
+												?>
 											</select>
 										</div>
 									</div>
@@ -215,7 +224,16 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Lokasi Penyimpanan</label>
 										<div class="col-sm-9">
 											<select name="store_place_after_use" class="col-xs-10 col-sm-5" id="store_place_after_use">
-												<option value="">--Pilih--</option>												
+												<option value="">--Pilih--</option>	
+												<?php
+													foreach($storage as $val){
+														$cek='';
+														if($val->inv_id == $inv_res->inv_store_place_after_use){
+															$cek='selected';
+														}
+														echo '<option value="'. $val->inv_id .'" '. $cek .'>'. $val->inv_name .'|'. $val->inv_number .'</option>';
+													}
+												?>												
 											</select>
 											<label><i>*Jika sudah tidak digunakan</i></label>
 										</div>

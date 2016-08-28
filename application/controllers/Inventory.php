@@ -114,7 +114,7 @@ class Inventory extends CI_Controller {
 		$data['inv_res'] = $this->M_inventory->getInvById($inv_id);
 		$data['category'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
-		//$data['view'] = 'pages/form_edit_inventory';
+		$data['storage'] = $this->M_inventory->select_all(1, null);
 		$this->load->view('pages/inventory_edit', $data);
 	}
 
