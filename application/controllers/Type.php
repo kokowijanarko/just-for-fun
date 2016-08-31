@@ -29,7 +29,7 @@ class Type extends CI_Controller {
 
 	public function type_add(){
 		$data['group'] = $this->m_group->getGroup();
-		var_dump($data);
+		//var_dump($data);
 		$this->load->view('pages/type_insert', $data);
 	}
 
