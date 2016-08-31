@@ -8,7 +8,8 @@ require_once 'MPDF57/mpdf.php';
 class Rep_pdf extends mpdf {
 
     public function __construct(
-		$mode = '', $format = 'A5-L', 
+		$mode = '', 
+		$format = 'A5-L', 
 		$default_font_size = 7, 
 		$default_font = 'Helvetica',
 		$mgl = 15, 

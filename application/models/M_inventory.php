@@ -165,6 +165,8 @@ class M_inventory extends CI_Model
 				b.`inv_date_procurement` AS `date_procurment`,
 				e.`category_name` AS `category`,
 				c.`type_name` AS `type`,
+				g.`class_name` AS `class`,
+				f.`group_name` AS `group`,
 				--cond--
 				(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = b.`inv_type_id`) AS count_total
 				
@@ -173,10 +175,13 @@ class M_inventory extends CI_Model
 			JOIN inv_ref_category e ON e.`category_id` = b.`inv_category_id`
 			JOIN inv_ref_type c ON c.`type_id` = b.`inv_type_id`
 			JOIN inv_ref_condition d ON d.`cond_id` = a.`history_condition_id`
+			JOIN inv_ref_class g ON g.`class_id` = b.`inv_class_id`
+			JOIN inv_ref_group f ON f.`group_id` = b.`inv_group_id`
 			WHERE 
 				1 = 1
 				--key--
 			GROUP BY c.`type_id`
+			ORDER BY b.`inv_name`
 		";
 		
 		$key = '';

@@ -32,9 +32,21 @@ class Report_inventory extends CI_Controller {
 		$inventory = $this->m_inventory->getInventoryByCat($filter);
 		//var_dump($inventory, $this->db->last_query());die;
 		
-		$mPDF = $this->rep_pdf;
+		$PDF = $this->rep_pdf;
 		
-		$mPDF = new $mPDF('', 'A4');
+		$mPDF = new $PDF(
+			'', 
+			array(330, 296), 
+			7, 
+			'Helvetica',
+			15, //l
+			15, //r
+			16, //t
+			16, //b
+			9, 
+			9, 
+			'L'
+		);
 		//var_dump($mPDF);
 		
 		// $mPDF->SetHTMLFooter('
@@ -74,8 +86,10 @@ class Report_inventory extends CI_Controller {
 				$row .= '
 					<tr>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $no .'</span></td>
-						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->type .'</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->class .'</span></td>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->category .'</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->group .'</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->type .'</span></td>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">'. $val->count_total .'</span></td>
 						'. $cond .'
 					</tr>				
@@ -100,6 +114,8 @@ class Report_inventory extends CI_Controller {
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
 						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
+						<td style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: left; "><span style="font-size:10pt;">-</span></td>
 						'. $cond .'
 					</tr>				
 				';
@@ -119,8 +135,10 @@ class Report_inventory extends CI_Controller {
 				
 				<tr>
 					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">NO</span></td>
-					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Tipe</span></td>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Golongan</span></td>
 					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Kategori</span></td>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Group</span></td>
+					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Tipe</span></td>
 					<td width="5%" style="border-left:1px solid; border-bottom:1px solid;padding:2px;text-align: center; "><span style="font-size:10pt;">Jumlah Inv.</span></td>
 					'. $kondisi .'
 					
