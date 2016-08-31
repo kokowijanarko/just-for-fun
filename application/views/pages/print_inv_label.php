@@ -136,13 +136,29 @@
 								<!-- PAGE CONTENT BEGINS -->
 								<form class="form-horizontal" action="<?php echo base_url('index.php/Report_inventory/print_inv_label');?>" role="form" method = "POST">									
 									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Golongan </label>
+										<div class="col-sm-9">
+											<select name="class" class="col-xs-10 col-sm-5" id="class">
+												<option value="all">--semua--</option>
+												<?php foreach ($class as $val) { ?>
+													<option value="<?php echo $val->class_id; ?>"> <?php echo $val->class_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
-											<select name="kategori" class="col-xs-10 col-sm-5" id="kategori">
-												<option value="all">--Semua--</option>
-												<?php foreach ($opt as $options) { ?>
-													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
-												<?php } ?>
+											<select name="category" class="col-xs-10 col-sm-5" id="category">
+												<option value="all">--semua--</option>										
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Group </label>
+										<div class="col-sm-9">
+											<select name="group" class="col-xs-10 col-sm-5" id="group">
+												<option value="all">--semua--</option>												
 											</select>
 										</div>
 									</div>
@@ -150,8 +166,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
 											<select name="tipe" class="col-xs-10 col-sm-5" id="tipe">
-												<option value="all">--Semua--</option>
-												
+												<option value="all">--semua--</option>												
 											</select>
 										</div>
 									</div>
@@ -241,19 +256,65 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
-				$('#kategori').change(function(){
-					var cat_id = $('#kategori').val();
+				$('#class').change(function(){
+					var class_id = $('#class').val();
 					var par = {
-						'category_id':cat_id
+						'class_id':class_id	
 					}
-					
 					$.ajax({
 						type:'post',
-						url:'<?php echo site_url('type/get_type_by_cat')?>',
+						url:'<?php echo site_url('inventory/get_cat_by_class')?>',
+						data:par
+					}).success(function(result){
+						console.log(result);
+						$('#category').empty();
+						$('#category').append('<option value="all">--semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#category').append('<option value="'+result[idx]['category_id']+'">'+result[idx]['category_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				
+				$('#category').change(function(){
+					var cat_id = $('#category').val();
+					var par = {
+						'cat_id':cat_id	
+					}
+					//console.log(par);
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_group_by_cat')?>',
+						data:par
+					}).success(function(result){
+						$('#group').empty();
+						$('#group').append('<option value="all">--semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#group').append('<option value="'+result[idx]['group_id']+'">'+result[idx]['group_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				$('#group').change(function(){
+					var group_id = $('#group').val();
+					var par = {
+						'group_id':group_id	
+					}
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_type_by_group')?>',
 						data:par
 					}).success(function(result){
 						$('#tipe').empty();
-						$('#tipe').append('<option value="all">--Semua--</option>');
+						$('#tipe').append('<option value="all">--semua--</option>');
 						if(result){
 							result = JSON.parse(result);
 							console.log(result);
@@ -264,7 +325,7 @@
 						}
 						
 					});
-				})			
+				})		
 				
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);

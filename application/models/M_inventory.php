@@ -243,20 +243,30 @@ class M_inventory extends CI_Model
 				a.`inv_name`,
 				a.`inv_number`,
 				a.`inv_date_procurement`,
+				d.`class_name`,
 				b.`category_name`,
+				e.`group_name`,
 				c.`type_name`,	
-				IFNULL((SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_after_use`), '-') AS `store_place_after_use`,
-				IFNULL((SELECT type_name FROM `inv_ref_type` WHERE `type_id`=a.`inv_store_place_in_use`), '-') AS `store_place_in_use`
+				IFNULL((SELECT CONCAT(inv_name, '|', inv_number) FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_after_use`), '-') AS `store_place_after_use`,
+				IFNULL((SELECT CONCAT(inv_name, '|', inv_number) FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_in_use`), '-') AS `store_place_in_use`
 			FROM `inv_inventory` a
 			JOIN `inv_ref_category` b ON b.`category_id`=a.`inv_category_id`
 			JOIN `inv_ref_type` c ON c.`type_id` = a.`inv_type_id`
+			JOIN inv_ref_class d ON d.`class_id` = a.`inv_class_id`
+			JOIN inv_ref_group e ON e.`group_id` = a.`inv_group_id`
 			WHERE 1 = 1
 				--key--
-			GROUP BY c.`type_id`
+			GROUP BY a.`inv_id`
 		";
 		$key = '';
-		if(!empty($kategori) && $kategori !== 'all'){
-			$key .= " AND a.`inv_category_id` = $kategori";
+		if(!empty($category) && $category !== 'all'){
+			$key .= " AND a.`inv_category_id` = $category";
+		}
+		if(!empty($class) && $class !== 'all'){
+			$key .= " AND a.`inv_class_id` = $class";
+		}
+		if(!empty($group) && $group !== 'all'){
+			$key .= " AND a.`inv_group_id` = $group";
 		}
 		if(!empty($tipe) && $tipe !== 'all'){
 			$key .= " AND a.`inv_type_id` = $tipe";

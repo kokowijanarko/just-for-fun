@@ -21,8 +21,7 @@ class Report_inventory extends CI_Controller {
 	}
 	
 	public function print_form(){
-		$data['opt'] = $this->m_inventory->getInvCategory();
-		$data['type'] = $this->m_inventory->getInvType();
+		$data['class'] = $this->m_inventory->getInvClass();		
 		$this->load->view('pages/print_inv_label', $data);
 	}
 	
@@ -36,7 +35,7 @@ class Report_inventory extends CI_Controller {
 		
 		$mPDF = new $PDF(
 			'', 
-			array(330, 296), 
+			array(216, 330), 
 			7, 
 			'Helvetica',
 			15, //l
@@ -162,7 +161,7 @@ class Report_inventory extends CI_Controller {
 		
 		$mPDF = $this->rep_pdf;
 		
-		$mPDF = new $mPDF('', 'A4');
+		
 		
 		if(!empty($inventory)){
 			$row = '';
@@ -171,7 +170,7 @@ class Report_inventory extends CI_Controller {
 			foreach($inventory as $val){
 				$row .= '
 					
-					<div style="position: relative; width: 250px; height: 100px; border: 2px solid; float=right;">
+					<div style="position: relative; width: 100%; height: 100%; border: 2px solid; float=right; font-size:6pt;">
 						<table>
 							<tr>
 								<th colspan="3"><span style="font-size:150%">'. $val->inv_name .' <br> '. $val->inv_number .'</span></th>								
@@ -190,6 +189,11 @@ class Report_inventory extends CI_Controller {
 								<td><span style="font-size:150%">Tipe</span></td>
 								<td><span style="font-size:150%">:</span></td>
 								<td><span style="font-size:150%">'. $val->type_name .'</span></td>
+							</tr>
+							<tr>
+								<td><span style="font-size:150%">Lokasi Penggunaan</span></td>
+								<td><span style="font-size:150%">:</span></td>
+								<td><span style="font-size:150%">'. $val->store_place_in_use .'</span></td>
 							</tr>						
 						</table>
 					</div>
@@ -205,7 +209,19 @@ class Report_inventory extends CI_Controller {
 		'. $row .'
 		</div>
 		';
-		
+		$mPDF = new $mPDF(
+			'', 
+			array(60, 90), 
+			8, 
+			'Helvetica',
+			5, //l
+			5, //r
+			5, //t
+			5, //b
+			9, 
+			9, 
+			'L'
+		);
 		//var_dump($html_body);die;
 		$mPDF->WriteHTML($html_body);
         $mPDF->Output('Label Inventaris.pdf', 'D');
