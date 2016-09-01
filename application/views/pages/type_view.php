@@ -158,7 +158,7 @@
 											<?php $no=1;foreach ($typ as $types) { ?>
 												<tr>
 													<td><?php echo $no; ?></td>
-													<td><?php echo $types->type_code; ?></td>
+													<td><?php echo $types->type_id; ?></td>
 													<td><?php echo $types->type_name; ?></td>
 													<td><?php echo $types->group_name; ?></td>
 													<td><?php echo $types->type_desc; ?></td>

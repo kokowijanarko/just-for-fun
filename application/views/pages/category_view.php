@@ -161,7 +161,7 @@
 											<?php $no=1; foreach ($cat as $cats) { ?>
 												<tr>
 													<td><?php echo $no; ?></td>
-													<td><?php echo $cats->category_code; ?></td>
+													<td><?php echo $cats->category_id; ?></td>
 													<td><?php echo $cats->category_name; ?></td>
 													<td><?php echo $cats->class_name; ?></td>
 													<td><?php echo $cats->category_desc; ?></td>
