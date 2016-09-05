@@ -190,7 +190,7 @@ class M_inventory extends CI_Model
 				g.`class_name` AS `class`,
 				f.`group_name` AS `group`,
 				--cond--
-				(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = b.`inv_type_id`) AS count_total
+				(SELECT COUNT(aa.`inv_id`) FROM inv_inventory aa WHERE aa.`inv_type_id` = b.`inv_type_id` AND inv_date_procurement = b.`inv_date_procurement`) AS count_total
 				
 			FROM inv_history a
 			JOIN inv_inventory b ON b.`inv_id` = a.`history_inv_id`
@@ -226,11 +226,11 @@ class M_inventory extends CI_Model
 		if(!is_null($period) && $period !== 'all-all'){
 			$period = explode('-', $period);
 			if($period[0] !== 'all' && $period[1] !== 'all'){
-				$str .= ' AND b.inv_date_procurement LIKE "%'.$period.'%"';
+				$key .= ' AND b.inv_date_procurement LIKE "%'.$period.'%"';
 			}elseif($period[0] == 'all' && $period[1] !== 'all'){
-				$str .= ' AND b.inv_date_procurement LIKE "%'.$period[1].'%"';
+				$key .= ' AND b.inv_date_procurement LIKE "%'.$period[1].'%"';
 			}elseif($period[0] !== 'all' && $period[1] == 'all'){
-				$str .= ' AND b.inv_date_procurement LIKE "%'.$period[0].'%"';
+				$key .= ' AND b.inv_date_procurement LIKE "%'.$period[0].'%"';
 			}
 		}
 		
@@ -246,12 +246,12 @@ class M_inventory extends CI_Model
 					(SELECT COUNT(aa.`history_id`) 
 					FROM inv_history aa
 					JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
-					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id`) = 0,
+					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id` AND inv_date_procurement = b.`inv_date_procurement`) = 0,
 					'-',
 					(SELECT COUNT(aa.`history_id`) 
 					FROM inv_history aa
 					JOIN inv_inventory bb ON bb.`inv_id` = aa.`history_inv_id`
-					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id`)						
+					WHERE  history_condition_id='". $val->cond_id ."' AND bb.`inv_type_id` = c.`type_id` AND inv_date_procurement = b.`inv_date_procurement`)						
 				) AS `". $cond_name ."`, 			
 			";
 		}
