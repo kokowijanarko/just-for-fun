@@ -133,15 +133,109 @@
 								</small>
 							</h1>
 						</div><!-- /.page-header -->
-	
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<form class="form-horizontal" action="<?php echo site_url('inventory/inventory_read');?>" role="form" method = "POST">
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tahun Pengadaan </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="year" id="date-picker"  type="text" data-date-format="yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
+										</div>
+									</div>
+									<div class="form-group" id='month'>
+										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Bulan Pengadaan </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="month" id="date-picker-month"  type="text" data-date-format="mm" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
+										</div>
+									</div>									
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Golongan </label>
+										<div class="col-sm-9">
+											<select name="class" class="col-xs-10 col-sm-5" id="class">
+												<option value="all">--Semua--</option>
+												<?php foreach ($class as $val) { ?>
+													<option value="<?php echo $val->class_id; ?>"> <?php echo $val->class_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Kategori </label>
+										<div class="col-sm-9">
+											<select name="category" class="col-xs-10 col-sm-5" id="category">
+												<option value="all">--Semua--</option>										
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Group </label>
+										<div class="col-sm-9">
+											<select name="group" class="col-xs-10 col-sm-5" id="group">
+												<option value="all">--Semua--</option>										
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Tipe </label>
+										<div class="col-sm-9">
+											<select name="type" class="col-xs-10 col-sm-5" id="tipe">
+												<option value="all">--Semua--</option>									
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<button class="btn btn-info" type="submit">
+											<i class="ace-icon fa fa-check bigger-110"></i>
+											Submit
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+						<br />
+						<br />
+						<br />
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
+								
+								
 								<div class="row">
+									<?php 
+											isset($message)? print_r($message):null;
+											// var_dump($filter);
+										?>	
 									<div class="col-xs-12">
-										<?php 
-											isset($message)? print_r($message):null;											
-										?>				
+										<div style="float:right">
+											<a href='<?php echo site_url('report_inventory/print_report/'.$filter['class_id'].'/'.$filter['category_id'].'/'.$filter['group_id'].'/'.$filter['type_id'].'/'.$filter['period']);?>' target="_blank">
+												<button class="btn btn-success">
+													Cetak Laporan
+												</button>
+											</a>
+											<a href='<?php echo site_url('report_inventory/print_inv_label/'.$filter['class_id'].'/'.$filter['category_id'].'/'.$filter['group_id'].'/'.$filter['type_id'].'/'.$filter['period']);?>' target="_blank">
+												<button class="btn btn-success">
+													Cetak Kode Inv.
+												</button>
+											</a>
+										</div>
+									</div>
+									<br>
+									<br>
+									<br>
+									<div class="col-xs-12">
+													
+										
 										
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
@@ -239,6 +333,7 @@
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/jquery.dataTables.bootstrap.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/dataTables.tableTools.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/dataTables.colVis.min.js"></script>
+		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-datepicker.min.js"></script>
 
 		<!-- ace scripts -->
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
@@ -247,6 +342,98 @@
 		<!-- inline scripts related to this page -->
 		<script type="text/javascript">
 			jQuery(function($) {
+				$('#month').addClass('hide');
+				$('#date-picker').datepicker({
+					viewMode: "years", 
+					minViewMode: "years",
+					autoclose: true
+				})
+				$('#date-picker').change(function(){
+					$('#month').removeClass('hide');
+					var year = $('#date-picker').val();
+					console.log(year);
+					
+					$('#date-picker-month').datepicker({
+					viewMode: "months", 
+					minViewMode: "months",
+					yearRange: '2015:2017',
+					autoclose: true
+				})
+				})
+				
+				
+					
+				$('#class').change(function(){
+					var class_id = $('#class').val();
+					var par = {
+						'class_id':class_id	
+					}
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_cat_by_class')?>',
+						data:par
+					}).success(function(result){
+						console.log(result);
+						$('#category').empty();
+						$('#category').append('<option value="all">--Semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#category').append('<option value="'+result[idx]['category_id']+'">'+result[idx]['category_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				
+				$('#category').change(function(){
+					var cat_id = $('#category').val();
+					var par = {
+						'cat_id':cat_id	
+					}
+					//console.log(par);
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_group_by_cat')?>',
+						data:par
+					}).success(function(result){
+						$('#group').empty();
+						$('#group').append('<option value="all">--Semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);		
+							for(idx=0; idx<result.length; idx++){
+								$('#group').append('<option value="'+result[idx]['group_id']+'">'+result[idx]['group_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				$('#group').change(function(){
+					var group_id = $('#group').val();
+					var par = {
+						'group_id':group_id	
+					}
+					$.ajax({
+						type:'post',
+						url:'<?php echo site_url('inventory/get_type_by_group')?>',
+						data:par
+					}).success(function(result){
+						$('#tipe').empty();
+						$('#tipe').append('<option value="all">--Semua--</option>');
+						if(result){
+							result = JSON.parse(result);
+							console.log(result);
+		
+							for(idx=0; idx<result.length; idx++){
+								$('#tipe').append('<option value="'+result[idx]['type_id']+'">'+result[idx]['type_name']+'</option>');
+							}							
+						}
+						
+					});
+				})
+				
 				//initiate dataTables plugin
 				var oTable1 = 
 				$('#dynamic-table')

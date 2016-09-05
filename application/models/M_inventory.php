@@ -30,7 +30,7 @@ class M_inventory extends CI_Model
 		return $execute;
 	}
 	
-	function select_all($is_container=null, $type_id=null){
+	function select_all($is_container=null, $type_id=null, $class_id=null, $category_id=null, $group_id=null, $period=null){
 		$sql = 
 		"SELECT a.inv_name AS inv_name, 
 			a.inv_id AS inv_id,
@@ -57,13 +57,35 @@ class M_inventory extends CI_Model
 		";	
 		
 		$str = '';
-		if(!is_null($is_container)){
-			$str = ' AND d.`is_container` = 1'; 
+		if(!is_null($is_container) && $is_container !== 'all'){
+			$str .= ' AND d.`is_container` = 1'; 
 		}
 		
-		if(!is_null($type_id)){
-			$str = ' AND c.`type_id` ='. $type_id;
+		if(!is_null($type_id) && $type_id !== 'all'){
+			$str .= ' AND c.`type_id` ='. $type_id;
 		}
+		
+		if(!is_null($class_id) && $class_id !== 'all'){
+			$str .= ' AND e.`class_id` ='. $class_id;
+		}
+		
+		if(!is_null($category_id) && $category_id !== 'all'){
+			$str .= ' AND b.`category_id` ='. $category_id;
+		}
+		if(!is_null($group_id) && $group_id !== 'all'){
+			$str .= ' AND d.`group_id` ='. $group_id;
+		}
+		if(!is_null($period) && $period !== 'all-all'){
+			$period = explode('-', $period);
+			if($period[0] !== 'all' && $period[1] !== 'all'){
+				$str .= ' AND a.inv_date_procurement LIKE "%'.$period[0].'-'.$period[1].'%"';
+			}elseif($period[0] == 'all' && $period[1] !== 'all'){
+				$str .= ' AND a.inv_date_procurement LIKE "%'.$period[1].'%"';
+			}elseif($period[0] !== 'all' && $period[1] == 'all'){
+				$str .= ' AND a.inv_date_procurement LIKE "%'.$period[0].'%"';
+			}
+		}
+		
 		
 		$sql = str_replace('---whr---', $str, $sql);
 		$query = $this->db->query($sql);
@@ -195,6 +217,22 @@ class M_inventory extends CI_Model
 		if(!empty($tipe) && $tipe !== 'all'){
 			$key .= " AND b.`inv_type_id` = $tipe";
 		}
+		if(!empty($group) && $group !== 'all'){
+			$key .= " AND f.`group_id` = $group";
+		}
+		if(!empty($class) && $class !== 'all'){
+			$key .= " AND g.`class_id` = $class";
+		}
+		if(!is_null($period) && $period !== 'all-all'){
+			$period = explode('-', $period);
+			if($period[0] !== 'all' && $period[1] !== 'all'){
+				$str .= ' AND b.inv_date_procurement LIKE "%'.$period.'%"';
+			}elseif($period[0] == 'all' && $period[1] !== 'all'){
+				$str .= ' AND b.inv_date_procurement LIKE "%'.$period[1].'%"';
+			}elseif($period[0] !== 'all' && $period[1] == 'all'){
+				$str .= ' AND b.inv_date_procurement LIKE "%'.$period[0].'%"';
+			}
+		}
 		
 		$ref_condition = $this->m_condition->select_all();
 		
@@ -270,6 +308,16 @@ class M_inventory extends CI_Model
 		}
 		if(!empty($tipe) && $tipe !== 'all'){
 			$key .= " AND a.`inv_type_id` = $tipe";
+		}
+		if(!is_null($period) && $period !== 'all-all'){
+			$period = explode('-', $period);
+			if($period[0] !== 'all' && $period[1] !== 'all'){
+				$key .= ' AND a.inv_date_procurement LIKE "%'.$period[0].'-'.$period[1].'%"';
+			}elseif($period[0] == 'all' && $period[1] !== 'all'){
+				$key .= ' AND a.inv_date_procurement LIKE "%'.$period[1].'%"';
+			}elseif($period[0] !== 'all' && $period[1] == 'all'){
+				$key .= ' AND a.inv_date_procurement LIKE "%'.$period[0].'%"';
+			}
 		}
 		$query = str_replace('--key--', $key, $query);
 		$sql = $this->db->query($query);

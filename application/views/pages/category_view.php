@@ -148,7 +148,6 @@
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th> No </th>
 													<th> Kode Kategori </th>
 													<th> Nama Kategori </th>
 													<th> Golongan </th>
@@ -160,7 +159,6 @@
 											<tbody>
 											<?php $no=1; foreach ($cat as $cats) { ?>
 												<tr>
-													<td><?php echo $no; ?></td>
 													<td><?php echo $cats->category_id; ?></td>
 													<td><?php echo $cats->category_name; ?></td>
 													<td><?php echo $cats->class_name; ?></td>

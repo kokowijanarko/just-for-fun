@@ -148,7 +148,6 @@
 										<table id="dynamic-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th> No </th>
 													<th> Kode Group </th>
 													<th> Nama Group </th>
 													<th> Container </th>
@@ -161,7 +160,6 @@
 											
 											<?php $no=1; foreach ($group as $val){ $is_cont = ($val->is_container == 1)?'YA':'TIDAK'; ?>
 												<tr>
-													<td><?php echo $no; ?></td>
 													<td><?php echo $val->group_id; ?></td>
 													<td><?php echo $val->group_name; ?></td>
 													<td><?php echo $is_cont; ?></td>

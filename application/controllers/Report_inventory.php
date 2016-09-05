@@ -25,12 +25,15 @@ class Report_inventory extends CI_Controller {
 		$this->load->view('pages/print_inv_label', $data);
 	}
 	
-	public function print_report(){
-		$filter = $_POST;		
-		$filter['periode'] = date('Y-m', strtotime($filter['tanggal_diterima']));
+	public function print_report($class, $category, $group, $type, $period){
+		$filter['class'] = $class;		
+		$filter['kategori'] = $category;		
+		$filter['group'] = $group;		
+		$filter['tipe'] = $type;	
+		$filter['period'] = $period;
+		//$filter['periode'] = date('Y-m', strtotime($filter['tanggal_diterima']));
 		$inventory = $this->m_inventory->getInventoryByCat($filter);
-		//var_dump($inventory, $this->db->last_query());die;
-		
+		// var_dump($filter, $inventory, $this->db->last_query());die;
 		$PDF = $this->rep_pdf;
 		
 		$mPDF = new $PDF(
@@ -128,7 +131,7 @@ class Report_inventory extends CI_Controller {
 			
 		}
 		$html_body = '
-			<b><span style=" font-size:10pt;">Daftar Inventaris Periode '. date('M Y', strtotime($filter['tanggal_diterima'])).'</span></b>
+			<b><span style=" font-size:10pt;">Daftar Inventaris </span></b>
 			<br /><br />
 			<table width="100%" width="100%" cellpadding="0" cellPadding="0" border="1" style="font-family:Times New Roman; border-collapse:collapse;">
 				
@@ -153,11 +156,15 @@ class Report_inventory extends CI_Controller {
         exit;
 	}
 	
-	public function print_inv_label(){
-		$filter = $_POST;	
+	public function print_inv_label($class, $category, $group, $type, $period){
+		$filter['class'] = $class;		
+		$filter['kategori'] = $category;		
+		$filter['group'] = $group;		
+		$filter['tipe'] = $type;	
+		$filter['period'] = $period;
 		//var_dump($filter);	die;	
 		$inventory = $this->m_inventory->getInv($filter);
-		//var_dump($inventory, $this->db->last_query());die;
+		// var_dump($inventory, $this->db->last_query());die;
 		
 		$mPDF = $this->rep_pdf;
 		

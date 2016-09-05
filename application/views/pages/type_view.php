@@ -145,7 +145,6 @@
 										<table id="simple-table" class="table table-striped table-bordered table-hover">
 											<thead>
 												<tr>
-													<th> NO </th>
 													<th> Kode Tipe </th>
 													<th> Nama Tipe </th>
 													<th> Group </th>
@@ -157,7 +156,6 @@
 											<tbody>
 											<?php $no=1;foreach ($typ as $types) { ?>
 												<tr>
-													<td><?php echo $no; ?></td>
 													<td><?php echo $types->type_id; ?></td>
 													<td><?php echo $types->type_name; ?></td>
 													<td><?php echo $types->group_name; ?></td>
