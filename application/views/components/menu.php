@@ -108,7 +108,7 @@
 						<?php }?>
 					</li>
 					
-					<li class="hide">
+					<li class="">
 						<a href="#" class="dropdown-toggle">
 							<i class="menu-icon fa fa-list"></i>
 							<span class="menu-text"> Laporan </span>
@@ -118,24 +118,13 @@
 						<b class="arrow"></b>
 						<ul class="submenu">
 							<li class="">
-								<a href="<?php echo base_url('index.php/Report_inventory/')?>">
+								<a href="<?php echo base_url('index.php/Report_inventory/view')?>">
 									<i class="menu-icon fa fa-caret-right"></i>
 									Laporan Inventaris
 								</a>
 								<b class="arrow"></b>
 							</li>							
-						</ul>
-						<ul class="submenu">
-							<li class="">
-								<a href="<?php echo base_url('index.php/Report_inventory/print_form')?>">
-									<i class="menu-icon fa fa-caret-right"></i>
-									Cetak Kode Inventaris
-								</a>
-
-								<b class="arrow"></b>
-							</li>							
-						</ul>
-						
+						</ul>						
 					</li>
 					
 					

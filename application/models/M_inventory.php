@@ -30,7 +30,7 @@ class M_inventory extends CI_Model
 		return $execute;
 	}
 	
-	function select_all($is_container=null, $type_id=null, $class_id=null, $category_id=null, $group_id=null, $period=null){
+	function select_all($is_container=null, $type_id=null, $class_id=null, $category_id=null, $group_id=null, $period=null, $fund_id='all'){
 		$sql = 
 		"SELECT a.inv_name AS inv_name, 
 			a.inv_id AS inv_id,
@@ -44,6 +44,8 @@ class M_inventory extends CI_Model
 			a.inv_desc AS `desc`,
 			d.`group_name` AS `group`,
 			e.`class_name` AS `class`,
+			a.`inv_fund_id` ,
+			f.`fund_name` AS `fund`,
 			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
 			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
 		FROM inv_inventory a 
@@ -51,6 +53,7 @@ class M_inventory extends CI_Model
 		JOIN inv_ref_type c ON c.type_id = a.inv_type_id
 		JOIN `inv_ref_group` d ON d.`group_id` = a.`inv_group_id`
 		JOIN `inv_ref_class` e ON e.`class_id` = a.`inv_class_id`
+		JOIN `inv_ref_fund` f ON f.`fund_id` = a.`inv_fund_id`
 		WHERE 
 			1=1
 			---whr---
@@ -74,6 +77,9 @@ class M_inventory extends CI_Model
 		}
 		if(!is_null($group_id) && $group_id !== 'all'){
 			$str .= ' AND d.`group_id` ='. $group_id;
+		}
+		if(!is_null($fund_id) && $fund_id !== 'all'){
+			$str .= ' AND a.`inv_fund_id` ='. $fund_id;
 		}
 		if(!is_null($period) && $period !== 'all-all'){
 			$period = explode('-', $period);
@@ -108,6 +114,11 @@ class M_inventory extends CI_Model
 	}
 	function getInvGroup(){
 		$query = $this->db->query("SELECT * FROM inv_ref_group");
+		$result = $query->result();
+		return $result;
+	}
+	function getInvFund(){
+		$query = $this->db->query("SELECT * FROM inv_ref_fund");
 		$result = $query->result();
 		return $result;
 	}
@@ -148,6 +159,8 @@ class M_inventory extends CI_Model
 			a.inv_type_id,
 			d.`group_name` AS `group`,
 			e.`class_name` AS `class`,
+			a.`inv_fund_id` ,
+			f.`fund_name` AS `fund`,
 			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_after_use`) AS `store_place_after_use`,
 			(SELECT inv_name FROM `inv_inventory` WHERE `inv_id`=a.`inv_store_place_in_use`) AS `store_place_in_use`
 		FROM inv_inventory a 
@@ -155,6 +168,7 @@ class M_inventory extends CI_Model
 		JOIN inv_ref_type c ON c.type_id = a.inv_type_id
 		JOIN `inv_ref_group` d ON d.`group_id` = a.`inv_group_id`
 		JOIN `inv_ref_class` e ON e.`class_id` = a.`inv_class_id`
+		JOIN `inv_ref_fund` f ON f.`fund_id` = a.`inv_fund_id`
 			WHERE a.`inv_id` = '. $inv_id);
 		
 		$result = $query->row();

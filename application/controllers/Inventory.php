@@ -35,6 +35,7 @@ class Inventory extends CI_Controller {
 		if(isset($_GET['msg'])){
 			$data['message'] = $this->message->getMessage($_GET['msg']);
 		}
+		$fund_id=!empty($_POST['fund'])?$_POST['fund']:'all';
 		$class_id=!empty($_POST['class'])?$_POST['class']:'all';
 		$category_id=!empty($_POST['category'])?$_POST['category']:'all';
 		$group_id=!empty($_POST['group'])?$_POST['group']:'all';
@@ -48,7 +49,9 @@ class Inventory extends CI_Controller {
 		$data['type'] = $this->M_inventory->getInvType();
 		$data['class'] = $this->M_inventory->getInvClass();
 		$data['group'] = $this->M_inventory->getInvGroup();
-		$data['inven'] = $this->M_inventory->select_all('all',$type_id, $class_id, $category_id, $group_id, $period);
+		$data['fund'] = $this->M_inventory->getInvFund();
+		$data['inven'] = $this->M_inventory->select_all('all',$type_id, $class_id, $category_id, $group_id, $period, $fund_id);
+		// var_dump($data['inven']);
 		// var_dump($_POST, $data['filter'], $this->db->last_query());
 		$this->load->view('pages/inventory_view', $data);
 	}
@@ -59,6 +62,7 @@ class Inventory extends CI_Controller {
 		$data['class'] = $this->M_inventory->getInvClass();
 		$data['group'] = $this->M_inventory->getInvGroup();
 		$data['storage'] = $this->M_inventory->select_all(1, null);
+		$data['fund'] = $this->M_inventory->getInvFund();
 		//var_dump($this->db->last_query());die;
 		$this->load->view('pages/inventory_insert', $data);
 	}
@@ -93,11 +97,12 @@ class Inventory extends CI_Controller {
 			$data['inv_type_id'] = $this->input->post('tipe');
 			$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
 			$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
+			$data['inv_fund_id'] = $this->input->post('fund');
 			$data['inv_desc'] = $this->input->post('deskripsi');
 			$data['inv_number'] = date('y.m', strtotime($this->input->post('tanggal_diterima'))).'.'.$data['inv_class_id'].'.'.$data['inv_category_id'].'.'.$data['inv_group_id'].'.'.$data['inv_type_id'].'.'. $prefik;
 	 		
 			$result = $result && $this->M_inventory->addInventory($data);			
-			//var_dump($result, $this->db->last_query(), $prefik, $data);
+			// var_dump($result, $this->db->last_query());die;
 			if($result){
 				$id = $this->db->insert_id();
 				$data_history['history_inv_id'] = $id;
@@ -142,6 +147,8 @@ class Inventory extends CI_Controller {
 		$data['class'] = $this->M_inventory->getInvClass();
 		$data['group'] = $this->M_inventory->getInvGroup();
 		$data['storage'] = $this->M_inventory->select_all(1, null);
+		$data['fund'] = $this->M_inventory->getInvFund();
+		// var_dump($data['inv_res']);
 		$this->load->view('pages/inventory_edit', $data);
 	}
 
@@ -150,15 +157,16 @@ class Inventory extends CI_Controller {
 		$data['inv_date_procurement'] = date('Y-m-d', strtotime($this->input->post('tanggal_diterima')));
 		$data['inv_date_expired'] = date('Y-m-d', strtotime($this->input->post('tanggal_expired')));
 		$data['inv_class_id'] = $this->input->post('class');
-			$data['inv_category_id'] = $this->input->post('category');
-			$data['inv_group_id'] = $this->input->post('group');
-			$data['inv_type_id'] = $this->input->post('tipe');
+		$data['inv_category_id'] = $this->input->post('category');
+		$data['inv_group_id'] = $this->input->post('group');
+		$data['inv_type_id'] = $this->input->post('tipe');
 		$data['inv_store_place_in_use'] = $this->input->post('store_place_in_use');
 		$data['inv_store_place_after_use'] = $this->input->post('store_place_after_use');
+		$data['inv_fund_id'] = $this->input->post('fund');
 		$data['inv_desc'] = $this->input->post('deskripsi');
 		$inv_id=$this->input->post('id_inventory');
 		$result = $this->M_inventory->do_edit_inventory($inv_id, $data);
-		var_dump($result, $this->db->last_query());
+		// var_dump($result, $this->db->last_query());die;
 		if($result == true){
 			redirect(site_url('inventory/inventory_read?msg=Em1'));
 		}else{

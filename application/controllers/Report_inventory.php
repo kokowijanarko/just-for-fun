@@ -24,11 +24,27 @@ class Report_inventory extends CI_Controller {
 		
     }
 	
-	public function index(){
-		$data['periode'] = date('F Y');
+	public function view(){
+		$fund_id=!empty($_POST['fund'])?$_POST['fund']:'all';
+		$class_id=!empty($_POST['class'])?$_POST['class']:'all';
+		$category_id=!empty($_POST['category'])?$_POST['category']:'all';
+		$group_id=!empty($_POST['group'])?$_POST['group']:'all';
+		$type_id=!empty($_POST['type'])?$_POST['type']:'all';
+		$year=!empty($_POST['year'])?$_POST['year']:'all';
+		$month=!empty($_POST['month'])?$_POST['month']:'all';
+		$period = $year.'-'.$month;
+		
+		$data['report'] = '1';
+		$data['filter'] = array('period'=>$period, 'year'=>$year, 'month'=>$month, 'type_id'=>$type_id, 'class_id'=>$class_id, 'category_id'=>$category_id, 'group_id'=>$group_id);
 		$data['opt'] = $this->m_inventory->getInvCategory();
 		$data['type'] = $this->m_inventory->getInvType();
-		$this->load->view('pages/report_form', $data);
+		$data['class'] = $this->m_inventory->getInvClass();
+		$data['group'] = $this->m_inventory->getInvGroup();
+		$data['fund'] = $this->m_inventory->getInvFund();
+		$data['inven'] = $this->m_inventory->select_all('all',$type_id, $class_id, $category_id, $group_id, $period, $fund_id);
+		// var_dump($data['inven']);
+		// var_dump($_POST, $data['filter'], $this->db->last_query());
+		$this->load->view('pages/inventory_view', $data);
 	}
 	
 	public function print_form(){

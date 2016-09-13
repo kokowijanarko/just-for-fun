@@ -160,6 +160,17 @@
 										</div>
 									</div>									
 									<div class="form-group">
+										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Sumber Dana </label>
+										<div class="col-sm-9">
+											<select name="fund" class="col-xs-10 col-sm-5" id="fund">
+												<option value="all">--Semua--</option>
+												<?php foreach ($fund as $val) { ?>
+													<option value="<?php echo $val->fund_id; ?>"> <?php echo $val->fund_name; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Golongan </label>
 										<div class="col-sm-9">
 											<select name="class" class="col-xs-10 col-sm-5" id="class">
@@ -194,6 +205,7 @@
 											</select>
 										</div>
 									</div>
+									
 									<div class="form-group">
 										<button class="btn btn-info" type="submit">
 											<i class="ace-icon fa fa-check bigger-110"></i>
@@ -203,9 +215,6 @@
 								</form>
 							</div>
 						</div>
-						<br />
-						<br />
-						<br />
 						<div class="row">
 							<div class="col-xs-12">
 								<!-- PAGE CONTENT BEGINS -->
@@ -215,8 +224,15 @@
 									<?php 
 											isset($message)? print_r($message):null;
 											// var_dump($filter);
+											if(isset($report)){
+												$rep_class = '';
+												$act_class = 'hide';
+											}else{
+												$rep_class = 'hide';
+												$act_class = '';
+											}
 										?>	
-									<div class="col-xs-12">
+									<div class="col-xs-12 <?php echo $rep_class ?>">
 										<div style="float:right">
 											<a href='<?php echo site_url('report_inventory/print_report/'.$filter['class_id'].'/'.$filter['category_id'].'/'.$filter['group_id'].'/'.$filter['type_id'].'/'.$filter['period']);?>' target="_blank">
 												<button class="btn btn-success">
@@ -248,10 +264,11 @@
 													<th> Tipe</th>
 													<th> Lokasi</th>
 													<th> Lokasi Penyimpanan</th>
+													<th> Sumber Dana</th>
 													<th> Tanggal Pengadaan </th>
 													<th> Tanggal Kedaluarsa </th>
 													<th> Keterangan </th>
-													<th> Aksi </th>
+													<th class="<?php echo $act_class ?>"> Aksi </th>
 												</tr>
 											</thead>
 
@@ -265,11 +282,12 @@
 													<td><?php echo $invens->type; ?></td>
 													<td><?php echo $invens->store_place_in_use; ?></td>
 													<td><?php echo $invens->store_place_after_use; ?></td>
+													<td><?php echo $invens->fund; ?></td>
 													<td><?php echo $invens->inv_date; ?></td>
 													<td><?php echo $invens->date_expired; ?></td>
 													<td><?php echo $invens->desc; ?></td>
 
-													<td>
+													<td class="<?php echo $act_class ?>">
 														<div class="hidden-sm hidden-xs btn-group">
 															<a href="<?php echo site_url('inventory/edit_inventory/'.$invens->inv_id);?>">
 																<button class="btn btn-xs btn-info">
@@ -334,7 +352,6 @@
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/dataTables.tableTools.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/dataTables.colVis.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/bootstrap-datepicker.min.js"></script>
-
 		<!-- ace scripts -->
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace-elements.min.js"></script>
 		<script src="<?php echo base_url()?>assets/theme/ac_master/js/ace.min.js"></script>

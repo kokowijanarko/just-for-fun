@@ -238,13 +238,26 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Sumber Dana</label>
+										<div class="col-sm-9">
+											<select name="fund" class="col-xs-10 col-sm-5" id="fund">
+												<option value="">--Pilih--</option>	
+												<?php
+													foreach($fund as $val){
+														echo '<option value="'. $val->fund_id .'">'. $val->fund_name .'</option>';
+													}
+												?>												
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
 										<div class="col-sm-9">
 											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"></textarea>
 										</div>
 									</div>
 									<div class="space-4"></div>
-
+									
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit">

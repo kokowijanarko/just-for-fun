@@ -265,6 +265,23 @@
 										</div>
 									</div>
 									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Sumber Dana</label>
+										<div class="col-sm-9">
+											<select name="fund" class="col-xs-10 col-sm-5" id="fund">
+												<option value="">--Pilih--</option>	
+												<?php
+													foreach($fund as $val){
+														$cek='';
+														if($val->fund_id == $inv_res->inv_fund_id){
+															$cek='selected';
+														}
+														echo '<option value="'. $val->fund_id .'" '. $cek .'>'. $val->fund_name .'</option>';
+													}
+												?>												
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Deskripsi </label>
 										<div class="col-sm-9">
 											<textarea name = "deskripsi" class="col-xs-10 col-sm-5" id="form-field-8" placeholder="Default Text"><?php echo $inv_res->inv_desc?></textarea>
