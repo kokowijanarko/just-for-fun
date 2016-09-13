@@ -153,6 +153,34 @@
 							<li class="">
 								<a href="#" class="dropdown-toggle">
 									<i class="menu-icon fa fa-list"></i>
+									<span class="menu-text"> Sumber Dana </span>
+
+									<b class="arrow fa fa-angle-down"></b>
+								</a>
+
+								<b class="arrow"></b>
+								<ul class="submenu">
+									<li class="">
+										<a href="<?php echo base_url('index.php/fund/view')?>">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Daftar Sumber Dana
+										</a>
+
+										<b class="arrow"></b>
+									</li>		
+									<li class="">
+										<a href="<?php echo base_url('index.php/fund/input')?>">
+											<i class="menu-icon fa fa-caret-right"></i>
+											Tambah Sumber Dana
+										</a>
+
+										<b class="arrow"></b>
+									</li>	
+								</ul>
+							</li>
+							<li class="">
+								<a href="#" class="dropdown-toggle">
+									<i class="menu-icon fa fa-list"></i>
 									<span class="menu-text"> Kondisi </span>
 
 									<b class="arrow fa fa-angle-down"></b>

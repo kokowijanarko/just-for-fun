@@ -146,26 +146,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Kategori </label>
-										<div class="col-sm-9">
-											<select name="kategori" class="col-xs-10 col-sm-5" id="kategori">
-												<option value="all">--Semua--</option>
-												<?php foreach ($opt as $options) { ?>
-													<option value="<?php echo $options->category_id; ?>"> <?php echo $options->category_name; ?> </option>
-												<?php } ?>
-											</select>
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tipe </label>
-										<div class="col-sm-9">
-											<select name="tipe" class="col-xs-10 col-sm-5" id="tipe">
-												<option value="all">--Semua--</option>
-												
-											</select>
-										</div>
-									</div>
 									
 									<div class="space-4"></div>
 
