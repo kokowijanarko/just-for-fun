@@ -12,12 +12,20 @@ class Home extends CI_Controller {
 		
     }
 	
-	public function index(){		
-		if(!isset($this->session->userdata['data'])){			
-			redirect(base_url('index.php/home/login'));
-		}else{			
+	public function index(){
+		if(empty($this->session->userdata('data')->user_id)){
+			$msg = '
+				<div class="alert alert-danger alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<h4>Anda Harus Login Dulu!</h4>
+				</div>			
+			';
+			$this->session->set_flashdata(array('msg'=>$msg));
+			// var_dump($msg, $this->session);die;
+			redirect(site_url('home/login'));
+		}else{
 			redirect(base_url('index.php/home/home'));
-		}
+		}	
 	}
 	
 	public function login(){
@@ -25,8 +33,21 @@ class Home extends CI_Controller {
 	}
 	
 	public function home(){
-		$data['view'] = 'pages/home_page';
-		$this->load->view('index', $data);
+		if(empty($this->session->userdata('data')->user_id)){
+			$msg = '
+				<div class="alert alert-danger alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<h4>Anda Harus Login Dulu!</h4>
+				</div>			
+			';
+			$this->session->set_flashdata(array('msg'=>$msg));
+			// var_dump($msg, $this->session);die;
+			redirect(site_url('home/login'));
+		}else{
+			$data['view'] = 'pages/home_page';
+			$this->load->view('index', $data);
+		}	
+		
 	}
 	
 	public function validasi(){

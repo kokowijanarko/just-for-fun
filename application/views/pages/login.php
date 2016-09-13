@@ -54,6 +54,9 @@
 									<div class="widget-body">
 										<div class="widget-main">
 											<h4 class="header blue lighter bigger">
+												<?php 
+												isset($this->session->userdata['msg'])? print_r($this->session->userdata['msg']):null;											
+											?>
 												<i class="ace-icon fa fa-coffee green"></i>
 												Please Enter Your Information
 											</h4>
@@ -93,19 +96,7 @@
 										</div><!-- /.widget-main -->
 
 										<div class="toolbar clearfix">
-											<div>
-												<a href="#" data-target="#forgot-box" class="forgot-password-link">
-													<i class="ace-icon fa fa-arrow-left"></i>
-													Lupa Password
-												</a>
-											</div>
-
-											<div>
-												<a href="#" data-target="#signup-box" class="user-signup-link">
-													Mendaftar
-													<i class="ace-icon fa fa-arrow-right"></i>
-												</a>
-											</div>
+												
 										</div>
 									</div><!-- /.widget-body -->
 								</div><!-- /.login-box -->

@@ -8,11 +8,21 @@ class Fund extends CI_Controller {
         $this->load->helper('url');
 		$this->load->model('m_fund');
 		
+		if(empty($this->session->userdata('data')->user_id)){
+			$msg = '
+				<div class="alert alert-danger alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<h4>Anda Harus Login Dulu!</h4>
+				</div>			
+			';
+			$this->session->set_flashdata(array('msg'=>$msg));
+			// var_dump($msg, $this->session);die;
+			redirect(site_url('home/login'));
+		}
     }
 	
 	
 	public function view(){
-		//var_dump($this->session->userdata['msg']);
 		if(isset($this->session->userdata['msg'])){
 			$data['message'] = $this->session->userdata['msg'];
 		}
