@@ -10,6 +10,7 @@
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/datepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
@@ -156,17 +157,6 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Kedaluarsa </label>
-										<div class="col-xs-10 col-sm-4">
-											<div class="input-group">
-												<input class="form-control date-picker" name="tanggal_expired" id="date-picker-exp"  type="text" data-date-format="dd-mm-yyyy" />
-												<span class="input-group-addon">
-													<i class="fa fa-calendar bigger-110"></i>
-												</span>
-											</div>
-										</div>
-									</div>
 									
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Golongan </label>
@@ -235,6 +225,17 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Jumlah </label>
 										<div class="col-sm-9">
 											<input type="number" name= "jumlah" id="form-field-1" placeholder="Jumlah" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> Tanggal Kedaluarsa </label>
+										<div class="col-xs-10 col-sm-4">
+											<div class="input-group">
+												<input class="form-control date-picker" name="tanggal_expired" id="date-picker-exp"  type="text" data-date-format="dd-mm-yyyy" />
+												<span class="input-group-addon">
+													<i class="fa fa-calendar bigger-110"></i>
+												</span>
+											</div>
 										</div>
 									</div>
 									<div class="form-group">

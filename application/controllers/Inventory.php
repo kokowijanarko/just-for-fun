@@ -44,6 +44,7 @@ class Inventory extends CI_Controller {
 		$month=!empty($_POST['month'])?$_POST['month']:'all';
 		$period = $year.'-'.$month;
 		
+		$data['url'] = site_url('inventory/inventory_read');
 		$data['filter'] = array('period'=>$period, 'year'=>$year, 'month'=>$month, 'type_id'=>$type_id, 'class_id'=>$class_id, 'category_id'=>$category_id, 'group_id'=>$group_id);
 		$data['opt'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();

@@ -10,6 +10,7 @@
 
 		<!-- bootstrap & fontawesome -->
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/css/datepicker.min.css" />
 		<link rel="stylesheet" href="<?php echo base_url()?>assets/theme/ac_master/font-awesome/4.2.0/css/font-awesome.min.css" />
 
 		<!-- page specific plugin styles -->
@@ -136,7 +137,7 @@
 						
 						<div class="row">
 							<div class="col-xs-12">
-								<form class="form-horizontal" action="<?php echo site_url('inventory/inventory_read');?>" role="form" method = "POST">
+								<form class="form-horizontal" action="<?php echo $url ?>" role="form" method = "POST">
 									<div class="form-group">
 										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tahun Pengadaan </label>
 										<div class="col-xs-10 col-sm-4">
@@ -170,7 +171,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
+									<div id="fg-class" class="form-group">
 										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Golongan </label>
 										<div class="col-sm-9">
 											<select name="class" class="col-xs-10 col-sm-5" id="class">
@@ -181,7 +182,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
+									<div id="fg-category" class="form-group hide">
 										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
 											<select name="category" class="col-xs-10 col-sm-5" id="category">
@@ -189,7 +190,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
+									<div id="fg-group" class="form-group hide">
 										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Group </label>
 										<div class="col-sm-9">
 											<select name="group" class="col-xs-10 col-sm-5" id="group">
@@ -197,7 +198,7 @@
 											</select>
 										</div>
 									</div>
-									<div class="form-group">
+									<div id="fg-type" class="form-group hide">
 										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
 											<select name="type" class="col-xs-10 col-sm-5" id="tipe">
@@ -398,10 +399,12 @@
 							console.log(result);		
 							for(idx=0; idx<result.length; idx++){
 								$('#category').append('<option value="'+result[idx]['category_id']+'">'+result[idx]['category_name']+'</option>');
-							}							
+							}
 						}
 						
 					});
+					$('#fg-category').removeClass('hide');
+					
 				})
 				
 				$('#category').change(function(){
@@ -426,6 +429,7 @@
 						}
 						
 					});
+					$('#fg-group').removeClass('hide');
 				})
 				$('#group').change(function(){
 					var group_id = $('#group').val();
@@ -449,6 +453,7 @@
 						}
 						
 					});
+					$('#fg-type').removeClass('hide');
 				})
 				
 				//initiate dataTables plugin

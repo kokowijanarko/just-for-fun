@@ -34,6 +34,7 @@ class Report_inventory extends CI_Controller {
 		$month=!empty($_POST['month'])?$_POST['month']:'all';
 		$period = $year.'-'.$month;
 		
+		$data['url'] = site_url('report_inventory/view');
 		$data['report'] = '1';
 		$data['filter'] = array('period'=>$period, 'year'=>$year, 'month'=>$month, 'type_id'=>$type_id, 'class_id'=>$class_id, 'category_id'=>$category_id, 'group_id'=>$group_id);
 		$data['opt'] = $this->m_inventory->getInvCategory();
