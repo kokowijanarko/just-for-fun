@@ -42,16 +42,18 @@ class Inventory extends CI_Controller {
 		$type_id=!empty($_POST['type'])?$_POST['type']:'all';
 		$year=!empty($_POST['year'])?$_POST['year']:'all';
 		$month=!empty($_POST['month'])?$_POST['month']:'all';
+		$storage=!empty($_POST['storage'])?$_POST['storage']:'all';
 		$period = $year.'-'.$month;
 		
+		$data['filter'] = array('period'=>$period, 'year'=>$year, 'month'=>$month, 'type_id'=>$type_id, 'class_id'=>$class_id, 'category_id'=>$category_id, 'group_id'=>$group_id, 'storage'=>$storage);
 		$data['url'] = site_url('inventory/inventory_read');
-		$data['filter'] = array('period'=>$period, 'year'=>$year, 'month'=>$month, 'type_id'=>$type_id, 'class_id'=>$class_id, 'category_id'=>$category_id, 'group_id'=>$group_id);
 		$data['opt'] = $this->M_inventory->getInvCategory();
 		$data['type'] = $this->M_inventory->getInvType();
 		$data['class'] = $this->M_inventory->getInvClass();
 		$data['group'] = $this->M_inventory->getInvGroup();
 		$data['fund'] = $this->M_inventory->getInvFund();
-		$data['inven'] = $this->M_inventory->select_all('all',$type_id, $class_id, $category_id, $group_id, $period, $fund_id);
+		$data['storage'] = $this->M_inventory->select_all(1, null);
+		$data['inven'] = $this->M_inventory->select_all('all',$type_id, $class_id, $category_id, $group_id, $period, $fund_id, $storage);
 		// var_dump($data['inven']);
 		// var_dump($_POST, $data['filter'], $this->db->last_query());
 		$this->load->view('pages/inventory_view', $data);

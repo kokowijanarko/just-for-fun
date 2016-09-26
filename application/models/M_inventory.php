@@ -30,7 +30,7 @@ class M_inventory extends CI_Model
 		return $execute;
 	}
 	
-	function select_all($is_container=null, $type_id=null, $class_id=null, $category_id=null, $group_id=null, $period=null, $fund_id='all'){
+	function select_all($is_container=null, $type_id=null, $class_id=null, $category_id=null, $group_id=null, $period=null, $fund_id='all', $storage='all'){
 		$sql = 
 		"SELECT a.inv_name AS inv_name, 
 			a.inv_id AS inv_id,
@@ -61,7 +61,7 @@ class M_inventory extends CI_Model
 		
 		$str = '';
 		if(!is_null($is_container) && $is_container !== 'all'){
-			$str .= ' AND d.`is_container` = 1'; 
+			$str .= ' AND d.`is_container` ='. $is_container; 
 		}
 		
 		if(!is_null($type_id) && $type_id !== 'all'){
@@ -80,6 +80,9 @@ class M_inventory extends CI_Model
 		}
 		if(!is_null($fund_id) && $fund_id !== 'all'){
 			$str .= ' AND a.`inv_fund_id` ='. $fund_id;
+		}
+		if(!is_null($storage) && $storage !== 'all'){
+			$str .= ' AND a.`inv_store_place_in_use` ='. $storage;
 		}
 		if(!is_null($period) && $period !== 'all-all'){
 			$period = explode('-', $period);

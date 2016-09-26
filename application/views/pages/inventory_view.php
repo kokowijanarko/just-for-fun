@@ -139,7 +139,7 @@
 							<div class="col-xs-12">
 								<form class="form-horizontal" action="<?php echo $url ?>" role="form" method = "POST">
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Tahun Pengadaan </label>
+										<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Tahun Pengadaan </label>
 										<div class="col-xs-10 col-sm-4">
 											<div class="input-group">
 												<input class="form-control date-picker" name="year" id="date-picker"  type="text" data-date-format="yyyy" />
@@ -150,7 +150,7 @@
 										</div>
 									</div>
 									<div class="form-group" id='month'>
-										<label class="col-sm-1 control-label no-padding-right" for="form-field-1"> Bulan Pengadaan </label>
+										<label class="col-sm-2 control-label no-padding-right" for="form-field-1"> Bulan Pengadaan </label>
 										<div class="col-xs-10 col-sm-4">
 											<div class="input-group">
 												<input class="form-control date-picker" name="month" id="date-picker-month"  type="text" data-date-format="mm" />
@@ -161,7 +161,7 @@
 										</div>
 									</div>									
 									<div class="form-group">
-										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Sumber Dana </label>
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Sumber Dana </label>
 										<div class="col-sm-9">
 											<select name="fund" class="col-xs-10 col-sm-5" id="fund">
 												<option value="all">--Semua--</option>
@@ -171,8 +171,19 @@
 											</select>
 										</div>
 									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Tempat Penyimpanan / Penggunaan </label>
+										<div class="col-sm-9">
+											<select name="storage" class="col-xs-10 col-sm-5" id="fund">
+												<option value="all">--Semua--</option>
+												<?php foreach ($storage as $val) { ?>
+													<option value="<?php echo $val->inv_id; ?>"> <?php echo $val->inv_name .'|'. $val->inv_number; ?> </option>
+												<?php } ?>
+											</select>
+										</div>
+									</div>
 									<div id="fg-class" class="form-group">
-										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Golongan </label>
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Golongan </label>
 										<div class="col-sm-9">
 											<select name="class" class="col-xs-10 col-sm-5" id="class">
 												<option value="all">--Semua--</option>
@@ -183,7 +194,7 @@
 										</div>
 									</div>
 									<div id="fg-category" class="form-group hide">
-										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Kategori </label>
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Kategori </label>
 										<div class="col-sm-9">
 											<select name="category" class="col-xs-10 col-sm-5" id="category">
 												<option value="all">--Semua--</option>										
@@ -191,7 +202,7 @@
 										</div>
 									</div>
 									<div id="fg-group" class="form-group hide">
-										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Group </label>
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Group </label>
 										<div class="col-sm-9">
 											<select name="group" class="col-xs-10 col-sm-5" id="group">
 												<option value="all">--Semua--</option>										
@@ -199,7 +210,7 @@
 										</div>
 									</div>
 									<div id="fg-type" class="form-group hide">
-										<label class="col-sm-1 control-label no-padding-left" for="form-field-1"> Tipe </label>
+										<label class="col-sm-2 control-label no-padding-left" for="form-field-1"> Tipe </label>
 										<div class="col-sm-9">
 											<select name="type" class="col-xs-10 col-sm-5" id="tipe">
 												<option value="all">--Semua--</option>									
