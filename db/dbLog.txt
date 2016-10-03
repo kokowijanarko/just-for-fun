@@ -1,3 +1,6 @@
+03-10-2016 by koko
+ALTER TABLE `db_admin`.`cash_order` ADD COLUMN `order_retur` INT NULL AFTER `order_type`; 
+
 15-06-2016 by koko
 ALTER TABLE `bs_prot`.`inv_inventory` ADD COLUMN `inv_number` VARCHAR(20) NULL AFTER `inv_id`; 
 

@@ -82,7 +82,7 @@ class M_inventory extends CI_Model
 			$str .= ' AND a.`inv_fund_id` ='. $fund_id;
 		}
 		if(!is_null($storage) && $storage !== 'all'){
-			$str .= ' AND a.`inv_store_place_in_use` ='. $storage;
+			$str .= ' AND a.`inv_store_place_in_use` ='. $storage .' OR a.`inv_store_place_after_use`='. $storage;
 		}
 		if(!is_null($period) && $period !== 'all-all'){
 			$period = explode('-', $period);

@@ -52,7 +52,6 @@ class Report_inventory extends CI_Controller {
 		$data['class'] = $this->m_inventory->getInvClass();		
 		$this->load->view('pages/print_inv_label', $data);
 	}
-	
 	public function print_report($class, $category, $group, $type, $period){
 		$filter['class'] = $class;		
 		$filter['kategori'] = $category;		
